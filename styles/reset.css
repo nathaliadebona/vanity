@@ -11,11 +11,17 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: var(--font-body);
   color: var(--color-text);
   background-color: var(--color-bg);
   line-height: 1.5;
-  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 h1, h2, h3, h4 {
@@ -44,4 +50,9 @@ a {
 
 ul, ol {
   list-style: none;
+}
+
+footer {
+  padding: var(--spacing-sm);
+  text-align: center;
 }
