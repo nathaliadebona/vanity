@@ -1,0 +1,44 @@
+@font-face {
+    src: url(/assets/fonts/gloock-v8-latin-regular.woff2);
+    font-family: 'Gloock';
+    font-weight: 400;
+}
+
+@font-face {
+    src: url(/assets/fonts/nunito-sans-v19-latin-regular.woff2);
+    font-family: 'Nunito Sans';
+    font-weight: 400;
+}
+
+@font-face {
+    src: url(/assets/fonts/nunito-sans-v19-latin-500.woff2);
+    font-family: 'Nunito Sans';
+    font-weight: 500;
+}
+
+@font-face {
+    src: url(/assets/fonts/nunito-sans-v19-latin-600.woff2);
+    font-family: 'Nunito Sans';
+    font-weight: 600;
+}
+
+:root {
+    --color-bg:#f2e8c2;
+    --color-cards-bg: #faf5e4;
+    --color-accent: #ad4d8c;
+    --color-text: #49243e;
+    --color-text-secondary: #7a4d68;
+    --color-danger: #d96c6c;
+    --color-alert: #c98a4b;
+
+    --font-heading: 'Gloock', serif;
+    --font-body: 'Nunito Sans', sans-serif;
+
+    --spacing-xs: 0.25rem;  
+    --spacing-sm: 0.5rem;   
+    --spacing-md: 1rem;     
+    --spacing-lg: 1.5rem;   
+    --spacing-xl: 2rem;     
+    --spacing-2xl: 3rem;
+}
+
