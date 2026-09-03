@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanity</title>
+  <meta name="description" content="Vanity — seu diário pessoal de beleza">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/login.css">
+</head>
+
+<body>
+    <header>
+        <h1>Vanity</h1>
+        <button type="button" id="lang-toggle">PT</button>
+    </header>
+
+    <main>
+        <div class="tab-buttons">
+            <button type="button" class="tab-button active" data-i18n="tab-login">Entrar</button>
+            <button type="button" class="tab-button" data-i18n="tab-register">Criar conta</button>
+        </div>
+
+        <section>
+            <form action="" id="login-form">
+                <label for="email-login" data-i18n="email-login">E-mail</label>
+                <input type="email" id="email-login" name="email-login" required>
+
+                <label for="password-login" data-i18n="password-login">Senha</label>
+                <input type="password" id="password-login" name="password-login" required>
+
+                <a href="#" id="forgot-password" data-i18n="forgot-password">Esqueci a senha</a>
+                
+                <button type="submit" id="login-btn" data-i18n="login-btn">Entrar</button>
+            </form>
+        </section>
+
+        <section>
+            <form action="" id="register-form" style="display: none;">
+                <label for="username-register" data-i18n="username-register">Nome de usuário</label>
+                <input type="text" id="username-register" name="username-register" required>
+
+                <label for="email-register" data-i18n="email-register">E-mail</label>
+                <input type="email" id="email-register" name="email-register" required>
+
+                <label for="password-register" data-i18n="password-register">Senha</label>
+                <input type="password" name="password-register" id="password-register" required>
+
+                <label for="password-confirm-register" data-i18n="password-confirm-register">Confirmar senha</label>
+                <input type="password" id="password-confirm-register" name="password-confirm-register" required>
+
+                <button type="submit" id="register-btn" data-i18n="register-btn">Criar conta</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p data-i18n="footer-copyright">© 2026 Vanity</p>
+    </footer>
+</body>
+
+</html>
