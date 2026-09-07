@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vanity</title>
+  <title>Vanity - Adicionar Produto</title>
   <meta name="description" content="Vanity — seu diário pessoal de beleza">
   <link rel="icon" href="assets/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/styles/reset.css">
   <link rel="stylesheet" href="styles/variables.css">
   <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/feed.css">
+  <link rel="stylesheet" href="styles/add-product.css">
 </head>
 
 <body>
     <header>
         <button type="button" id="lang-toggle">PT</button>
-        <h1>Vanity - Feed</h1>
+        <h1>Vanity</h1>
         <a href="profile.html" aria-label="Ver perfil">
             <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
         </a>
@@ -33,7 +33,71 @@
     </nav>
 
     <main>
+        <h2>Adicionar produto</h2>
 
+        <form action="">
+            <label for="add-product-image"><span><i class="fa-solid fa-camera"></i> Adicionar foto</span></label>
+            <input type="file" name="add-product-image" id="add-product-image">
+
+            <label for="product-name">Nome do produto</label>
+            <input type="text" name="product-name" id="product-name">
+
+            <label for="product-brand">Marca do produto</label>
+            <input type="text" name="product-brand" id="product-brand">
+
+            <label for="product-category">Categoria</label>
+            <select name="product-category" id="product-category">
+                <option value="">Selecione</option>
+                <option value="makeup">Maquiagem</option>
+                <option value="skincare">Skincare</option>
+                <option value="perfume">Perfume</option>
+                <option value="hair">Cabelo</option>
+            </select>
+
+            <label for="product-subcategory">Subcategoria</label>
+            <select name="product-subcategory" id="product-subcategory" disabled>
+                <option value="">Selecione</option>
+            </select>
+
+            <fieldset>
+                <legend>Nota</legend>
+
+                <label for="rating-1"><i class="fa-regular fa-star"></i></label>
+                <input type="radio" name="rating" id="rating-1">
+                
+                <label for="rating-2"><i class="fa-regular fa-star"></i></label>
+                <input type="radio" name="rating" id="rating-2">
+                
+                <label for="rating-3"><i class="fa-regular fa-star"></i></label>
+                <input type="radio" name="rating" id="rating-3">
+                
+                <label for="rating-4"><i class="fa-regular fa-star"></i></label>
+                <input type="radio" name="rating" id="rating-4">
+                
+                <label for="rating-5"><i class="fa-regular fa-star"></i></label>
+                <input type="radio" name="rating" id="rating-5">
+            </fieldset>
+
+            <label for="buy-again">Recompraria?</label>
+            <select name="buy-again" id="buy-again">
+                <option value="">Selecione</option>
+                <option value="yes">Sim</option>
+                <option value="no">Não</option>
+            </select>
+
+            <label for="status">Status</label>
+            <select name="status" id="status">
+                <option value="">Selecione</option>
+                <option value="using">Em uso</option>
+                <option value="finished">Acabou</option>
+                <option value="wishlist">Wishlist</option>
+            </select>
+
+            <label for="review-area">Resenha</label>
+            <textarea name="review-area" id="review-area"></textarea>
+        
+            <button type="submit">Adicionar produto</button>
+        </form>
     </main>
 </body>
 </html>
