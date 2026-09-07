@@ -1,0 +1,178 @@
+.product-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.product-full-image {
+    width: calc(100% + 2 * var(--spacing-lg));
+    margin: 0 calc(-1 * var(--spacing-lg));
+}
+
+.key-information {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.key-information .post-author {
+    padding: 0;
+    margin-bottom: var(--spacing-xs);
+}
+
+.key-information .post-author img {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.key-information .post-author span {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.key-information h3 {
+    font-size: 1.5rem;
+}
+
+.product-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+}
+
+.action-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-shrink: 0;
+}
+
+.action-buttons button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: var(--color-cards-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+}
+
+.edit-btn {
+    color: var(--color-text-secondary);
+}
+
+.trash-btn {
+    color: var(--color-danger);
+}
+
+.action-buttons .favorite-btn {
+    color: var(--color-accent);
+}
+
+.product-brand {
+    font-size: 1.1rem;
+}
+
+.review {
+    background-color: var(--color-cards-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--spacing-md);
+}
+
+.review h4 {
+    font-size: 1.5rem;
+}
+
+.review p {
+    line-height: 1.8;
+}
+
+.comments-section h4 {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.comment {
+    background-color: var(--color-cards-bg);
+    border-radius: 0.75rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+.comment-header img {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-header span {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.comment-header time {
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+}
+
+.comment p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xs);
+}
+
+.comments-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.comments-actions button {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+}
+
+.comments-actions span {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-right: var(--spacing-sm);
+}
+
+.comments-actions .trash-btn {
+    margin-left: auto;
+    color: var(--color-danger);
+}
+
+.new-comment {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.new-comment input {
+    flex: 1;
+}
+
+.new-comment button {
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 999px;
+    background-color: var(--color-accent);
+    color: var(--color-cards-bg);
+    font-weight: 600;
+}
+
+

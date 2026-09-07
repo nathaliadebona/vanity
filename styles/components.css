@@ -1,6 +1,6 @@
 main {
     padding: var(--spacing-lg);
-    padding-bottom: 5.0625rem;
+    padding-bottom: 6rem;
 }
 
 input {
@@ -120,7 +120,7 @@ header a img {
     padding: var(--spacing-md);
 }
 
-.favorite-btn {
+.card-image .favorite-btn {
     position: absolute;
     top: var(--spacing-sm);
     right: var(--spacing-sm);
@@ -159,6 +159,24 @@ header a img {
 .status-tag.acabou {
   background-color: var(--color-alert);
   color: var(--color-cards-bg);
+}
+
+.post-author {
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm);
+}
+
+.post-author a {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.post-author a img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 
