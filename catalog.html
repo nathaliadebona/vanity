@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vanity</title>
+  <title>Vanity - Catálogo</title>
   <meta name="description" content="Vanity — seu diário pessoal de beleza">
   <link rel="icon" href="assets/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/styles/reset.css">
   <link rel="stylesheet" href="styles/variables.css">
   <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/feed.css">
+  <link rel="stylesheet" href="styles/catalog.css">
 </head>
 
 <body>
     <header>
         <button type="button" id="lang-toggle">PT</button>
-        <h1>Vanity - Feed</h1>
+        <h1>Vanity</h1>
         <a href="profile.html" aria-label="Ver perfil">
             <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
         </a>
@@ -24,8 +24,8 @@
 
     <nav class="menu">
         <ul>
-            <li><a href="feed.html" class="current"><i class="fa-solid fa-house"></i><span data-i18n="feed"> Feed</span></a></li>
-            <li><a href="catalog.html"><i class="fa-solid fa-layer-group"></i><span data-i18n="catalog"> Catálogo</span></a></li>
+            <li><a href="feed.html"><i class="fa-solid fa-house"></i><span data-i18n="feed"> Feed</span></a></li>
+            <li><a href="catalog.html" class="current"><i class="fa-solid fa-layer-group"></i><span data-i18n="catalog"> Catálogo</span></a></li>
             <li><a href="add-product.html" class="nav-add"><i class="fa-solid fa-plus"></i><span data-i18n="add-product"> Adicionar</span></a></li>
             <li><a href="explore.html"><i class="fa-solid fa-magnifying-glass"></i><span data-i18n="explore"> Explorar</span></a></li>
             <li><a href="profile.html" class="nav-profile"><i class="fa-solid fa-user"></i><span data-i18n="profile"> Perfil</span></a></li>
@@ -33,15 +33,39 @@
     </nav>
 
     <main>
-        <section class="feed-post-list">
-            <article class="product-card">
-                <div class="post-author">
-                    <a href="#">
-                        <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
-                        <span>@nickname</span>
-                    </a>
-                </div>
+        <div class="catalog-header">
+            <h2>Meu catálogo</h2>
+            <button type="button"><i class="fa-solid fa-sliders"></i></button>
+        </div>
 
+        <div class="catalog-filter" style="display: none;">
+            <input type="text" placeholder="Buscar produto...">
+
+            <div class="category-buttons">
+                <button type="button">Maquiagem</button>
+                <button type="button">Skincare</button>
+                <button type="button">Perfume</button>
+                <button type="button">Cabelo</button>
+            </div>
+
+            <div class="status-buttons">
+                <button type="button">Em uso</button>
+                <button type="button">Acabou</button>
+                <button type="button">Wishlist</button>
+            </div>
+
+            <div class="buy-again-buttons">
+                <button type="button">Sim</button>
+                <button type="button">Não</button>
+            </div>
+
+            <button type="button" class="favorite-filter">
+                <i class="fa-regular fa-heart"></i> Favoritos
+            </button>
+        </div>
+
+        <section class="catalog-grid">
+            <article class="product-card">
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
@@ -65,20 +89,13 @@
             </article>
 
             <article class="product-card">
-                <div class="post-author">
-                    <a href="#">
-                        <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
-                        <span>@nickname</span>
-                    </a>
-                </div>
-
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </div>
-                
+
                 <div class="card-content">
                     <span class="category-tag">Categoria</span>
                     <h3>Nome do produto</h3>
@@ -95,20 +112,13 @@
             </article>
 
             <article class="product-card">
-                <div class="post-author">
-                    <a href="#">
-                        <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
-                        <span>@nickname</span>
-                    </a>
-                </div>
-
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </div>
-                
+
                 <div class="card-content">
                     <span class="category-tag">Categoria</span>
                     <h3>Nome do produto</h3>
@@ -125,20 +135,13 @@
             </article>
 
             <article class="product-card">
-                <div class="post-author">
-                    <a href="#">
-                        <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
-                        <span>@nickname</span>
-                    </a>
-                </div>
-
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </div>
-                
+
                 <div class="card-content">
                     <span class="category-tag">Categoria</span>
                     <h3>Nome do produto</h3>
@@ -156,4 +159,3 @@
         </section>
     </main>
 </body>
-</html>
