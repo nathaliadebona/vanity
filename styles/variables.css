@@ -26,11 +26,13 @@
     --color-bg:#f2e8c2;
     --color-cards-bg: #faf5e4;
     --color-accent: #ad4d8c;
+    --color-accent-light: #f2d9ea;
     --color-text: #49243e;
     --color-text-secondary: #7a4d68;
     --color-danger: #d96c6c;
     --color-alert: #c98a4b;
     --color-border: #e3d6ab;
+    --color-neutral-light: #e8e4dc;
 
     --font-heading: 'Gloock', serif;
     --font-body: 'Nunito Sans', sans-serif;

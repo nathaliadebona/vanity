@@ -1,3 +1,9 @@
+main {
+    padding: var(--spacing-lg);
+    padding-bottom: 5.0625rem;
+}
+
+/* -- HEADER -- */
 header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -29,6 +35,8 @@ header a img {
     border-radius: 50%;
     object-fit: cover;
 }
+
+/* -- MENU -- */
 .menu {
     position: fixed;
     bottom: 0;
@@ -74,6 +82,73 @@ header a img {
 .nav-add span {
     display: none;
 }
+
+/* -- CARDS -- */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    background-color: var(--color-cards-bg);
+}
+
+.card-image {
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* quadrado */
+    object-fit: cover;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md);
+}
+
+.favorite-btn {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+}
+
+.category-tag,
+.status-tag {
+    align-self: flex-start;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 999px;
+    background-color: var(--color-accent-light);
+}
+
+.product-card h3 {
+    font-size: 1.3rem;
+}
+
+.product-brand {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}
+
+.rating .fa-solid {
+    color: var(--color-accent);
+}
+
+.rating .fa-regular {
+    color: var(--color-border);
+}
+
+.status-tag.wishlist {
+  background-color: var(--color-neutral-light);
+  color: var(--color-text-secondary);
+}
+
+.status-tag.acabou {
+  background-color: var(--color-alert);
+  color: var(--color-cards-bg);
+}
+
 
 @media (min-width: 48rem) {
     .menu {
