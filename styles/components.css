@@ -3,6 +3,18 @@ main {
     padding-bottom: 5.0625rem;
 }
 
+input {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 0.0625rem solid var(--color-text-secondary);
+  border-radius: 0.5rem;
+  background-color: var(--color-cards-bg);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
 /* -- HEADER -- */
 header {
     display: grid;

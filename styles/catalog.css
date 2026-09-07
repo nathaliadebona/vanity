@@ -1,0 +1,78 @@
+.catalog-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+}
+
+.catalog-header button {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--color-cards-bg);
+    color: var(--color-accent);
+}
+
+.catalog-filter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+}
+
+.category-buttons,
+.status-buttons,
+.buy-again-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.category-buttons button,
+.status-buttons button,
+.buy-again-buttons button,
+.favorite-filter {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 999px;
+    border: 0.0625rem solid var(--color-accent);
+    background-color: transparent;
+    color: var(--color-accent);
+}
+
+.category-buttons button.active,
+.status-buttons button.active,
+.buy-again-buttons button.active,
+.favorite-filter.active {
+  background-color: var(--color-accent);
+  color: var(--color-cards-bg);
+}
+
+.favorite-filter {
+    align-self: flex-start;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.catalog-grid .category-tag,
+.catalog-grid .status-tag {
+  font-size: 0.75rem;
+}
+
+.catalog-grid h3 {
+    font-size: 1.1rem;
+}
+
+.catalog-grid .product-brand {
+    font-size: 0.9rem;
+}
+
+.catalog-grid .rating {
+    font-size: 0.75rem;
+}
+
+@media (min-width: 48rem) {
+
+}
