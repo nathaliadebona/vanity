@@ -1,0 +1,30 @@
+.feed-post-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.post-author {
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm);
+}
+
+.post-author a {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.post-author a img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media (min-width: 48rem) {
+    .feed-post-list {
+        max-width: 32rem;
+        margin: 0 auto;
+    }
+}
