@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanity - Perfil</title>
+  <meta name="description" content="Vanity — seu diário pessoal de beleza">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/profile.css">
+</head>
+
+<body>
+    <header>
+        <button type="button" id="lang-toggle">PT</button>
+        <h1>Vanity</h1>
+        <a href="profile.html" aria-label="Ver perfil">
+            <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
+        </a>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li><a href="feed.html"><i class="fa-solid fa-house"></i><span data-i18n="feed"> Feed</span></a></li>
+            <li><a href="catalog.html"><i class="fa-solid fa-layer-group"></i><span data-i18n="catalog"> Catálogo</span></a></li>
+            <li><a href="add-product.html" class="nav-add"><i class="fa-solid fa-plus"></i><span data-i18n="add-product"> Adicionar</span></a></li>
+            <li><a href="explore.html"><i class="fa-solid fa-magnifying-glass"></i><span data-i18n="explore"> Explorar</span></a></li>
+            <li><a href="profile.html" class="nav-profile current"><i class="fa-solid fa-user"></i><span data-i18n="profile"> Perfil</span></a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="profile-top">
+            <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
+
+            <div class="profile-counters">
+                <div>
+                    <span>10</span>
+                    <p>Produtos</p>
+                </div>
+
+                <div>
+                    <span>100</span>
+                    <p>Seguidores</p>
+                </div>
+
+                <div>
+                    <span>45</span>
+                    <p>Seguindo</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-info">
+            <h2 class="profile-name">Nome e Sobrenome</h2>
+            <p class="profile-username">@username</p>
+            <p class="profile-bio">Biografia</p>
+        </div>
+
+        <button type="button" id="profile-edit-btn">Editar perfil</button>
+    
+        <div class="profile-tabs">
+            <button type="button" data-tab="products" class="active">Produtos</button>
+            <button type="button" data-tab="stats">Estatísticas</button>
+        </div>
+
+        <section class="products-tab">
+            <div class="catalog-grid">
+                <article class="product-card">
+                    <div class="card-image">
+                        <img src="" alt="">
+                        <button type="button" class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="card-content">
+                        <span class="category-tag">Categoria</span>
+                        <h3>Nome do produto</h3>
+                        <p class="product-brand">Marca</p>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <span class="status-tag">Status</span>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="card-image">
+                        <img src="" alt="">
+                        <button type="button" class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="card-content">
+                        <span class="category-tag">Categoria</span>
+                        <h3>Nome do produto</h3>
+                        <p class="product-brand">Marca</p>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <span class="status-tag">Status</span>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="card-image">
+                        <img src="" alt="">
+                        <button type="button" class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="card-content">
+                        <span class="category-tag">Categoria</span>
+                        <h3>Nome do produto</h3>
+                        <p class="product-brand">Marca</p>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <span class="status-tag">Status</span>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="card-image">
+                        <img src="" alt="">
+                        <button type="button" class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="card-content">
+                        <span class="category-tag">Categoria</span>
+                        <h3>Nome do produto</h3>
+                        <p class="product-brand">Marca</p>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <span class="status-tag">Status</span>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="card-image">
+                        <img src="" alt="">
+                        <button type="button" class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="card-content">
+                        <span class="category-tag">Categoria</span>
+                        <h3>Nome do produto</h3>
+                        <p class="product-brand">Marca</p>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <span class="status-tag">Status</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="stats-tab" style="display: none;">
+            <div class="stats-summary">
+                <div>
+                    <span>47</span>
+                    <p>Produtos</p>
+                </div>
+
+                <div>
+                    <span>18</span>
+                    <p>Favoritos</p>
+                </div>
+
+                <div>
+                    <span>32</span>
+                    <p>Recompraria</p>
+                </div>
+            </div>
+
+            <div class="stats-chart">
+                <h4>Por categoria</h4>
+
+                <div>
+                    <span>Maquiagem</span>
+                    <progress value="17" max="20"></progress>
+                </div>
+
+                <div>
+                    <span>Skincare</span>
+                    <progress value="5" max="20"></progress>
+                </div>
+
+                <div>
+                    <span>Perfume</span>
+                    <progress value="12" max="20"></progress>
+                </div>
+
+                <div>
+                    <span>Cabelo</span>
+                    <progress value="20" max="20"></progress>
+                </div>
+            </div>
+
+            <div class="stats-chart">
+                <h4>Por status</h4>
+
+                <div>
+                    <span>Em uso</span>
+                    <progress value="17" max="20"></progress>
+                </div>
+
+                <div>
+                    <span>Acabou</span>
+                    <progress value="5" max="20"></progress>
+                </div>
+
+                <div>
+                    <span>Wishlist</span>
+                    <progress value="12" max="20"></progress>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
