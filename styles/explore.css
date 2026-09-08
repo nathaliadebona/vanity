@@ -61,6 +61,7 @@ main.explore-page input {
   color: var(--color-accent);
   font-size: 0.85rem;
   font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
 @media (min-width: 48rem) {
@@ -69,4 +70,12 @@ main.explore-page input {
     max-width: 32rem;
     margin: 0 auto;
   }
+}
+
+@media (hover: hover) {
+  .follow-btn:hover {
+    background-color: var(--color-accent-light);
+  }
+
+  
 }

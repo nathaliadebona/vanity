@@ -56,6 +56,7 @@
     align-items: center;
     justify-content: center;
     font-size: 0.875rem;
+    transition: filter 0.2s ease;
 }
 
 .edit-btn {
@@ -188,6 +189,12 @@
 
     .key-information .post-author span {
         font-size: 1rem;
+    }
+}
+
+@media (hover: hover) {
+    .action-buttons button:hover {
+        filter: brightness(0.9);
     }
 }
 

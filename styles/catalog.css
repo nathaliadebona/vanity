@@ -36,16 +36,26 @@
     border: 0.0625rem solid var(--color-accent);
     background-color: transparent;
     color: var(--color-accent);
+    transition: background-color 0.2s ease;
 }
 
 .category-buttons button.active,
 .status-buttons button.active,
 .buy-again-buttons button.active,
 .favorite-filter.active {
-  background-color: var(--color-accent);
-  color: var(--color-cards-bg);
+    background-color: var(--color-accent);
+    color: var(--color-cards-bg);
 }
 
 .favorite-filter {
     align-self: flex-start;
+}
+
+@media (hover: hover) {
+    .category-buttons button:hover,
+    .status-buttons button:hover,
+    .buy-again-buttons button:hover,
+    .favorite-filter:hover {
+        background-color: var(--color-accent-light);
+    }
 }

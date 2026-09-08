@@ -47,6 +47,7 @@
     font-weight: 600;
     background-color: transparent;
     color: var(--color-accent);
+    transition: background-color 0.2s ease;
 }
 
 .profile-tabs {
@@ -124,5 +125,11 @@
         width: 100%;
         max-width: 56rem;
         margin: 0 auto;
+    }
+}
+
+@media (hover: hover) {
+    #profile-edit-btn:hover {
+        background-color: var(--color-accent-light);
     }
 }
