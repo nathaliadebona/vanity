@@ -1,5 +1,6 @@
 h2 {
     margin-bottom: var(--spacing-md);
+    text-align: center;
 }
 
 form {
@@ -68,4 +69,12 @@ fieldset input:checked ~ label i {
 
 fieldset input:checked ~ label {
   color: var(--color-accent);
+}
+
+@media (min-width: 48rem) {
+    .add-product-page {
+        width: 100%;
+        max-width: 50rem;
+        margin: 0 auto;
+    }
 }
