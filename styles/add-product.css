@@ -58,11 +58,6 @@ fieldset label {
   cursor: pointer;
 }
 
-fieldset input:checked ~ label {
-  color: var(--color-accent);
-  font-weight: 900;
-}
-
 fieldset input:checked ~ label i {
   font-weight: 900;
 }

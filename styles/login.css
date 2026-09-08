@@ -1,17 +1,17 @@
-header {
+.login-page header {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     padding: var(--spacing-md);
 }
 
-h1 {
+.login-page h1 {
     grid-column: 2;
     text-align: center;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
-main {
+.login-page main {
     margin-top: var(--spacing-md);
     padding: 0 var(--spacing-lg);
 }

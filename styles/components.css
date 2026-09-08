@@ -148,6 +148,14 @@ header a img {
     position: absolute;
     top: var(--spacing-sm);
     right: var(--spacing-sm);
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(250, 245, 228, 0.85);
+    color: var(--color-accent);
 }
 
 .category-tag,
@@ -180,7 +188,7 @@ header a img {
   color: var(--color-text-secondary);
 }
 
-.status-tag.acabou {
+.status-tag.finished {
   background-color: var(--color-alert);
   color: var(--color-cards-bg);
 }
@@ -258,6 +266,12 @@ header a img {
 
     .catalog-grid {
         grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    }
+
+    .card-image .favorite-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.1rem;
     }
 }
 
