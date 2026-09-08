@@ -36,65 +36,81 @@
         <h2>Adicionar produto</h2>
 
         <form action="">
-            <label for="add-product-image"><span><i class="fa-solid fa-camera"></i> Adicionar foto</span></label>
-            <input type="file" name="add-product-image" id="add-product-image">
+            <div class="form-group">
+                <label for="add-product-image"><span><i class="fa-solid fa-camera"></i> Adicionar foto</span></label>
+                <input type="file" name="add-product-image" id="add-product-image">
+            </div>
 
-            <label for="product-name">Nome do produto</label>
-            <input type="text" name="product-name" id="product-name">
+            <div class="form-group">
+                <label for="product-name">Nome do produto</label>
+                <input type="text" name="product-name" id="product-name">
+            </div>
 
-            <label for="product-brand">Marca do produto</label>
-            <input type="text" name="product-brand" id="product-brand">
+            <div class="form-group">
+                <label for="product-brand">Marca do produto</label>
+                <input type="text" name="product-brand" id="product-brand">
+            </div>
 
-            <label for="product-category">Categoria</label>
-            <select name="product-category" id="product-category">
-                <option value="">Selecione</option>
-                <option value="makeup">Maquiagem</option>
-                <option value="skincare">Skincare</option>
-                <option value="perfume">Perfume</option>
-                <option value="hair">Cabelo</option>
-            </select>
+            <div class="form-group">
+                <label for="product-category">Categoria</label>
+                <select name="product-category" id="product-category">
+                    <option value="">Selecione</option>
+                    <option value="makeup">Maquiagem</option>
+                    <option value="skincare">Skincare</option>
+                    <option value="perfume">Perfume</option>
+                    <option value="hair">Cabelo</option>
+                </select>
+            </div>
 
-            <label for="product-subcategory">Subcategoria</label>
-            <select name="product-subcategory" id="product-subcategory" disabled>
-                <option value="">Selecione</option>
-            </select>
+            <div class="form-group">
+                <label for="product-subcategory">Subcategoria</label>
+                <select name="product-subcategory" id="product-subcategory" disabled>
+                    <option value="">Selecione</option>
+                </select>
+            </div>
 
             <fieldset>
                 <legend>Nota</legend>
 
-                <label for="rating-1"><i class="fa-regular fa-star"></i></label>
-                <input type="radio" name="rating" id="rating-1">
-                
-                <label for="rating-2"><i class="fa-regular fa-star"></i></label>
-                <input type="radio" name="rating" id="rating-2">
-                
-                <label for="rating-3"><i class="fa-regular fa-star"></i></label>
-                <input type="radio" name="rating" id="rating-3">
-                
-                <label for="rating-4"><i class="fa-regular fa-star"></i></label>
-                <input type="radio" name="rating" id="rating-4">
-                
-                <label for="rating-5"><i class="fa-regular fa-star"></i></label>
                 <input type="radio" name="rating" id="rating-5">
+                <label for="rating-5"><i class="fa-regular fa-star"></i></label>
+
+                <input type="radio" name="rating" id="rating-4">
+                <label for="rating-4"><i class="fa-regular fa-star"></i></label>
+
+                <input type="radio" name="rating" id="rating-3">
+                <label for="rating-3"><i class="fa-regular fa-star"></i></label>
+
+                <input type="radio" name="rating" id="rating-2">
+                <label for="rating-2"><i class="fa-regular fa-star"></i></label>
+
+                <input type="radio" name="rating" id="rating-1">
+                <label for="rating-1"><i class="fa-regular fa-star"></i></label>
             </fieldset>
 
-            <label for="buy-again">Recompraria?</label>
-            <select name="buy-again" id="buy-again">
-                <option value="">Selecione</option>
-                <option value="yes">Sim</option>
-                <option value="no">Não</option>
-            </select>
+            <div class="form-group">
+                <label for="buy-again">Recompraria?</label>
+                <select name="buy-again" id="buy-again">
+                    <option value="">Selecione</option>
+                    <option value="yes">Sim</option>
+                    <option value="no">Não</option>
+                </select>
+            </div>
 
-            <label for="status">Status</label>
-            <select name="status" id="status">
-                <option value="">Selecione</option>
-                <option value="using">Em uso</option>
-                <option value="finished">Acabou</option>
-                <option value="wishlist">Wishlist</option>
-            </select>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" id="status">
+                    <option value="">Selecione</option>
+                    <option value="using">Em uso</option>
+                    <option value="finished">Acabou</option>
+                    <option value="wishlist">Wishlist</option>
+                </select>
+            </div>
 
-            <label for="review-area">Resenha</label>
-            <textarea name="review-area" id="review-area"></textarea>
+            <div class="form-group">
+                <label for="review-area">Resenha</label>
+                <textarea name="review-area" id="review-area"></textarea>
+            </div>
         
             <button type="submit">Adicionar produto</button>
         </form>
