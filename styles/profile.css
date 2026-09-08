@@ -1,0 +1,120 @@
+.profile-top {
+   display: flex; 
+   align-items: center;
+   gap: var(--spacing-md);
+}
+
+.profile-top img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-counters {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.profile-counters span {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.profile-counters p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.profile-info {
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.profile-info h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+#profile-edit-btn {
+    width: 100%;
+    text-align: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 0.0625rem solid var(--color-accent);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: transparent;
+    color: var(--color-accent);
+}
+
+.profile-tabs {
+    display: inline-block;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-xs);
+    border-radius: 999px;
+    background-color: var(--color-cards-bg);
+}
+
+.profile-tabs button {
+    padding: var(--spacing-xs) var(--spacing-md);
+}
+
+.profile-tabs .active {
+    border-radius: 1rem;
+    background-color: var(--color-accent);
+    font-weight: 600;
+    color: var(--color-cards-bg);
+}
+
+.stats-summary {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.stats-summary > div {
+  flex: 1;
+  background-color: var(--color-cards-bg);
+  border-radius: 0.75rem;
+  padding: var(--spacing-md);
+  text-align: center;
+}
+
+.stats-summary span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.stats-summary p {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.stats-chart h4 {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.1rem;
+}
+
+.stats-chart > div {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.bar-track {
+  flex: 1;
+  height: 0.5rem;
+  background-color: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background-color: var(--color-accent);
+  border-radius: 999px;
+}

@@ -49,32 +49,3 @@
 .favorite-filter {
     align-self: flex-start;
 }
-
-.catalog-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-sm);
-}
-
-.catalog-grid .category-tag,
-.catalog-grid .status-tag {
-  font-size: 0.75rem;
-}
-
-.catalog-grid h3 {
-    font-size: 1.1rem;
-}
-
-.catalog-grid .product-brand {
-    font-size: 0.9rem;
-}
-
-.catalog-grid .rating {
-    font-size: 0.75rem;
-}
-
-@media (min-width: 48rem) {
-  .catalog-grid {
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  }
-}
