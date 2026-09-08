@@ -118,3 +118,11 @@
   background-color: var(--color-accent);
   border-radius: 999px;
 }
+
+@media (min-width: 48rem) {
+    .profile-page {
+        width: 100%;
+        max-width: 56rem;
+        margin: 0 auto;
+    }
+}
