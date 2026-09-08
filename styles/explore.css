@@ -62,3 +62,11 @@ main.explore-page input {
   font-size: 0.85rem;
   font-weight: 600;
 }
+
+@media (min-width: 48rem) {
+  .explore-page {
+    width: 100%;
+    max-width: 32rem;
+    margin: 0 auto;
+  }
+}
