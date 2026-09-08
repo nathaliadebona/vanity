@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanity - Explorar</title>
+  <meta name="description" content="Vanity — seu diário pessoal de beleza">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/explore.css">
+</head>
+
+<body>
+    <header>
+        <button type="button" id="lang-toggle">PT</button>
+        <h1>Vanity</h1>
+        <a href="profile.html" aria-label="Ver perfil">
+            <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
+        </a>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li><a href="feed.html"><i class="fa-solid fa-house"></i><span data-i18n="feed"> Feed</span></a></li>
+            <li><a href="catalog.html"><i class="fa-solid fa-layer-group"></i><span data-i18n="catalog"> Catálogo</span></a></li>
+            <li><a href="add-product.html" class="nav-add"><i class="fa-solid fa-plus"></i><span data-i18n="add-product"> Adicionar</span></a></li>
+            <li><a href="explore.html" class="current"><i class="fa-solid fa-magnifying-glass"></i><span data-i18n="explore"> Explorar</span></a></li>
+            <li><a href="profile.html" class="nav-profile"><i class="fa-solid fa-user"></i><span data-i18n="profile"> Perfil</span></a></li>
+        </ul>
+    </nav>
+
+    <main class="explore-page">
+        <h2>Explorar</h2>
+
+        <input type="text" placeholder="Buscar por username...">
+    
+        <div class="people-list">
+            <article class="person-card">
+                <img src="https://ui-avatars.com/api/?name=Camila" alt="">
+
+                <div class="person-info">
+                    <p class="person-username">@camimakeup</p>
+                    <p class="person-details">Camila Alves · makeup artist e review de produtos</p>
+                </div>
+
+                <button type="button" class="follow-btn">Seguir</button>
+            </article>
+
+            <article class="person-card">
+                <img src="https://ui-avatars.com/api/?name=Camila" alt="">
+
+                <div class="person-info">
+                    <p class="person-username">@nathdalila</p>
+                    <p class="person-details">Nathalia Dalila · makeup artist e review de produtos</p>
+                </div>
+
+                <button type="button" class="follow-btn">Seguir</button>
+            </article>
+
+            <article class="person-card">
+                <img src="https://ui-avatars.com/api/?name=Camila" alt="">
+
+                <div class="person-info">
+                    <p class="person-username">@holly</p>
+                    <p class="person-details">Holly Eloise · makeup artist e review de produtos</p>
+                </div>
+
+                <button type="button" class="follow-btn">Seguir</button>
+            </article>
+
+            <article class="person-card">
+                <img src="https://ui-avatars.com/api/?name=Camila" alt="">
+
+                <div class="person-info">
+                    <p class="person-username">@bruna</p>
+                    <p class="person-details">Bruna Gabriela · makeup artist e review de produtos</p>
+                </div>
+
+                <button type="button" class="follow-btn">Seguir</button>
+            </article>
+        </div>
+    </main>
+</body>
+</html>
