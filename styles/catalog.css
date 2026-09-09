@@ -51,6 +51,10 @@
     align-self: flex-start;
 }
 
+.hidden {
+    display: none;
+}
+
 @media (hover: hover) {
     .category-buttons button:hover,
     .status-buttons button:hover,
