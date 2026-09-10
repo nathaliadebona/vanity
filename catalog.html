@@ -42,21 +42,21 @@
             <input type="text" placeholder="Buscar produto...">
 
             <div class="category-buttons">
-                <button type="button">Maquiagem</button>
-                <button type="button">Skincare</button>
-                <button type="button">Perfume</button>
-                <button type="button">Cabelo</button>
+                <button type="button" data-value="makeup">Maquiagem</button>
+                <button type="button" data-value="skincare">Skincare</button>
+                <button type="button" data-value="perfume">Perfume</button>
+                <button type="button" data-value="hair">Cabelo</button>
             </div>
 
             <div class="status-buttons">
-                <button type="button">Em uso</button>
-                <button type="button">Acabou</button>
-                <button type="button">Wishlist</button>
+                <button type="button" data-value="using">Em uso</button>
+                <button type="button" data-value="finished">Acabou</button>
+                <button type="button" data-value="wishlist">Wishlist</button>
             </div>
 
             <div class="buy-again-buttons">
-                <button type="button">Sim</button>
-                <button type="button">Não</button>
+                <button type="button" data-value="yes">Sim</button>
+                <button type="button" data-value="no">Não</button>
             </div>
 
             <button type="button" class="favorite-filter">
@@ -65,7 +65,7 @@
         </div>
 
         <section class="catalog-grid">
-            <article class="product-card">
+            <article class="product-card" data-category="hair" data-status="using" data-buy-again="yes">
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
@@ -90,7 +90,7 @@
                 </div>
             </article>
 
-            <article class="product-card">
+            <article class="product-card" data-category="makeup" data-status="using" data-buy-again="no">
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
@@ -115,7 +115,7 @@
                 </div>
             </article>
 
-            <article class="product-card">
+            <article class="product-card" data-category="skincare" data-status="finished" data-buy-again="no">
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
@@ -140,7 +140,7 @@
                 </div>
             </article>
 
-            <article class="product-card">
+            <article class="product-card" data-category="perfume" data-status="wishlist" data-buy-again="yes">
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">

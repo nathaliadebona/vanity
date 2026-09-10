@@ -288,7 +288,7 @@ header a img {
     }
 
     .catalog-grid {
-        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     }
 
     .card-image .favorite-btn {
