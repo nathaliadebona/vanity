@@ -34,7 +34,7 @@
 
     <main class="catalog-page">
         <div class="catalog-header">
-            <h2>Meu catálogo</h2>
+            <h2 data-i18n="catalog-title">Meu catálogo</h2>
             <button type="button" id="filter-btn"><i class="fa-solid fa-sliders"></i></button>
         </div>
 
@@ -42,24 +42,24 @@
             <input type="text" placeholder="Buscar produto...">
 
             <div class="category-buttons">
-                <button type="button" data-value="makeup">Maquiagem</button>
-                <button type="button" data-value="skincare">Skincare</button>
-                <button type="button" data-value="perfume">Perfume</button>
-                <button type="button" data-value="hair">Cabelo</button>
+                <button type="button" data-value="makeup" data-i18n="filter-makeup">Maquiagem</button>
+                <button type="button" data-value="skincare" data-i18n="filter-skincare">Skincare</button>
+                <button type="button" data-value="perfume" data-i18n="filter-perfume">Perfume</button>
+                <button type="button" data-value="hair" data-i18n="filter-hair">Cabelo</button>
             </div>
 
             <div class="status-buttons">
-                <button type="button" data-value="using">Em uso</button>
-                <button type="button" data-value="finished">Acabou</button>
-                <button type="button" data-value="wishlist">Wishlist</button>
+                <button type="button" data-value="using" data-i18n="filter-using">Em uso</button>
+                <button type="button" data-value="finished" data-i18n="filter-finished">Acabou</button>
+                <button type="button" data-value="wishlist" data-i18n="filter-wishlist">Wishlist</button>
             </div>
 
             <div class="buy-again-buttons">
-                <button type="button" data-value="yes">Sim</button>
-                <button type="button" data-value="no">Não</button>
+                <button type="button" data-value="yes" data-i18n="filter-yes">Sim</button>
+                <button type="button" data-value="no" data-i18n="filter-no">Não</button>
             </div>
 
-            <button type="button" class="favorite-filter">
+            <button type="button" class="favorite-filter" data-i18n="filter-favorites">
                 <i class="fa-regular fa-heart"></i> Favoritos
             </button>
         </div>

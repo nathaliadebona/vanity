@@ -39,17 +39,17 @@
             <div class="profile-counters">
                 <div>
                     <span>10</span>
-                    <p>Produtos</p>
+                    <p data-i18n="counter-products">Produtos</p>
                 </div>
 
                 <div>
                     <span>100</span>
-                    <p>Seguidores</p>
+                    <p data-i18n="counter-followers">Seguidores</p>
                 </div>
 
                 <div>
                     <span>45</span>
-                    <p>Seguindo</p>
+                    <p data-i18n="counter-following">Seguindo</p>
                 </div>
             </div>
         </div>
@@ -60,11 +60,13 @@
             <p class="profile-bio">Biografia</p>
         </div>
 
-        <button type="button" id="profile-edit-btn">Editar perfil</button>
+        <button type="button" id="profile-edit-btn" data-i18n="profile-edit">
+            Editar perfil
+        </button>
     
         <div class="profile-tabs">
-            <button type="button" data-tab="products" class="active">Produtos</button>
-            <button type="button" data-tab="stats">Estatísticas</button>
+            <button type="button" data-tab="products" data-i18n="tab-products" class="active">Produtos</button>
+            <button type="button" data-tab="stats" data-i18n="tab-stats">Estatísticas</button>
         </div>
 
         <section class="products-tab">
@@ -190,7 +192,7 @@
             </div>
 
             <div class="stats-chart">
-                <h4>Por categoria</h4>
+                <h4 data-i18n="chart-category">Por categoria</h4>
 
                 <div>
                     <span>Maquiagem</span>
@@ -222,7 +224,7 @@
             </div>
 
             <div class="stats-chart">
-                <h4>Por status</h4>
+                <h4 data-i18n="chart-status">Por status</h4>
 
                 <div>
                     <span>Em uso</span>
