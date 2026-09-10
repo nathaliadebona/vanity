@@ -258,26 +258,62 @@ header a img {
 }
 
 @media (min-width: 48rem) {
+    body {
+        display: grid;
+        grid-template-columns: 14rem 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "header main"
+            "nav main"
+    }
+
     header {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        justify-content: center;
+        align-items: center;
+        row-gap: var(--spacing-sm);
+        column-gap: var(--spacing-sm);
+        grid-area: header;
+        background-color: var(--color-cards-bg);
         border-bottom: none;
     }
 
-    #lang-toggle:hover {
-        background-color: var(--color-accent-light);
+    header h1 {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        text-align: center;
+    }
+
+    header button,
+    header a {
+        justify-self: unset;
     }
 
     .menu {
+        grid-area: nav;
         position: static;
-        border-bottom: 0.0625rem solid var(--color-border);
+        display: flex;
+        flex-direction: column;
+        padding: var(--spacing-lg) var(--spacing-lg);
+        border-top: none;
+    }
+
+    main {
+        grid-area: main;
     }
 
     .menu ul {
-        justify-content: center;
-        gap: 2rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
     }
 
-    .menu i {
-        display: none;
+    .menu a {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-size: 1.1rem;
     }
 
     .nav-add {
@@ -287,12 +323,12 @@ header a img {
         border-radius: 0;
     }
 
-    .nav-add span {
-        display: inline;
+    .nav-add i {
+        color: inherit;
     }
 
-    .menu a.nav-profile {
-        display: none;
+    .nav-add span {
+        display: inline;
     }
 
     .catalog-grid {
