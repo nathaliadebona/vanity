@@ -126,6 +126,20 @@
         max-width: 56rem;
         margin: 0 auto;
     }
+
+    .profile-counters {
+        justify-content: center;
+        gap: 6rem;
+    }
+
+    .profile-info h2 {
+        font-size: 1.75rem;
+    }
+
+    #profile-edit-btn {
+        display: block;
+        width: auto;
+    }
 }
 
 @media (hover: hover) {

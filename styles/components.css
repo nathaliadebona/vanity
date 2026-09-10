@@ -73,6 +73,10 @@ header a img {
     object-fit: cover;
 }
 
+#lang-toggle {
+    transition: background-color 0.2s ease;
+}
+
 /* -- MENU -- */
 .menu {
     position: fixed;
@@ -256,6 +260,10 @@ header a img {
 @media (min-width: 48rem) {
     header {
         border-bottom: none;
+    }
+
+    #lang-toggle:hover {
+        background-color: var(--color-accent-light);
     }
 
     .menu {

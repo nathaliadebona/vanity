@@ -9,6 +9,10 @@
     margin: 0 calc(-1 * var(--spacing-lg));
 }
 
+.product-full-image img {
+    border-radius: 0.75rem;
+}
+
 .key-information {
     display: flex;
     flex-direction: column;

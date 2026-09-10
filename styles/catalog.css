@@ -1,7 +1,13 @@
 .catalog-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
     margin-bottom: var(--spacing-md);
+}
+
+.catalog-header h2 {
+    grid-column: 2;
+    text-align: center;
 }
 
 .catalog-header button {
@@ -10,13 +16,18 @@
     border-radius: 50%;
     background-color: var(--color-cards-bg);
     color: var(--color-accent);
+    grid-column: 3;
+    justify-self: end;
 }
 
 .catalog-filter {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
     padding: var(--spacing-md);
+    background-color: var(--color-cards-bg);
+    border-radius: 0.75rem;
 }
 
 .category-buttons,
@@ -56,10 +67,16 @@
 }
 
 @media (hover: hover) {
-    .category-buttons button:hover,
-    .status-buttons button:hover,
-    .buy-again-buttons button:hover,
-    .favorite-filter:hover {
+    .catalog-page {
+        width: 100%;
+        max-width: 56rem;
+        margin: 0 auto;
+    }
+
+    .category-buttons button:hover:not(.active),
+    .status-buttons button:hover:not(.active),
+    .buy-again-buttons button:hover:not(.active),
+    .favorite-filter:hover:not(.active) {
         background-color: var(--color-accent-light);
     }
 }
