@@ -6,7 +6,9 @@ const subcategories = {
 }
 const productCategory = document.getElementById('product-category');
 const productSubcategory = document.getElementById('product-subcategory');
+const addImageInput = document.getElementById('add-product-image');
 
+// ---- Select de subcategoria ---- //
 productCategory.addEventListener('change', () => {
     const selectedCategory = productCategory.value;
     const subcategoryOptions = subcategories[selectedCategory];
@@ -26,4 +28,17 @@ productCategory.addEventListener('change', () => {
         productSubcategory.append(option);
     });
     productSubcategory.removeAttribute('disabled');
+});
+
+// ---- Preview de upload de imagem ---- //
+addImageInput.addEventListener('change', () => {
+    const file = addImageInput.files[0];
+    const reader = new FileReader();
+    const uploadLabel = document.querySelector('label[for="add-product-image"]');
+
+    reader.addEventListener('load', () => {
+        uploadLabel.innerHTML = `<img src="${reader.result}" alt="">`;
+    });
+
+    reader.readAsDataURL(file);
 });
