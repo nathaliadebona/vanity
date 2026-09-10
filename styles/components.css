@@ -258,36 +258,47 @@ header a img {
 }
 
 @media (min-width: 48rem) {
+    html,
+    body {
+        height: 100%;
+    }
+
     body {
         display: grid;
         grid-template-columns: 14rem 1fr;
         grid-template-rows: auto 1fr auto;
         grid-template-areas:
             "header main"
-            "nav main"
+            "nav main";
+        overflow: hidden;
     }
 
     header {
-        display: grid;
-        grid-template-columns: max-content max-content;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        row-gap: var(--spacing-sm);
-        column-gap: var(--spacing-sm);
-        grid-area: header;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-lg);
         background-color: var(--color-cards-bg);
         border-bottom: none;
     }
 
     header h1 {
-        grid-column: 1 / -1;
-        grid-row: 1;
+        flex-basis: 100%;
         text-align: center;
+        order: 1;
     }
 
     header button,
     header a {
-        justify-self: unset;
+        order: 2;
+    }
+
+    main {
+        height: 100vh;
+        overflow-y: auto;
+        grid-area: main;
     }
 
     .menu {
@@ -297,10 +308,6 @@ header a img {
         flex-direction: column;
         padding: var(--spacing-lg) var(--spacing-lg);
         border-top: none;
-    }
-
-    main {
-        grid-area: main;
     }
 
     .menu ul {
