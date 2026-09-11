@@ -57,11 +57,15 @@ const translations = {
     "review-title": { pt: "Resenha", en: "Review" },
     "comments-title": { pt: "Comentários", en: "Comments" },
     "reply-btn": { pt: "Responder", en: "Reply" },
-    "send-btn": { pt: "Enviar", en: "Send" }
+    "send-btn": { pt: "Enviar", en: "Send" },
+    // ---- Inputs de busca ---- //
+    "search-product": { pt: "Buscar produto...", en: "Search product..." },
+    "search-username": { pt: "Buscar por username...", en: "Search by username..." },
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');
 const elementsToTranslate = document.querySelectorAll('[data-i18n]');
+const elementsToTranslatePlaceholder = document.querySelectorAll('[data-i18n-placeholder]');
 const savedLanguage = localStorage.getItem('language');
 let currentLanguage = savedLanguage ? savedLanguage : 'pt';
 
@@ -71,6 +75,13 @@ function applyTranslations () {
         const translation = translations[key];
         element.textContent = translation[currentLanguage];
     });
+
+    elementsToTranslatePlaceholder.forEach(el => {
+        const key = el.dataset.i18nPlaceholder;
+        const translation = translations[key];
+        el.placeholder = translation[currentLanguage];
+    });
+
     langToggleBtn.textContent = (currentLanguage === 'pt' ? 'en' : 'pt').toUpperCase();
 }
 
