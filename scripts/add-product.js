@@ -35,6 +35,7 @@ const subcategories = {
 const productCategory = document.getElementById('product-category');
 const productSubcategory = document.getElementById('product-subcategory');
 const addImageInput = document.getElementById('add-product-image');
+const uploadLabel = document.querySelector('label[for="add-product-image"]');
 
 function updateSubcategoryOptions() {
     const selectedCategory = productCategory.value;
@@ -61,8 +62,7 @@ productCategory.addEventListener('change', () => {
 });
 
 // ---- Preview de upload de imagem ---- //
-addImageInput.addEventListener('change', () => {
-    const file = addImageInput.files[0];
+function showImagePreview(file) {
     const reader = new FileReader();
     const uploadLabel = document.querySelector('label[for="add-product-image"]');
 
@@ -71,4 +71,20 @@ addImageInput.addEventListener('change', () => {
     });
 
     reader.readAsDataURL(file);
+    }
+
+    addImageInput.addEventListener('change', () => {
+    const file = addImageInput.files[0];
+    showImagePreview(file);
+});
+
+uploadLabel.addEventListener('dragover', (event) => {
+    event.preventDefault();
+});
+
+uploadLabel.addEventListener('drop', (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+
+    showImagePreview(file);
 });
