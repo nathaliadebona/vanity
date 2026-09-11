@@ -5,8 +5,23 @@
 }
 
 @media (min-width: 48rem) {
+    .feed-page {
+        display: flex;
+        align-items: flex-start;
+    }
+    
     .feed-post-list {
         max-width: 32rem;
         margin: 0 auto;
+    }
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    aside h3 {
+        text-align: center;
     }
 }
