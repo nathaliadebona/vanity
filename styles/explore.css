@@ -1,9 +1,9 @@
-main.explore-page h2 {
+.explore-page h2 {
   margin-bottom: var(--spacing-md);
   text-align: center;
 }
 
-main.explore-page input {
+.explore-page input {
   width: 100%;
 }
 

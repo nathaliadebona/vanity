@@ -32,90 +32,78 @@
         </ul>
     </nav>
 
-    <main class="add-product-page">
-        <h2 data-i18n="add-product-title">Adicionar produto</h2>
-
-        <form action="">
-            <div class="form-group">
-                <label for="add-product-image" data-i18n="label-photo">
-                    <span><i class="fa-solid fa-camera"></i> Adicionar foto</span>
-                </label>
-                <input type="file" name="add-product-image" id="add-product-image">
-            </div>
-
-            <div class="form-group">
-                <label for="product-name" data-i18n="label-name">Nome do produto</label>
-                <input type="text" name="product-name" id="product-name">
-            </div>
-
-            <div class="form-group">
-                <label for="product-brand" data-i18n="label-brand">Marca do produto</label>
-                <input type="text" name="product-brand" id="product-brand">
-            </div>
-
-            <div class="form-group">
-                <label for="product-category" data-i18n="label-category">Categoria</label>
-                <select name="product-category" id="product-category">
-                    <option value="">Selecione</option>
-                    <option value="makeup">Maquiagem</option>
-                    <option value="skincare">Skincare</option>
-                    <option value="perfume">Perfume</option>
-                    <option value="hair">Cabelo</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="product-subcategory" data-i18n="label-subcategory">Subcategoria</label>
-                <select name="product-subcategory" id="product-subcategory" disabled>
-                    <option value="">Selecione</option>
-                </select>
-            </div>
-
-            <fieldset>
-                <legend data-i18n="legend-rating">Nota</legend>
-
-                <input type="radio" name="rating" id="rating-5">
-                <label for="rating-5"><i class="fa-regular fa-star"></i></label>
-
-                <input type="radio" name="rating" id="rating-4">
-                <label for="rating-4"><i class="fa-regular fa-star"></i></label>
-
-                <input type="radio" name="rating" id="rating-3">
-                <label for="rating-3"><i class="fa-regular fa-star"></i></label>
-
-                <input type="radio" name="rating" id="rating-2">
-                <label for="rating-2"><i class="fa-regular fa-star"></i></label>
-
-                <input type="radio" name="rating" id="rating-1">
-                <label for="rating-1"><i class="fa-regular fa-star"></i></label>
-            </fieldset>
-
-            <div class="form-group">
-                <label for="buy-again" data-i18n="label-buy-again">Recompraria?</label>
-                <select name="buy-again" id="buy-again">
-                    <option value="">Selecione</option>
-                    <option value="yes">Sim</option>
-                    <option value="no">Não</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="status" data-i18n="label-status">Status</label>
-                <select name="status" id="status">
-                    <option value="">Selecione</option>
-                    <option value="using">Em uso</option>
-                    <option value="finished">Acabou</option>
-                    <option value="wishlist">Wishlist</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="review-area" data-i18n="label-review">Resenha</label>
-                <textarea name="review-area" id="review-area"></textarea>
-            </div>
-        
-            <button type="submit" data-i18n="submit-add-product">Adicionar produto</button>
-        </form>
+    <main>
+        <div class="add-product-page">
+            <h2 data-i18n="add-product-title">Adicionar produto</h2>
+            <form action="">
+                <div class="form-group">
+                    <label for="add-product-image" data-i18n="label-photo">
+                        <span><i class="fa-solid fa-camera"></i> Adicionar foto</span>
+                    </label>
+                    <input type="file" name="add-product-image" id="add-product-image">
+                </div>
+                <div class="form-group">
+                    <label for="product-name" data-i18n="label-name">Nome do produto</label>
+                    <input type="text" name="product-name" id="product-name">
+                </div>
+                <div class="form-group">
+                    <label for="product-brand" data-i18n="label-brand">Marca do produto</label>
+                    <input type="text" name="product-brand" id="product-brand">
+                </div>
+                <div class="form-group">
+                    <label for="product-category" data-i18n="label-category">Categoria</label>
+                    <select name="product-category" id="product-category">
+                        <option value="">Selecione</option>
+                        <option value="makeup">Maquiagem</option>
+                        <option value="skincare">Skincare</option>
+                        <option value="perfume">Perfume</option>
+                        <option value="hair">Cabelo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-subcategory" data-i18n="label-subcategory">Subcategoria</label>
+                    <select name="product-subcategory" id="product-subcategory" disabled>
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <fieldset>
+                    <legend data-i18n="legend-rating">Nota</legend>
+                    <input type="radio" name="rating" id="rating-5">
+                    <label for="rating-5"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" name="rating" id="rating-4">
+                    <label for="rating-4"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" name="rating" id="rating-3">
+                    <label for="rating-3"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" name="rating" id="rating-2">
+                    <label for="rating-2"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" name="rating" id="rating-1">
+                    <label for="rating-1"><i class="fa-regular fa-star"></i></label>
+                </fieldset>
+                <div class="form-group">
+                    <label for="buy-again" data-i18n="label-buy-again">Recompraria?</label>
+                    <select name="buy-again" id="buy-again">
+                        <option value="">Selecione</option>
+                        <option value="yes">Sim</option>
+                        <option value="no">Não</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="status" data-i18n="label-status">Status</label>
+                    <select name="status" id="status">
+                        <option value="">Selecione</option>
+                        <option value="using">Em uso</option>
+                        <option value="finished">Acabou</option>
+                        <option value="wishlist">Wishlist</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="review-area" data-i18n="label-review">Resenha</label>
+                    <textarea name="review-area" id="review-area"></textarea>
+                </div>
+            
+                <button type="submit" data-i18n="submit-add-product">Adicionar produto</button>
+            </form>
+        </div>
     </main>
 
     <script src="scripts/add-product.js"></script>

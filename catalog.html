@@ -32,139 +32,128 @@
         </ul>
     </nav>
 
-    <main class="catalog-page">
-        <div class="catalog-header">
-            <h2 data-i18n="catalog-title">Meu catálogo</h2>
-            <button type="button" id="filter-btn"><i class="fa-solid fa-sliders"></i></button>
+    <main>
+        <div class="catalog-page">
+            <div class="catalog-header">
+                <h2 data-i18n="catalog-title">Meu catálogo</h2>
+                <button type="button" id="filter-btn"><i class="fa-solid fa-sliders"></i></button>
+            </div>
+            <div class="catalog-filter hidden">
+                <input type="text" placeholder="Buscar produto...">
+                <div class="category-buttons">
+                    <button type="button" data-value="makeup" data-i18n="filter-makeup">Maquiagem</button>
+                    <button type="button" data-value="skincare" data-i18n="filter-skincare">Skincare</button>
+                    <button type="button" data-value="perfume" data-i18n="filter-perfume">Perfume</button>
+                    <button type="button" data-value="hair" data-i18n="filter-hair">Cabelo</button>
+                </div>
+                <div class="status-buttons">
+                    <button type="button" data-value="using" data-i18n="filter-using">Em uso</button>
+                    <button type="button" data-value="finished" data-i18n="filter-finished">Acabou</button>
+                    <button type="button" data-value="wishlist" data-i18n="filter-wishlist">Wishlist</button>
+                </div>
+                <div class="buy-again-buttons">
+                    <button type="button" data-value="yes" data-i18n="filter-yes">Sim</button>
+                    <button type="button" data-value="no" data-i18n="filter-no">Não</button>
+                </div>
+                <button type="button" class="favorite-filter">
+                    <i class="fa-regular fa-heart"></i> <span data-i18n="filter-favorites">Favoritos</span>
+                </button>
+            </div>
+            <section class="catalog-grid">
+                <article class="product-card" data-category="hair" data-status="using" data-buy-again="yes">
+                    <div class="card-image">
+                        <img src="" alt="">
+                        <button type="button" class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                         <div class="tags-row">
+                            <span class="category-tag">Categoria</span>
+                            <span class="status-tag">Status</span>
+                        </div>
+                        <h3>Nome do produto</h3>
+                        <p class="product-brand">Marca</p>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-category="makeup" data-status="using" data-buy-again="no">
+                    <div class="card-image">
+                        <img src="" alt="">
+                        <button type="button" class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                         <div class="tags-row">
+                            <span class="category-tag">Categoria</span>
+                            <span class="status-tag">Status</span>
+                        </div>
+                        <h3>Nome do produto</h3>
+                        <p class="product-brand">Marca</p>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-category="skincare" data-status="finished" data-buy-again="no">
+                    <div class="card-image">
+                        <img src="" alt="">
+                        <button type="button" class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                         <div class="tags-row">
+                            <span class="category-tag">Categoria</span>
+                            <span class="status-tag">Status</span>
+                        </div>
+                        <h3>Nome do produto</h3>
+                        <p class="product-brand">Marca</p>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-category="perfume" data-status="wishlist" data-buy-again="yes">
+                    <div class="card-image">
+                        <img src="" alt="">
+                        <button type="button" class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                         <div class="tags-row">
+                            <span class="category-tag">Categoria</span>
+                            <span class="status-tag">Status</span>
+                        </div>
+                        <h3>Nome do produto</h3>
+                        <p class="product-brand">Marca</p>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                </article>
+            </section>
         </div>
-
-        <div class="catalog-filter hidden">
-            <input type="text" placeholder="Buscar produto...">
-
-            <div class="category-buttons">
-                <button type="button" data-value="makeup" data-i18n="filter-makeup">Maquiagem</button>
-                <button type="button" data-value="skincare" data-i18n="filter-skincare">Skincare</button>
-                <button type="button" data-value="perfume" data-i18n="filter-perfume">Perfume</button>
-                <button type="button" data-value="hair" data-i18n="filter-hair">Cabelo</button>
-            </div>
-
-            <div class="status-buttons">
-                <button type="button" data-value="using" data-i18n="filter-using">Em uso</button>
-                <button type="button" data-value="finished" data-i18n="filter-finished">Acabou</button>
-                <button type="button" data-value="wishlist" data-i18n="filter-wishlist">Wishlist</button>
-            </div>
-
-            <div class="buy-again-buttons">
-                <button type="button" data-value="yes" data-i18n="filter-yes">Sim</button>
-                <button type="button" data-value="no" data-i18n="filter-no">Não</button>
-            </div>
-
-            <button type="button" class="favorite-filter">
-                <i class="fa-regular fa-heart"></i> <span data-i18n="filter-favorites">Favoritos</span>
-            </button>
-        </div>
-
-        <section class="catalog-grid">
-            <article class="product-card" data-category="hair" data-status="using" data-buy-again="yes">
-                <div class="card-image">
-                    <img src="" alt="">
-                    <button type="button" class="favorite-btn">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-
-                <div class="card-content">
-                     <div class="tags-row">
-                        <span class="category-tag">Categoria</span>
-                        <span class="status-tag">Status</span>
-                    </div>
-                    <h3>Nome do produto</h3>
-                    <p class="product-brand">Marca</p>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                </div>
-            </article>
-
-            <article class="product-card" data-category="makeup" data-status="using" data-buy-again="no">
-                <div class="card-image">
-                    <img src="" alt="">
-                    <button type="button" class="favorite-btn">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-
-                <div class="card-content">
-                     <div class="tags-row">
-                        <span class="category-tag">Categoria</span>
-                        <span class="status-tag">Status</span>
-                    </div>
-                    <h3>Nome do produto</h3>
-                    <p class="product-brand">Marca</p>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                </div>
-            </article>
-
-            <article class="product-card" data-category="skincare" data-status="finished" data-buy-again="no">
-                <div class="card-image">
-                    <img src="" alt="">
-                    <button type="button" class="favorite-btn">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-
-                <div class="card-content">
-                     <div class="tags-row">
-                        <span class="category-tag">Categoria</span>
-                        <span class="status-tag">Status</span>
-                    </div>
-                    <h3>Nome do produto</h3>
-                    <p class="product-brand">Marca</p>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                </div>
-            </article>
-
-            <article class="product-card" data-category="perfume" data-status="wishlist" data-buy-again="yes">
-                <div class="card-image">
-                    <img src="" alt="">
-                    <button type="button" class="favorite-btn">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-
-                <div class="card-content">
-                     <div class="tags-row">
-                        <span class="category-tag">Categoria</span>
-                        <span class="status-tag">Status</span>
-                    </div>
-                    <h3>Nome do produto</h3>
-                    <p class="product-brand">Marca</p>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                </div>
-            </article>
-        </section>
     </main>
     
     <script src="scripts/product-interactions.js"></script>

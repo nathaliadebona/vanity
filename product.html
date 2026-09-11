@@ -32,72 +32,67 @@
         </ul>
     </nav>
 
-    <main class="product-page">
-        <div class="product-full-image">
-            <img src="https://picsum.photos/800/450" alt="">
-        </div>
-
-        <div class="key-information">
-            <div class="post-author">
-                <a href="#">
-                    <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
-                    <span>@nickname</span>
-                </a>
-            </div>  
-
-            <div class="product-title-row">
-                <h3>Nome do Produto</h3>
-                <div class="action-buttons">
-                    <button type="button" class="edit-btn"><i class="fa-solid fa-pencil"></i></button>
-                    <button type="button" class="trash-btn"><i class="fa-solid fa-trash-can"></i></button>
-                    <button type="button" class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
-                </div>
+    <main>
+        <div class="product-page">
+            <div class="product-full-image">
+                <img src="https://picsum.photos/800/450" alt="">
             </div>
-            <p class="product-brand">Marca</p>
-            <span class="category-tag">Categoria</span>
-            <div class="rating">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-            </div>
-            <p>Recompraria: <strong>Sim!</strong></p>
-            <span class="status-tag">Status</span>
-        </div>
-
-        <section class="review">
-            <h4 data-i18n="review-title">Resenha</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum cupiditate, quam ea obcaecati tenetur debitis esse enim earum facilis, a harum illo! Ad, accusamus. Ipsa nisi distinctio voluptatem officia eligendi.</p>
-        </section>
-
-        <section class="comments-section">
-            <h4 data-i18n="comments-title">Comentários</h4>
-
-            <div class="comments-list">
-                <article class="comment">
-                    <div class="comment-header">
+            <div class="key-information">
+                <div class="post-author">
+                    <a href="#">
                         <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
                         <span>@nickname</span>
-                        <time datetime="">há 2 horas</time>
-                    </div>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ea amet voluptate voluptatem laboriosam. Fugit in vero ipsum repellendus minus, temporibus, velit voluptatum nemo deserunt aperiam cumque est sunt maiores?</p>
-                
-                    <div class="comments-actions">
-                        <button type="button"><i class="fa-regular fa-heart"></i></button>
-                        <span>3</span>
-                        <button type="button" class="reply-btn" data-i18n="reply-btn">Responder</button>
+                    </a>
+                </div>
+                <div class="product-title-row">
+                    <h3>Nome do Produto</h3>
+                    <div class="action-buttons">
+                        <button type="button" class="edit-btn"><i class="fa-solid fa-pencil"></i></button>
                         <button type="button" class="trash-btn"><i class="fa-solid fa-trash-can"></i></button>
+                        <button type="button" class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
                     </div>
-                </article>
+                </div>
+                <p class="product-brand">Marca</p>
+                <span class="category-tag">Categoria</span>
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <p>Recompraria: <strong>Sim!</strong></p>
+                <span class="status-tag">Status</span>
             </div>
-
-            <div class="new-comment">
-                <input type="text" class="comment-input" id="new-comment-input">
-                <button type="button" data-i18n="send-btn">Enviar</button>
-            </div>
-        </section>
+            <section class="review">
+                <h4 data-i18n="review-title">Resenha</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum cupiditate, quam ea obcaecati tenetur debitis esse enim earum facilis, a harum illo! Ad, accusamus. Ipsa nisi distinctio voluptatem officia eligendi.</p>
+            </section>
+            <section class="comments-section">
+                <h4 data-i18n="comments-title">Comentários</h4>
+                <div class="comments-list">
+                    <article class="comment">
+                        <div class="comment-header">
+                            <img src="https://ui-avatars.com/api/?name=Nathalia" alt="">
+                            <span>@nickname</span>
+                            <time datetime="">há 2 horas</time>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ea amet voluptate voluptatem laboriosam. Fugit in vero ipsum repellendus minus, temporibus, velit voluptatum nemo deserunt aperiam cumque est sunt maiores?</p>
+            
+                        <div class="comments-actions">
+                            <button type="button"><i class="fa-regular fa-heart"></i></button>
+                            <span>3</span>
+                            <button type="button" class="reply-btn" data-i18n="reply-btn">Responder</button>
+                            <button type="button" class="trash-btn"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </article>
+                </div>
+                <div class="new-comment">
+                    <input type="text" class="comment-input" id="new-comment-input">
+                    <button type="button" data-i18n="send-btn">Enviar</button>
+                </div>
+            </section>
+        </div>
     </main>
 
     <script src="scripts/product-interactions.js"></script>
