@@ -11,14 +11,16 @@
     }
     
     .feed-post-list {
-        max-width: 32rem;
+        max-width: 38rem;
         margin: 0 auto;
+        flex: 1;
     }
 
     aside {
         display: flex;
         flex-direction: column;
         gap: var(--spacing-md);
+        width: 18rem;
     }
 
     aside h3 {
