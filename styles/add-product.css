@@ -32,6 +32,13 @@ label[for="add-product-image"] {
     cursor: pointer;
 }
 
+label[for="add-product-image"] img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: 0.75rem;
+}
+
 label[for="add-product-image"] span {
     display: flex;
     flex-direction: column;
@@ -72,4 +79,8 @@ fieldset input:checked ~ label {
         max-width: 50rem;
         margin: 0 auto;
     }
+
+    label[for="add-product-image"] img {
+    height: 20rem;
+  }
 }
