@@ -53,17 +53,17 @@
                 <div class="form-group">
                     <label for="product-category" data-i18n="label-category">Categoria</label>
                     <select name="product-category" id="product-category">
-                        <option value="">Selecione</option>
-                        <option value="makeup">Maquiagem</option>
-                        <option value="skincare">Skincare</option>
-                        <option value="perfume">Perfume</option>
-                        <option value="hair">Cabelo</option>
+                        <option value="" data-i18n="select-placeholder">Selecione</option>
+                        <option value="makeup" data-i18n="filter-makeup">Maquiagem</option>
+                        <option value="skincare" data-i18n="filter-skincare">Skincare</option>
+                        <option value="perfume" data-i18n="filter-perfume">Perfume</option>
+                        <option value="hair" data-i18n="filter-hair">Cabelo</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="product-subcategory" data-i18n="label-subcategory">Subcategoria</label>
                     <select name="product-subcategory" id="product-subcategory" disabled>
-                        <option value="">Selecione</option>
+                        <option value="" data-i18n="select-placeholder">Selecione</option>
                     </select>
                 </div>
                 <fieldset>
@@ -82,18 +82,18 @@
                 <div class="form-group">
                     <label for="buy-again" data-i18n="label-buy-again">Recompraria?</label>
                     <select name="buy-again" id="buy-again">
-                        <option value="">Selecione</option>
-                        <option value="yes">Sim</option>
-                        <option value="no">Não</option>
+                        <option value="" data-i18n="select-placeholder">Selecione</option>
+                        <option value="yes" data-i18n="filter-yes">Sim</option>
+                        <option value="no" data-i18n="filter-no">Não</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="status" data-i18n="label-status">Status</label>
                     <select name="status" id="status">
-                        <option value="">Selecione</option>
-                        <option value="using">Em uso</option>
-                        <option value="finished">Acabou</option>
-                        <option value="wishlist">Wishlist</option>
+                        <option value="" data-i18n="select-placeholder">Selecione</option>
+                        <option value="using" data-i18n="filter-using">Em uso</option>
+                        <option value="finished" data-i18n="filter-finished">Acabou</option>
+                        <option value="wishlist" data-i18n="filter-wishlist">Wishlist</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -106,7 +106,7 @@
         </div>
     </main>
 
-    <script src="scripts/add-product.js"></script>
     <script src="scripts/i18n.js"></script>
+    <script src="scripts/add-product.js"></script>
 </body>
 </html>

@@ -38,6 +38,7 @@ const translations = {
     "label-status": { pt: "Status", en: "Status" },
     "label-review": { pt: "Resenha", en: "Review" },
     "submit-add-product": { pt: "Adicionar produto", en: "Add product" },
+    "select-placeholder": { pt: "Selecione", en: "Select" },
     // ---- Catálogo ---- //
     "catalog-title": { pt: "Meu catálogo", en: "My catalog" },
     "filter-makeup": { pt: "Maquiagem", en: "Makeup" },
@@ -61,6 +62,8 @@ const translations = {
     // ---- Inputs de busca ---- //
     "search-product": { pt: "Buscar produto...", en: "Search product..." },
     "search-username": { pt: "Buscar por username...", en: "Search by username..." },
+    // ---- Sugestões para seguir ---- //
+    "follow-suggestions": { pt: "Sugestões para seguir", en: "Suggestions to follow" },
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');
@@ -95,6 +98,10 @@ langToggleBtn.addEventListener('click', () => {
     localStorage.setItem('language', currentLanguage);
 
     applyTranslations();
+
+    if (typeof productCategory !== 'undefined' && productCategory.value) {
+        updateSubcategoryOptions();
+    }
 });
 
 applyTranslations();
