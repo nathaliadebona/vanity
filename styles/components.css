@@ -266,6 +266,11 @@ header a img {
     background-color: var(--color-cards-bg);
 }
 
+.product-card,
+.person-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .person-card img {
     width: 2.75rem;
     height: 2.75rem;
@@ -397,6 +402,8 @@ header a img {
         height: 2.5rem;
         font-size: 1.1rem;
     }
+
+    
 }
 
 @media (hover: hover) {
@@ -404,4 +411,9 @@ header a img {
         color: var(--color-accent);
     }
 
+    .product-card:hover,
+    .person-card:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 0.5rem 1rem rgba(73, 36, 62, 0.15);
+    }
 }

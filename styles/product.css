@@ -60,7 +60,7 @@
     align-items: center;
     justify-content: center;
     font-size: 0.875rem;
-    transition: filter 0.2s ease;
+    transition: filter 0.3s ease;
 }
 
 .edit-btn {
