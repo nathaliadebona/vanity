@@ -328,6 +328,16 @@ header a img {
         overflow: hidden;
     }
 
+    header,
+    .menu {
+        background-color: var(--color-accent);
+    }
+
+    header h1,
+    .menu a {
+        color: var(--color-cards-bg);
+    }
+
     header {
         display: flex;
         flex-wrap: wrap;
@@ -335,7 +345,6 @@ header a img {
         align-items: center;
         gap: var(--spacing-sm);
         padding: var(--spacing-lg);
-        background-color: var(--color-cards-bg);
         border-bottom: none;
     }
 
@@ -343,6 +352,10 @@ header a img {
         flex-basis: 100%;
         text-align: center;
         order: 1;
+    }
+
+    header a img {
+        border: 0.125rem solid var(--color-cards-bg);
     }
 
     header button,
@@ -368,19 +381,27 @@ header a img {
     .menu ul {
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+
+    .menu li {
+        width: 100%;
     }
 
     .menu a {
+        width: 100%;
         flex-direction: row;
         align-items: center;
         gap: var(--spacing-sm);
+        padding: 0.5rem 1rem;
         font-size: 1.1rem;
+        color: rgba(250, 245, 228, 0.6);
     }
 
     .nav-add {
         width: auto;
         height: auto;
+        justify-content: flex-start;
         background-color: transparent;
         border-radius: 0;
     }
@@ -393,6 +414,22 @@ header a img {
         display: inline;
     }
 
+    .menu a.current {
+        color: var(--color-cards-bg);
+        font-weight: 700;
+    }
+
+    #lang-toggle {
+        border-color: var(--color-cards-bg);
+        color: var(--color-cards-bg);
+    }
+
+    .catalog-header h2,
+    .explore-page h2,
+    .add-product-page h2 {
+        font-size: 2.5rem;
+    }
+
     .catalog-grid {
         grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     }
@@ -401,14 +438,13 @@ header a img {
         width: 2.5rem;
         height: 2.5rem;
         font-size: 1.1rem;
-    }
-
-    
+    } 
 }
 
 @media (hover: hover) {
     .menu a:hover {
-        color: var(--color-accent);
+        background-color: rgba(250, 245, 228, 0.15);
+        border-radius: 999px;
     }
 
     .product-card:hover,
