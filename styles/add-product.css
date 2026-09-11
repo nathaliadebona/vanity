@@ -74,13 +74,22 @@ fieldset input:checked ~ label {
 }
 
 @media (min-width: 48rem) {
-    .add-product-page {
-        width: 100%;
-        max-width: 50rem;
-        margin: 0 auto;
-    }
+  .add-product-page {
+    width: 100%;
+    max-width: 50rem;
+    margin: 0 auto;
+  }
 
-    label[for="add-product-image"] img {
+  label[for="add-product-image"] img {
     height: 20rem;
+  }
+
+  label[for="add-product-image"] {
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  label[for="add-product-image"].drag-over {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-light);
   }
 }

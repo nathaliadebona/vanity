@@ -80,11 +80,17 @@ function showImagePreview(file) {
 
 uploadLabel.addEventListener('dragover', (event) => {
     event.preventDefault();
+    uploadLabel.classList.add('drag-over');
+});
+
+uploadLabel.addEventListener('dragleave', () => {
+    uploadLabel.classList.remove('drag-over');
 });
 
 uploadLabel.addEventListener('drop', (event) => {
     event.preventDefault();
-    const file = event.dataTransfer.files[0];
+    uploadLabel.classList.remove('drag-over');
 
+    const file = event.dataTransfer.files[0];
     showImagePreview(file);
 });
