@@ -36,6 +36,7 @@ const productCategory = document.getElementById('product-category');
 const productSubcategory = document.getElementById('product-subcategory');
 const addImageInput = document.getElementById('add-product-image');
 const uploadLabel = document.querySelector('label[for="add-product-image"]');
+const photoPreviews = document.querySelector('.photo-previews');
 
 function updateSubcategoryOptions() {
     const selectedCategory = productCategory.value;
@@ -62,22 +63,24 @@ productCategory.addEventListener('change', () => {
 });
 
 // ---- Preview de upload de imagem ---- //
-function showImagePreview(file) {
-    const reader = new FileReader();
-    const uploadLabel = document.querySelector('label[for="add-product-image"]');
+function showImagePreviews(files) {
+    Array.from(files).forEach(file => {
+        const reader = new FileReader();
 
-    reader.addEventListener('load', () => {
-        uploadLabel.innerHTML = `<img src="${reader.result}" alt="">`;
+        reader.addEventListener('load', () => {
+            const img = document.createElement('img');
+            img.src = reader.result;
+            photoPreviews.append(img);
+        });
+        reader.readAsDataURL(file);
     });
+}
 
-    reader.readAsDataURL(file);
-    }
-
-    addImageInput.addEventListener('change', () => {
-    const file = addImageInput.files[0];
-    showImagePreview(file);
+addImageInput.addEventListener('change', () => {
+    showImagePreviews(addImageInput.files);
 });
 
+// ---- Drag and drop ---- //
 uploadLabel.addEventListener('dragover', (event) => {
     event.preventDefault();
     uploadLabel.classList.add('drag-over');
@@ -91,6 +94,6 @@ uploadLabel.addEventListener('drop', (event) => {
     event.preventDefault();
     uploadLabel.classList.remove('drag-over');
 
-    const file = event.dataTransfer.files[0];
-    showImagePreview(file);
+    const files = event.dataTransfer.files;
+    showImagePreviews(files);
 });

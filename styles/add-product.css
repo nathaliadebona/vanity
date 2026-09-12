@@ -46,6 +46,19 @@ label[for="add-product-image"] span {
     gap: var(--spacing-xs);
 }
 
+.photo-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.photo-previews img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
 fieldset {
   display: flex;
   flex-direction: row-reverse;
