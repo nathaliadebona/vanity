@@ -457,4 +457,8 @@ header a img {
         transform: translateY(-0.25rem);
         box-shadow: 0 0.5rem 1rem rgba(73, 36, 62, 0.15);
     }
+
+    .follow-btn:hover {
+        background-color: var(--color-accent-light);
+    }
 }

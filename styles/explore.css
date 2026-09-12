@@ -21,11 +21,3 @@
     margin: 0 auto;
   }
 }
-
-@media (hover: hover) {
-  .follow-btn:hover {
-    background-color: var(--color-accent-light);
-  }
-
-  
-}
