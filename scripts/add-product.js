@@ -37,6 +37,7 @@ const productSubcategory = document.getElementById('product-subcategory');
 const addImageInput = document.getElementById('add-product-image');
 const uploadLabel = document.querySelector('label[for="add-product-image"]');
 const photoPreviews = document.querySelector('.photo-previews');
+let selectedFiles = [];
 
 function updateSubcategoryOptions() {
     const selectedCategory = productCategory.value;
@@ -64,14 +65,39 @@ productCategory.addEventListener('change', () => {
 
 // ---- Preview de upload de imagem ---- //
 function showImagePreviews(files) {
-    Array.from(files).forEach(file => {
+    selectedFiles.push(...files);
+    renderPreviews();
+}
+
+function renderPreviews() {
+    photoPreviews.innerHTML = '';
+
+    selectedFiles.forEach((file, index) => {
         const reader = new FileReader();
 
         reader.addEventListener('load', () => {
+            const photoPreviewItem = document.createElement('div');
+            photoPreviewItem.className = 'photo-preview-item';
+
             const img = document.createElement('img');
             img.src = reader.result;
-            photoPreviews.append(img);
+
+            const removePhotoBtn = document.createElement('button');
+            removePhotoBtn.className = 'remove-photo-btn';
+            removePhotoBtn.addEventListener('click', () => {
+                selectedFiles.splice(index, 1);
+                renderPreviews();
+            });
+
+            const removeIcon = document.createElement('i');
+            removeIcon.className = 'fa-solid fa-trash-can';
+            removePhotoBtn.append(removeIcon);
+
+            photoPreviewItem.append(img);
+            photoPreviewItem.append(removePhotoBtn);
+            photoPreviews.append(photoPreviewItem);
         });
+
         reader.readAsDataURL(file);
     });
 }

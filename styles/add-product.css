@@ -16,47 +16,68 @@ form {
 }
 
 #add-product-image {
-    display: none;
+  display: none;
 }
 
 label[for="add-product-image"] {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-xl);
-    border: 0.125rem dashed var(--color-text-secondary);
-    border-radius: 0.75rem;
-    background-color: var(--color-cards-bg);
-    color: var(--color-text-secondary);
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  border: 0.125rem dashed var(--color-text-secondary);
+  border-radius: 0.75rem;
+  background-color: var(--color-cards-bg);
+  color: var(--color-text-secondary);
+  cursor: pointer;
 }
 
 label[for="add-product-image"] img {
-    width: 100%;
-    height: 12rem;
-    object-fit: cover;
-    border-radius: 0.75rem;
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
 }
 
 label[for="add-product-image"] span {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 
 .photo-previews {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.photo-preview-item {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
 }
 
 .photo-previews img {
-    width: 5rem;
-    height: 5rem;
-    object-fit: cover;
-    border-radius: 0.5rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.remove-photo-btn {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-danger);
+  color: var(--color-cards-bg);
+  font-size: 0.6rem;
 }
 
 fieldset {
