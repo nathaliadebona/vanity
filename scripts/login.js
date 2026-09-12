@@ -1,3 +1,6 @@
+import { auth } from "./firebase-config.js";
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 const tabButtons = document.querySelectorAll('.tab-button');
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
@@ -17,4 +20,18 @@ tabButtons.forEach(button => {
         registerForm.style.display = 'flex';
     }
     });
+});
+
+registerForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById('email-register').value;
+    const password = document.getElementById('password-register').value;
+
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        window.location.href = 'feed.html';
+    } catch (error) {
+        alert(error.message);
+    }
 });
