@@ -2,16 +2,36 @@ const replyBtn = document.querySelectorAll('.reply-btn');
 const carouselImage = document.querySelectorAll('.carousel-image');
 const nextButton = document.querySelector('.carousel-next');
 const prevButton = document.querySelector('.carousel-prev');
+const carouselDots = document.querySelector('.carousel-dots');
 let currentIndex = 0;
 
 function updateCarousel() {
     carouselImage.forEach(image => {
         image.classList.remove('active')
     });
-
     const activeImage = carouselImage[currentIndex];
     activeImage.classList.add('active');
+
+    const allDots = document.querySelectorAll('.carousel-dot');
+
+     allDots.forEach(dot => {
+        dot.classList.remove('active');
+    });
+
+    const activeDot = allDots[currentIndex];
+    activeDot.classList.add('active');
 }
+
+carouselImage.forEach((image, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot';
+    carouselDots.append(dot);
+
+    dot.addEventListener('click', () => {
+        currentIndex = index;
+        updateCarousel();
+    });
+});
 
 replyBtn.forEach(button => {
     button.addEventListener('click', () => {

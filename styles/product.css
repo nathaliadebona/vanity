@@ -47,6 +47,26 @@
     right: var(--spacing-sm);
 }
 
+.carousel-dots {
+    position: absolute;
+    bottom: var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.carousel-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: rgba(250, 245, 228, 0.6);
+}
+
+.carousel-dot.active {
+    background-color: var(--color-cards-bg);
+}
+
 .product-details {
     display: flex;
     flex-direction: column;
