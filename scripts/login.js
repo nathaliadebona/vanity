@@ -1,5 +1,6 @@
 import { auth } from "./firebase-config.js";
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 const tabButtons = document.querySelectorAll('.tab-button');
 const loginForm = document.getElementById('login-form');
@@ -30,6 +31,20 @@ registerForm.addEventListener('submit', async (event) => {
 
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        window.location.href = 'feed.html';
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById('email-login').value;
+    const password = document.getElementById('password-login').value;
+
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
         window.location.href = 'feed.html';
     } catch (error) {
         alert(error.message);
