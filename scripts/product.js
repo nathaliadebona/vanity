@@ -1,4 +1,17 @@
 const replyBtn = document.querySelectorAll('.reply-btn');
+const carouselImage = document.querySelectorAll('.carousel-image');
+const nextButton = document.querySelector('.carousel-next');
+const prevButton = document.querySelector('.carousel-prev');
+let currentIndex = 0;
+
+function updateCarousel() {
+    carouselImage.forEach(image => {
+        image.classList.remove('active')
+    });
+
+    const activeImage = carouselImage[currentIndex];
+    activeImage.classList.add('active');
+}
 
 replyBtn.forEach(button => {
     button.addEventListener('click', () => {
@@ -25,4 +38,16 @@ replyBtn.forEach(button => {
             replyWrapper.append(replyCommentBtn);
         }
     });
+});
+
+nextButton.addEventListener('click', () => {
+    currentIndex++;
+    currentIndex = currentIndex % carouselImage.length;
+    updateCarousel();
+});
+
+prevButton.addEventListener('click', () => {
+    currentIndex--
+    currentIndex = (currentIndex + carouselImage.length) % carouselImage.length;
+    updateCarousel();
 });
