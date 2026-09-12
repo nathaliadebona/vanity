@@ -4,6 +4,11 @@ import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/1
 import { firestore } from "./firebase-config.js";
 import { doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { collection }from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { translations, currentLanguage } from "./i18n.js";
 
 const tabButtons = document.querySelectorAll('.tab-button');
 const loginForm = document.getElementById('login-form');
@@ -34,6 +39,13 @@ registerForm.addEventListener('submit', async (event) => {
     const username = document.getElementById('username-register').value;
 
     try {
+        const q = query(collection(firestore, "users"), where("username", "==", username));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+            return alert(translations["username-taken"][currentLanguage]);
+        }
+
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const userDocRef = doc(firestore, "users", userCredential.user.uid);
 

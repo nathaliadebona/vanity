@@ -1,4 +1,4 @@
-const translations = {
+export const translations = {
     // ---- Login + Nav ---- //
     "tab-login": { pt: "Entrar", en: "Log in" },
     "tab-register": { pt: "Criar conta", en: "Sign up" },
@@ -64,13 +64,15 @@ const translations = {
     "search-username": { pt: "Buscar por username...", en: "Search by username..." },
     // ---- Sugestões para seguir ---- //
     "follow-suggestions": { pt: "Sugestões para seguir", en: "Suggestions to follow" },
+    // ---- Mensagem de erro de username em uso ---- //
+    "username-taken": { pt: "Esse nome de usuário já está em uso", en: "This username is already in use." }
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');
 const elementsToTranslate = document.querySelectorAll('[data-i18n]');
 const elementsToTranslatePlaceholder = document.querySelectorAll('[data-i18n-placeholder]');
 const savedLanguage = localStorage.getItem('language');
-let currentLanguage = savedLanguage ? savedLanguage : 'pt';
+export let currentLanguage = savedLanguage ? savedLanguage : 'pt';
 
 function applyTranslations () {
     elementsToTranslate.forEach(element => {
