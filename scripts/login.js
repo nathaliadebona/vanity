@@ -1,6 +1,9 @@
 import { auth } from "./firebase-config.js";
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { firestore } from "./firebase-config.js";
+import { doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const tabButtons = document.querySelectorAll('.tab-button');
 const loginForm = document.getElementById('login-form');
@@ -28,9 +31,17 @@ registerForm.addEventListener('submit', async (event) => {
 
     const email = document.getElementById('email-register').value;
     const password = document.getElementById('password-register').value;
+    const username = document.getElementById('username-register').value;
 
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const userDocRef = doc(firestore, "users", userCredential.user.uid);
+
+        await setDoc(userDocRef, {
+            username: username,
+            email: email
+        });
+
         window.location.href = 'feed.html';
     } catch (error) {
         alert(error.message);
