@@ -11,9 +11,9 @@ const logoutBtn = document.getElementById('logout-btn');
 const tabButtons = document.querySelectorAll('.profile-tabs button');
 const productsTab = document.querySelector('.products-tab');
 const statsTab = document.querySelector('.stats-tab');
+const catalogGrid = document.querySelector('.catalog-grid');
 
 async function loadProfileProducts() {
-    const catalogGrid = document.querySelector('.catalog-grid');
     catalogGrid.innerHTML = '';
     const q = query(collection(firestore, "products"), where("userId", "==", auth.currentUser.uid));
     const querySnapshot = await getDocs(q);
@@ -38,7 +38,7 @@ async function loadProfileProducts() {
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </div>
-                
+
                 <div class="card-content">
                     <div class="tags-row">
                         <span class="category-tag">${product.category}</span>
@@ -79,6 +79,15 @@ tabButtons.forEach(button => {
 logoutBtn.addEventListener('click', async () => {
     await signOut(auth);
     window.location.href = 'index.html';
+});
+
+catalogGrid.addEventListener('click', (event) => {
+    if (event.target.closest('.favorite-btn')) {
+        return;
+    }
+
+    const card = event.target.closest('.product-card');
+    window.location.href = `product.html?id=${card.dataset.id}`;
 });
 
 onAuthStateChanged(auth, (user) => {
