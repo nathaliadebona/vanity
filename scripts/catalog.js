@@ -49,7 +49,16 @@ async function loadProducts() {
 
     querySnapshot.forEach((doc) => {
         const product = doc.data();
-        console.log(product);
+
+        let starsHTML = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < product.rating) {
+                starsHTML += '<i class="fa-solid fa-star"></i>';
+            } else {
+                starsHTML += '<i class="fa-regular fa-star"></i>';
+            }
+        }
+
         const cardHTML = `
             <article class="product-card">
                 <div class="card-content">
@@ -60,6 +69,10 @@ async function loadProducts() {
 
                     <h3>${product.name}</h3>
                     <p class="product-brand">${product.brand}</p>
+
+                    <div class="rating">
+                        ${starsHTML}
+                    </div>
                 </div>
             </article>
         `;
