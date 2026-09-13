@@ -33,8 +33,26 @@
     margin-bottom: var(--spacing-sm);
 }
 
-.profile-info h2 {
+.profile-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-name-row h2 {
     font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+#logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 0.0625rem solid var(--color-accent);
+    color: var(--color-accent);
+    transition: background-color 0.3s ease;
 }
 
 #profile-edit-btn {
@@ -144,6 +162,10 @@
 
 @media (hover: hover) {
     #profile-edit-btn:hover {
+        background-color: var(--color-accent-light);
+    }
+
+    #logout-btn:hover {
         background-color: var(--color-accent-light);
     }
 }

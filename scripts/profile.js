@@ -1,3 +1,7 @@
+import { auth } from "./firebase-config.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+const logoutBtn = document.getElementById('logout-btn');
 const tabButtons = document.querySelectorAll('.profile-tabs button');
 const productsTab = document.querySelector('.products-tab');
 const statsTab = document.querySelector('.stats-tab');
@@ -17,4 +21,9 @@ tabButtons.forEach(button => {
         statsTab.style.display = 'block';
     }
     });
+});
+
+logoutBtn.addEventListener('click', async () => {
+    await signOut(auth);
+    window.location.href = 'index.html';
 });
