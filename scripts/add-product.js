@@ -1,3 +1,8 @@
+import { auth } from "./firebase-config.js";
+import { firestore } from "./firebase-config.js";
+import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
 const subcategories = {
     makeup: [
         { pt: 'Batom', en: 'Lipstick' },
@@ -35,6 +40,7 @@ const subcategories = {
 const productCategory = document.getElementById('product-category');
 const productSubcategory = document.getElementById('product-subcategory');
 const addImageInput = document.getElementById('add-product-image');
+const addProductForm = document.getElementById('add-product-form');
 const uploadLabel = document.querySelector('label[for="add-product-image"]');
 const photoPreviews = document.querySelector('.photo-previews');
 let selectedFiles = [];
@@ -122,4 +128,35 @@ uploadLabel.addEventListener('drop', (event) => {
 
     const files = event.dataTransfer.files;
     showImagePreviews(files);
+});
+
+addProductForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    try {
+        const productName = document.getElementById('product-name').value;
+        const productBrand = document.getElementById('product-brand').value;
+        const productCategory = document.getElementById('product-category').value;
+        const productSubcategory = document.getElementById('product-subcategory').value;
+        const buyAgain = document.getElementById('buy-again').value;
+        const status = document.getElementById('status').value;
+        const reviewArea = document.getElementById('review-area').value;
+        const ratingInput = document.querySelector('input[name="rating"]:checked');
+        const rating = ratingInput.id.split('-')[1];
+        const productData = {
+            name: productName,
+            brand: productBrand,
+            category: productCategory,
+            subcategory: productSubcategory,
+            buyAgain: buyAgain,
+            status: status,
+            review: reviewArea,
+            rating: rating,
+            userId: auth.currentUser.uid
+        }
+        const docRef = await addDoc(collection(firestore, "products"), productData);
+        window.location.href = 'profile.html';
+    } catch (error) {
+        alert(error.message)
+    }
 });
