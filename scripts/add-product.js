@@ -180,7 +180,13 @@ addProductForm.addEventListener('submit', async (event) => {
             rating: rating,
             userId: auth.currentUser.uid
         }
-        const docRef = await addDoc(collection(firestore, "products"), productData);
+
+        if (productId) {
+            await updateDoc(doc(firestore, "products", productId), productData);
+        } else {
+            await addDoc(collection(firestore, "products"), productData);
+        }
+
         window.location.href = 'profile.html';
     } catch (error) {
         alert(error.message)
