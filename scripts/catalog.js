@@ -61,6 +61,13 @@ async function loadProducts() {
 
         const cardHTML = `
             <article class="product-card" data-id="${docSnapshot.id}">
+                <div class="card-image">
+                    <img src="" alt="">
+                    <button type="button" class="favorite-btn">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+                
                 <div class="card-content">
                     <div class="tags-row">
                         <span class="category-tag">${product.category}</span>
