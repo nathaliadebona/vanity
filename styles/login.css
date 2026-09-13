@@ -75,12 +75,20 @@ label {
     main {
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         width: 100%;
         max-width: 32rem;
         margin: var(--spacing-md) auto 0;
         padding: var(--spacing-xl);
     }
 
+    .login-page {
+        display: flex;
+        flex-direction: column;
+    }
 
+    #lang-toggle {
+        border-color: var(--color-cards-bg);
+        color: var(--color-cards-bg);
+    }
 }
