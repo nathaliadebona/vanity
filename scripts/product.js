@@ -9,12 +9,14 @@ const carouselImage = document.querySelectorAll('.carousel-image');
 const nextButton = document.querySelector('.carousel-next');
 const prevButton = document.querySelector('.carousel-prev');
 const carouselDots = document.querySelector('.carousel-dots');
+const editBtn = document.querySelector('.edit-btn');
+let productId;
 let currentIndex = 0;
 let productData;
 
 async function loadProduct() {
     const params = new URLSearchParams(window.location.search);
-    const productId = params.get('id');
+    productId = params.get('id');
     const productDoc = await getDoc(doc(firestore, "products", productId));
     productData = productDoc.data();
     const userDoc = await getDoc(doc(firestore, "users", productData.userId));
@@ -118,6 +120,10 @@ prevButton.addEventListener('click', () => {
 
 document.addEventListener('languageChanged', () => {
     updateBuyAgainText()
+});
+
+editBtn.addEventListener('click', () => {
+    window.location.href = `add-product.html?id=${productId}`;
 });
 
 onAuthStateChanged(auth, (user) => {

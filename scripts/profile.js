@@ -3,7 +3,7 @@ import { signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-aut
 import { firestore } from "./firebase-config.js";
 import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import{ where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 

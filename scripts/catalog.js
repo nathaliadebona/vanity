@@ -2,7 +2,7 @@ import { auth } from "./firebase-config.js";
 import { firestore } from "./firebase-config.js";
 import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import{ where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
@@ -67,7 +67,7 @@ async function loadProducts() {
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </div>
-                
+
                 <div class="card-content">
                     <div class="tags-row">
                         <span class="category-tag">${product.category}</span>

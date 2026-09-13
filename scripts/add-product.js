@@ -1,7 +1,10 @@
+import { translations, currentLanguage } from "./i18n.js";
 import { auth } from "./firebase-config.js";
 import { firestore } from "./firebase-config.js";
 import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { updateDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const subcategories = {
     makeup: [
@@ -43,7 +46,30 @@ const addImageInput = document.getElementById('add-product-image');
 const addProductForm = document.getElementById('add-product-form');
 const uploadLabel = document.querySelector('label[for="add-product-image"]');
 const photoPreviews = document.querySelector('.photo-previews');
+const params = new URLSearchParams(window.location.search);
+const productId = params.get('id');
 let selectedFiles = [];
+
+if (productId) {
+    loadProductForEdit();
+}
+
+async function loadProductForEdit() {
+    const productDoc = await getDoc(doc(firestore, "products", productId));
+    const productData = productDoc.data();
+
+    document.getElementById('product-name').value = productData.name;
+    document.getElementById('product-brand').value = productData.brand;
+    document.getElementById('review-area').value = productData.review;
+    document.getElementById('product-category').value = productData.category;
+    updateSubcategoryOptions();
+    document.getElementById('product-subcategory').value = productData.subcategory;
+    document.getElementById('buy-again').value = productData.buyAgain;
+    document.getElementById('status').value = productData.status;
+
+    const ratingId = 'rating-' + productData.rating;
+    document.getElementById(ratingId).checked = true;
+}
 
 function updateSubcategoryOptions() {
     const selectedCategory = productCategory.value;
