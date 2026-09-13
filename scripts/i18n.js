@@ -56,6 +56,7 @@ export const translations = {
     "follow-btn": { pt: "Seguir", en: "Follow" },
     // ---- Detalhe do produto ---- //
     "review-title": { pt: "Resenha", en: "Review" },
+    "label-buy-again-result": { pt: "Recompraria?", en: "Would repurchase?" },
     "comments-title": { pt: "Comentários", en: "Comments" },
     "reply-btn": { pt: "Responder", en: "Reply" },
     "send-btn": { pt: "Enviar", en: "Send" },
@@ -88,6 +89,7 @@ function applyTranslations () {
     });
 
     langToggleBtn.textContent = (currentLanguage === 'pt' ? 'en' : 'pt').toUpperCase();
+    document.dispatchEvent(new CustomEvent('languageChanged'));
 }
 
 langToggleBtn.addEventListener('click', () => {

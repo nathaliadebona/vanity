@@ -10,6 +10,7 @@ const filterBtn = document.getElementById('filter-btn');
 const catalogFilter = document.querySelector('.catalog-filter');
 const filterOptionsBtns = document.querySelectorAll('.category-buttons button, .status-buttons button, .buy-again-buttons button, .favorite-filter');
 const productCards = document.querySelectorAll('.catalog-grid .product-card');
+const catalogGrid = document.querySelector('.catalog-grid');
 
 function applyFilters() {
     const activeCategoryButtons = document.querySelectorAll('.category-buttons button.active');
@@ -42,13 +43,12 @@ function applyFilters() {
 }
 
 async function loadProducts() {
-    const catalogGrid = document.querySelector('.catalog-grid');
     catalogGrid.innerHTML = '';
     const q = query(collection(firestore, "products"), where("userId", "==", auth.currentUser.uid));
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => {
-        const product = doc.data();
+    querySnapshot.forEach((docSnapshot) => {
+        const product = docSnapshot.data();
 
         let starsHTML = '';
         for (let i = 0; i < 5; i++) {
@@ -60,7 +60,7 @@ async function loadProducts() {
         }
 
         const cardHTML = `
-            <article class="product-card">
+            <article class="product-card" data-id="${docSnapshot.id}">
                 <div class="card-content">
                     <div class="tags-row">
                         <span class="category-tag">${product.category}</span>
@@ -80,6 +80,15 @@ async function loadProducts() {
         catalogGrid.innerHTML += cardHTML;
     });
 }
+
+catalogGrid.addEventListener('click', (event) => {
+    if (event.target.closest('.favorite-btn')) {
+        return;
+    }
+
+    const card = event.target.closest('.product-card');
+    window.location.href = `product.html?id=${card.dataset.id}`;
+});
 
 filterOptionsBtns.forEach(button => {
     button.addEventListener('click', () => {

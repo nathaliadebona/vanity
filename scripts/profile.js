@@ -1,10 +1,56 @@
 import { auth } from "./firebase-config.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { firestore } from "./firebase-config.js";
+import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import{ where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 const logoutBtn = document.getElementById('logout-btn');
 const tabButtons = document.querySelectorAll('.profile-tabs button');
 const productsTab = document.querySelector('.products-tab');
 const statsTab = document.querySelector('.stats-tab');
+
+async function loadProfileProducts() {
+    const catalogGrid = document.querySelector('.catalog-grid');
+    catalogGrid.innerHTML = '';
+    const q = query(collection(firestore, "products"), where("userId", "==", auth.currentUser.uid));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((docSnapshot) => {
+        const product = docSnapshot.data();
+
+        let starsHTML = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < product.rating) {
+                starsHTML += '<i class="fa-solid fa-star"></i>';
+            } else {
+                starsHTML += '<i class="fa-regular fa-star"></i>';
+            }
+        }
+
+        const cardHTML = `
+            <article class="product-card" data-id="${docSnapshot.id}">
+                <div class="card-content">
+                    <div class="tags-row">
+                        <span class="category-tag">${product.category}</span>
+                        <span class="status-tag">${product.status}</span>
+                    </div>
+
+                    <h3>${product.name}</h3>
+                    <p class="product-brand">${product.brand}</p>
+
+                    <div class="rating">
+                        ${starsHTML}
+                    </div>
+                </div>
+            </article>
+        `;
+        
+        catalogGrid.innerHTML += cardHTML;
+    });
+}
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -26,4 +72,8 @@ tabButtons.forEach(button => {
 logoutBtn.addEventListener('click', async () => {
     await signOut(auth);
     window.location.href = 'index.html';
+});
+
+onAuthStateChanged(auth, (user) => {
+    loadProfileProducts();
 });

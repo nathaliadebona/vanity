@@ -1,9 +1,53 @@
+import { auth } from "./firebase-config.js";
+import { firestore } from "./firebase-config.js";
+import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { translations, currentLanguage } from "./i18n.js";
+
 const replyBtn = document.querySelectorAll('.reply-btn');
 const carouselImage = document.querySelectorAll('.carousel-image');
 const nextButton = document.querySelector('.carousel-next');
 const prevButton = document.querySelector('.carousel-prev');
 const carouselDots = document.querySelector('.carousel-dots');
 let currentIndex = 0;
+let productData;
+
+async function loadProduct() {
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+    const productDoc = await getDoc(doc(firestore, "products", productId));
+    productData = productDoc.data();
+    const userDoc = await getDoc(doc(firestore, "users", productData.userId));
+    const userData = userDoc.data();
+
+    document.querySelector('.post-author span').textContent = `@${userData.username}`;
+    document.querySelector('.key-information h3').textContent = productData.name;
+    document.querySelector('.key-information .product-brand').textContent = productData.brand;
+    document.querySelector('.key-information .tags-row .category-tag').textContent = productData.category;
+    document.querySelector('.key-information .tags-row .status-tag').textContent = productData.status;
+
+    let starsHTML = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < productData.rating) {
+                starsHTML += '<i class="fa-solid fa-star"></i>';
+            } else {
+                starsHTML += '<i class="fa-regular fa-star"></i>';
+            }
+        }
+
+    document.querySelector('.key-information .rating').innerHTML = starsHTML;
+    document.querySelector('.review p').textContent = productData.review;
+
+    updateBuyAgainText();
+}
+
+function updateBuyAgainText() {
+    if (productData.buyAgain === 'yes') {
+        document.querySelector('.key-information strong').textContent = translations["filter-yes"][currentLanguage];
+    } else {
+        document.querySelector('.key-information strong').textContent = translations["filter-no"][currentLanguage];
+    }
+}
 
 function updateCarousel() {
     carouselImage.forEach(image => {
@@ -70,4 +114,12 @@ prevButton.addEventListener('click', () => {
     currentIndex--
     currentIndex = (currentIndex + carouselImage.length) % carouselImage.length;
     updateCarousel();
+});
+
+document.addEventListener('languageChanged', () => {
+    updateBuyAgainText()
+});
+
+onAuthStateChanged(auth, (user) => {
+    loadProduct();
 });
