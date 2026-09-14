@@ -6,14 +6,19 @@ import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fires
 import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const logoutBtn = document.getElementById('logout-btn');
+const profileEditBtn = document.getElementById('profile-edit-btn');
+const followBtn = document.getElementById('follow-btn');
 const tabButtons = document.querySelectorAll('.profile-tabs button');
 const productsTab = document.querySelector('.products-tab');
 const statsTab = document.querySelector('.stats-tab');
 const catalogGrid = document.querySelector('.catalog-grid');
 const params = new URLSearchParams(window.location.search);
 const viewedUserId = params.get('id');
+const profileUserId = viewedUserId ? viewedUserId : user.uid;
 
 async function loadProfileProducts(profileUserId) {
     catalogGrid.innerHTML = '';
@@ -92,7 +97,28 @@ catalogGrid.addEventListener('click', (event) => {
     window.location.href = `product.html?id=${card.dataset.id}`;
 });
 
+followBtn.addEventListener('click', async () => {
+    const followId = `${auth.currentUser.uid}_${profileUserId}`;
+    const followDocRef = doc(firestore, "follows", followId);
+
+    await setDoc(followDocRef, {
+        followerId: auth.currentUser.uid,
+        followingId: profileUserId
+    });
+});
+
 onAuthStateChanged(auth, (user) => {
-    const profileUserId = viewedUserId ? viewedUserId : user.uid;
+    const isOwnProfile = profileUserId === user.uid;
+
+    if (isOwnProfile) {
+        logoutBtn.style.display = 'flex';
+        profileEditBtn.style.display = 'block'
+        followBtn.style.display = 'none'
+    } else {
+        logoutBtn.style.display = 'none';
+        profileEditBtn.style.display = 'none';
+        followBtn.style.display = 'flex';
+    }
+
     loadProfileProducts(profileUserId);
 });
