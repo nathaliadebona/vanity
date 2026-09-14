@@ -28,6 +28,8 @@ async function loadProfileProducts(profileUserId) {
     const q = query(collection(firestore, "products"), where("userId", "==", profileUserId));
     const querySnapshot = await getDocs(q);
 
+    document.getElementById('products-count').textContent = querySnapshot.size;
+
     querySnapshot.forEach((docSnapshot) => {
         const product = docSnapshot.data();
 
@@ -67,6 +69,16 @@ async function loadProfileProducts(profileUserId) {
         
         catalogGrid.innerHTML += cardHTML;
     });
+}
+
+async function loadFollowCounts(profileUserId) {
+    const followersQuery = query(collection(firestore, "follows"), where("followingId", "==", profileUserId));
+    const followersSnapshot = await getDocs(followersQuery);
+    document.getElementById('followers-count').textContent = followersSnapshot.size;
+
+    const followingQuery = query(collection(firestore, "follows"), where("followerId", "==", profileUserId));
+    const followingSnapshot = await getDocs(followingQuery);
+    document.getElementById('following-count').textContent = followingSnapshot.size;
 }
 
 tabButtons.forEach(button => {
@@ -143,4 +155,5 @@ onAuthStateChanged(auth, async (user) => {
     }
 
     loadProfileProducts(profileUserId);
+    loadFollowCounts(profileUserId);
 });
