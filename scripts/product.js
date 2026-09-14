@@ -3,6 +3,7 @@ import { firestore } from "./firebase-config.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { translations, currentLanguage } from "./i18n.js";
+import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const replyBtn = document.querySelectorAll('.reply-btn');
 const carouselImage = document.querySelectorAll('.carousel-image');
@@ -10,6 +11,7 @@ const nextButton = document.querySelector('.carousel-next');
 const prevButton = document.querySelector('.carousel-prev');
 const carouselDots = document.querySelector('.carousel-dots');
 const editBtn = document.querySelector('.edit-btn');
+const trashBtn = document.querySelector('.trash-btn');
 let productId;
 let currentIndex = 0;
 let productData;
@@ -124,6 +126,15 @@ document.addEventListener('languageChanged', () => {
 
 editBtn.addEventListener('click', () => {
     window.location.href = `add-product.html?id=${productId}`;
+});
+
+trashBtn.addEventListener('click', async () => {
+    const confirmed = confirm('Tem certeza que deseja excluir este produto?');
+    
+    if (confirmed) {
+        await deleteDoc(doc(firestore, "products", productId));
+        window.location.href = 'profile.html';
+    }
 });
 
 onAuthStateChanged(auth, (user) => {

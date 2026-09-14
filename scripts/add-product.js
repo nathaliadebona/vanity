@@ -6,6 +6,7 @@ import { addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fire
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { updateDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
+
 const subcategories = {
     makeup: [
         { pt: 'Batom', en: 'Lipstick' },
