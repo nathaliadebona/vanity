@@ -5,10 +5,11 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fir
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
+const feedPostList = document.querySelector('.feed-post-list');
+
 async function loadFeed() {
     const querySnapshot = await getDocs(collection(firestore, "products"));
 
-    const feedPostList = document.querySelector('.feed-post-list');
     feedPostList.innerHTML = '';
 
     querySnapshot.forEach(async (docSnapshot) => {
@@ -59,6 +60,15 @@ async function loadFeed() {
         feedPostList.innerHTML += cardHTML;
     });
 }
+
+feedPostList.addEventListener('click', (event) => {
+    if (event.target.closest('.favorite-btn')) {
+        return;
+    }
+
+    const card = event.target.closest('.product-card');
+    window.location.href = `product.html?id=${card.dataset.id}`;
+});
 
 onAuthStateChanged(auth, (user) => {
     loadFeed();
