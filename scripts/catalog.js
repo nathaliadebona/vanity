@@ -44,10 +44,11 @@ function applyFilters() {
 
 async function loadProducts() {
     catalogGrid.innerHTML = '';
-    const q = query(collection(firestore, "products"), where("userId", "==", auth.currentUser.uid));
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(collection(firestore, "products"));
+    const docsArray = querySnapshot.docs;
+    docsArray.sort(() => Math.random() - 0.5);
 
-    querySnapshot.forEach((docSnapshot) => {
+    docsArray.forEach((docSnapshot) => {
         const product = docSnapshot.data();
 
         let starsHTML = '';
