@@ -9,6 +9,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/f
 import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { translations, currentLanguage } from "./i18n.js";
+import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const logoutBtn = document.getElementById('logout-btn');
 const profileEditBtn = document.getElementById('profile-edit-btn');
@@ -19,7 +20,8 @@ const statsTab = document.querySelector('.stats-tab');
 const catalogGrid = document.querySelector('.catalog-grid');
 const params = new URLSearchParams(window.location.search);
 const viewedUserId = params.get('id');
-const profileUserId = viewedUserId ? viewedUserId : user.uid;
+let profileUserId;
+let isFollowing;
 
 async function loadProfileProducts(profileUserId) {
     catalogGrid.innerHTML = '';
@@ -102,13 +104,22 @@ followBtn.addEventListener('click', async () => {
     const followId = `${auth.currentUser.uid}_${profileUserId}`;
     const followDocRef = doc(firestore, "follows", followId);
 
-    await setDoc(followDocRef, {
-        followerId: auth.currentUser.uid,
-        followingId: profileUserId
-    });
+    if (isFollowing) {
+        await deleteDoc(followDocRef);
+        isFollowing = false;
+        followBtn.textContent = translations["follow-btn"][currentLanguage];
+    } else {
+        await setDoc(followDocRef, {
+            followerId: auth.currentUser.uid,
+            followingId: profileUserId
+        });
+        isFollowing = true;
+        followBtn.textContent = translations["following-btn"][currentLanguage];
+    }
 });
 
 onAuthStateChanged(auth, async (user) => {
+    profileUserId = viewedUserId ? viewedUserId : user.uid;
     const isOwnProfile = profileUserId === user.uid;
 
     if (isOwnProfile) {
@@ -120,7 +131,7 @@ onAuthStateChanged(auth, async (user) => {
         profileEditBtn.style.display = 'none';
 
         const followDoc = await getDoc(doc(firestore, "follows", `${user.uid}_${profileUserId}`));
-        const isFollowing = followDoc.exists();
+        isFollowing = followDoc.exists();
 
         followBtn.style.display = 'flex';
 
