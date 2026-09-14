@@ -12,10 +12,12 @@ const tabButtons = document.querySelectorAll('.profile-tabs button');
 const productsTab = document.querySelector('.products-tab');
 const statsTab = document.querySelector('.stats-tab');
 const catalogGrid = document.querySelector('.catalog-grid');
+const params = new URLSearchParams(window.location.search);
+const viewedUserId = params.get('id');
 
-async function loadProfileProducts() {
+async function loadProfileProducts(profileUserId) {
     catalogGrid.innerHTML = '';
-    const q = query(collection(firestore, "products"), where("userId", "==", auth.currentUser.uid));
+    const q = query(collection(firestore, "products"), where("userId", "==", profileUserId));
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((docSnapshot) => {
@@ -91,5 +93,6 @@ catalogGrid.addEventListener('click', (event) => {
 });
 
 onAuthStateChanged(auth, (user) => {
-    loadProfileProducts();
+    const profileUserId = viewedUserId ? viewedUserId : user.uid;
+    loadProfileProducts(profileUserId);
 });

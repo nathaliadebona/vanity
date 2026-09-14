@@ -29,7 +29,7 @@ async function loadFeed() {
         let cardHTML = `
             <article class="product-card" data-id="${docSnapshot.id}">
                 <div class="post-author">
-                    <a href="">
+                    <a href="profile.html?id=${product.userId}">
                         <img src="" alt="">
                         <span>@${userData.username}</span>
                     </a>
