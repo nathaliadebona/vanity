@@ -26,6 +26,7 @@ export const translations = {
     "counter-following": { pt: "Seguindo", en: "Following" },
     "chart-category": { pt: "Por categoria", en: "By category" },
     "chart-status": { pt: "Por status", en: "By status" },
+    "following-btn": { pt: "Seguindo", en: "Following" },
     // ---- Adicionar produto ---- //
     "add-product-title": { pt: "Adicionar produto", en: "Add product" },
     "label-photo": { pt: "Adicionar foto", en: "Add photo" },

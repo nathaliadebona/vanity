@@ -8,6 +8,7 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fir
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { translations, currentLanguage } from "./i18n.js";
 
 const logoutBtn = document.getElementById('logout-btn');
 const profileEditBtn = document.getElementById('profile-edit-btn');
@@ -107,7 +108,7 @@ followBtn.addEventListener('click', async () => {
     });
 });
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
     const isOwnProfile = profileUserId === user.uid;
 
     if (isOwnProfile) {
@@ -117,7 +118,17 @@ onAuthStateChanged(auth, (user) => {
     } else {
         logoutBtn.style.display = 'none';
         profileEditBtn.style.display = 'none';
+
+        const followDoc = await getDoc(doc(firestore, "follows", `${user.uid}_${profileUserId}`));
+        const isFollowing = followDoc.exists();
+
         followBtn.style.display = 'flex';
+
+        if (isFollowing) {
+            followBtn.textContent = translations["following-btn"][currentLanguage];
+        } else {
+            followBtn.textContent = translations["follow-btn"][currentLanguage];
+        }
     }
 
     loadProfileProducts(profileUserId);
