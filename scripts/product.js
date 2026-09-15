@@ -24,6 +24,7 @@ async function loadProduct() {
     const userDoc = await getDoc(doc(firestore, "users", productData.userId));
     const userData = userDoc.data();
 
+    document.querySelector('.post-author a').href = `profile.html?id=${productData.userId}`;
     document.querySelector('.post-author span').textContent = `@${userData.username}`;
     document.querySelector('.key-information h3').textContent = productData.name;
     document.querySelector('.key-information .product-brand').textContent = productData.brand;
