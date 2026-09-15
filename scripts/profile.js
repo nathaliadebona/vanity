@@ -8,7 +8,7 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fir
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import { translations, currentLanguage } from "./i18n.js";
+import { translations, currentLanguage, translateProductField } from "./i18n.js";
 import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const logoutBtn = document.getElementById('logout-btn');
@@ -53,8 +53,8 @@ async function loadProfileProducts(profileUserId) {
 
                 <div class="card-content">
                     <div class="tags-row">
-                        <span class="category-tag">${product.category}</span>
-                        <span class="status-tag">${product.status}</span>
+                        <span class="category-tag">${translateProductField(product.category)}</span>
+                        <span class="status-tag">${translateProductField(product.status)}</span>
                     </div>
 
                     <h3>${product.name}</h3>
@@ -128,6 +128,10 @@ followBtn.addEventListener('click', async () => {
         isFollowing = true;
         followBtn.textContent = translations["following-btn"][currentLanguage];
     }
+});
+
+document.addEventListener('languageChanged', () => {
+    loadProfileProducts(profileUserId);
 });
 
 onAuthStateChanged(auth, async (user) => {
