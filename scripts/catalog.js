@@ -8,11 +8,14 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/f
 import { translations, currentLanguage, translateProductField } from "./i18n.js";
 
 const filterBtn = document.getElementById('filter-btn');
+const searchInput = document.getElementById('search-input');
 const catalogFilter = document.querySelector('.catalog-filter');
 const filterOptionsBtns = document.querySelectorAll('.category-buttons button, .status-buttons button, .buy-again-buttons button, .favorite-filter');
 const catalogGrid = document.querySelector('.catalog-grid');
 
 function applyFilters() {
+    const searchValue = searchInput.value.toLowerCase();
+
     const productCards = document.querySelectorAll('.catalog-grid .product-card');
 
     const activeCategoryButtons = document.querySelectorAll('.category-buttons button.active');
@@ -35,8 +38,10 @@ function applyFilters() {
         const matchesBuyAgain = activeBuyAgain.length === 0 || activeBuyAgain.includes(cardBuyAgain);
         const isFavorited = card.querySelector('.favorite-btn i').classList.contains('fa-solid');
         const matchesFavorite = !isFavoriteFilterActive || isFavorited;
-    
-        if (matchesCategory && matchesStatus && matchesBuyAgain && matchesFavorite) {
+        const cardName = card.querySelector('h3').textContent.toLowerCase();
+        const matchesSearch = searchValue === '' || cardName.includes(searchValue);
+
+        if (matchesCategory && matchesStatus && matchesBuyAgain && matchesFavorite && matchesSearch) {
             card.style.display = 'flex';
         } else {
             card.style.display = 'none';
@@ -115,6 +120,10 @@ filterBtn.addEventListener('click', () => {
 document.addEventListener('languageChanged', () => {
     loadProducts();
 });
+
+searchInput.addEventListener('input', () => {
+    applyFilters();
+})
 
 onAuthStateChanged(auth, (user) => {
     loadProducts();
