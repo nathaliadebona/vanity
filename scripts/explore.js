@@ -3,6 +3,10 @@ import { firestore } from "./firebase-config.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { translations, currentLanguage } from "./i18n.js";
 
 const searchPeopleInput = document.getElementById('search-people-input');
 const peopleList = document.querySelector('.people-list');
@@ -12,8 +16,12 @@ async function loadPeople() {
 
     peopleList.innerHTML = '';
 
-    querySnapshot.forEach( (docSnapshot) => {
+    querySnapshot.forEach( async (docSnapshot) => {
         const person = docSnapshot.data();
+
+        const followId = `${auth.currentUser.uid}_${docSnapshot.id}`;
+        const followDoc = await getDoc(doc(firestore, "follows", followId));
+        const isFollowing = followDoc.exists();
 
         let cardHTML = `
             <article class="person-card" data-id="${docSnapshot.id}">
@@ -24,7 +32,9 @@ async function loadPeople() {
                     </div>
                 </a>
 
-                <button type="button" class="follow-btn">Seguir</button>
+                <button type="button" class="follow-btn">
+                    ${isFollowing ? translations["following-btn"][currentLanguage] : translations["follow-btn"][currentLanguage]}
+                </button>
             </article>
         `;
 
@@ -50,6 +60,33 @@ function applyPeopleFilter() {
 
 searchPeopleInput.addEventListener('input', () => {
     applyPeopleFilter();
+});
+
+peopleList.addEventListener('click', async (event) => {
+    if (!event.target.closest('.follow-btn')) {
+        return;
+    }
+
+    const card = event.target.closest('.person-card');
+    const personId = card.dataset.id;
+
+    const followId = `${auth.currentUser.uid}_${personId}`;
+    const followDocRef = doc(firestore, "follows", followId);
+    const followDoc = await getDoc(followDocRef);
+    const isFollowing = followDoc.exists();
+    const followBtn = event.target.closest('.follow-btn');
+
+    if (isFollowing) {
+        await deleteDoc(followDocRef);
+        followBtn.textContent = translations["follow-btn"][currentLanguage];
+    } else {
+        await setDoc(followDocRef, {
+            followerId: auth.currentUser.uid,
+            followingId: personId
+        });
+
+        followBtn.textContent = translations["following-btn"][currentLanguage];
+    }
 });
 
 onAuthStateChanged(auth, (user) => {
