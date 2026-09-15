@@ -4,6 +4,7 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fir
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
+const searchPeopleInput = document.getElementById('search-people-input');
 const peopleList = document.querySelector('.people-list');
 
 async function loadPeople() {
@@ -30,6 +31,26 @@ async function loadPeople() {
         peopleList.innerHTML += cardHTML;
     });
 }
+
+function applyPeopleFilter() {
+    const searchValue = searchPeopleInput.value.toLowerCase();
+
+    const peopleCards = document.querySelectorAll('.person-card');
+
+    peopleCards.forEach(card => {
+        const personUsername = card.querySelector('.person-username').textContent.toLowerCase();
+
+        if (searchValue === '' || personUsername.includes(searchValue)) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+searchPeopleInput.addEventListener('input', () => {
+    applyPeopleFilter();
+});
 
 onAuthStateChanged(auth, (user) => {
     loadPeople();

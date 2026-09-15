@@ -123,7 +123,7 @@ document.addEventListener('languageChanged', () => {
 
 searchInput.addEventListener('input', () => {
     applyFilters();
-})
+});
 
 onAuthStateChanged(auth, (user) => {
     loadProducts();
