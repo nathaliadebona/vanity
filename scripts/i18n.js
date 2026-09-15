@@ -93,6 +93,11 @@ function applyTranslations () {
     document.dispatchEvent(new CustomEvent('languageChanged'));
 }
 
+export function translateProductField(value) {
+    const key = `filter-${value}`;
+    return translations[key][currentLanguage];
+}
+
 langToggleBtn.addEventListener('click', () => {
     if (currentLanguage === 'pt') {
         currentLanguage = 'en';

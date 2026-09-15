@@ -5,14 +5,16 @@ import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fires
 import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { translations, currentLanguage, translateProductField } from "./i18n.js";
 
 const filterBtn = document.getElementById('filter-btn');
 const catalogFilter = document.querySelector('.catalog-filter');
 const filterOptionsBtns = document.querySelectorAll('.category-buttons button, .status-buttons button, .buy-again-buttons button, .favorite-filter');
-const productCards = document.querySelectorAll('.catalog-grid .product-card');
 const catalogGrid = document.querySelector('.catalog-grid');
 
 function applyFilters() {
+    const productCards = document.querySelectorAll('.catalog-grid .product-card');
+
     const activeCategoryButtons = document.querySelectorAll('.category-buttons button.active');
     const activeCategories = Array.from(activeCategoryButtons).map(button => button.dataset.value);
 
@@ -61,7 +63,7 @@ async function loadProducts() {
         }
 
         const cardHTML = `
-            <article class="product-card" data-id="${docSnapshot.id}">
+            <article class="product-card" data-id="${docSnapshot.id}" data-category="${product.category}" data-status="${product.status}" data-buy-again="${product.buyAgain}">
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
@@ -71,8 +73,8 @@ async function loadProducts() {
 
                 <div class="card-content">
                     <div class="tags-row">
-                        <span class="category-tag">${product.category}</span>
-                        <span class="status-tag">${product.status}</span>
+                        <span class="category-tag">${translateProductField(product.category)}</span>
+                        <span class="status-tag">${translateProductField(product.status)}</span>
                     </div>
 
                     <h3>${product.name}</h3>
@@ -108,6 +110,10 @@ filterOptionsBtns.forEach(button => {
 
 filterBtn.addEventListener('click', () => {
     catalogFilter.classList.toggle('hidden');
+});
+
+document.addEventListener('languageChanged', () => {
+    loadProducts();
 });
 
 onAuthStateChanged(auth, (user) => {
