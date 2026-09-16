@@ -11,6 +11,12 @@ import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase
 import { translations, currentLanguage, translateProductField } from "./i18n.js";
 import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
+const followModal = document.getElementById('follow-modal');
+const followModalTitle = document.getElementById('follow-modal-title');
+const followModalList = document.getElementById('follow-modal-list');
+const followModalClose = document.getElementById('follow-modal-close');
+const followersCountEl = document.getElementById('followers-count');
+const followingCountEl = document.getElementById('following-count');
 const logoutBtn = document.getElementById('logout-btn');
 const profileEditBtn = document.getElementById('profile-edit-btn');
 const followBtn = document.getElementById('follow-btn');
@@ -85,6 +91,53 @@ async function loadFollowCounts(profileUserId) {
     document.getElementById('following-count').textContent = followingSnapshot.size;
 }
 
+async function openFollowModal(type) {
+    let fieldToQuery;
+    let title;
+
+    if (type === 'followers') {
+        fieldToQuery = 'followingId';
+        title = translations['counter-followers'][currentLanguage];
+    } else {
+        fieldToQuery = 'followerId';
+        title = translations['counter-following'][currentLanguage];
+    }
+
+    const followsQuery = query(collection(firestore, "follows"), where(fieldToQuery, "==", profileUserId));
+    const followsSnapshot = await getDocs(followsQuery);
+    followModalList.innerHTML = '';
+
+    followsSnapshot.forEach( async (docSnapshot) => {
+        const followData = docSnapshot.data();
+        const personId = fieldToQuery === 'followingId' ? followData.followerId : followData.followingId;
+        const personDoc = await getDoc(doc(firestore, "users", personId));
+        const personData = personDoc.data();
+
+        const checkFollowId = `${auth.currentUser.uid}_${personId}`;
+        const checkFollowDoc = await getDoc(doc(firestore, "follows", checkFollowId));
+        const checkIsFollowing = checkFollowDoc.exists();
+
+        const cardHTML = `
+            <article class="person-card">
+                <a href="profile.html?id=${personId}" class="person-link">
+                    <img src="https://ui-avatars.com/api/?name=Camila" alt="">
+                    <div class="person-info">
+                        <p class="person-username">@${personData.username}</p>
+                    </div>
+                </a>
+                <button type="button" class="follow-btn" data-id="${personId}">
+                    ${checkIsFollowing ? translations["following-btn"][currentLanguage] : translations["follow-btn"][currentLanguage]}
+                </button>
+            </article>
+        `;
+
+        followModalList.innerHTML += cardHTML;
+    });
+
+    followModalTitle.textContent = title;
+    followModal.showModal();
+}
+
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
         tabButtons.forEach(btn => {
@@ -155,6 +208,18 @@ followBtn.addEventListener('click', async () => {
 
 document.addEventListener('languageChanged', () => {
     loadProfileProducts(profileUserId);
+});
+
+followersCountEl.addEventListener('click', () => {
+    openFollowModal('followers');
+});
+
+followingCountEl.addEventListener('click', () => {
+    openFollowModal('following');
+});
+
+followModalClose.addEventListener('click', () => {
+    followModal.close();
 });
 
 onAuthStateChanged(auth, async (user) => {

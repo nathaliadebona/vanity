@@ -21,6 +21,7 @@
 .profile-counters span {
     font-size: 1.1rem;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .profile-counters p {
@@ -136,6 +137,39 @@
   height: 100%;
   background-color: var(--color-accent);
   border-radius: 999px;
+}
+
+dialog#follow-modal {
+    width: 90%;
+    max-width: 24rem;
+    max-height: 70vh;
+    margin: auto;
+    padding: var(--spacing-lg);
+    border: none;
+    border-radius: 1rem;
+    background-color: var(--color-cards-bg);
+    color: var(--color-text);
+}
+
+dialog#follow-modal::backdrop {
+    background-color: rgba(73, 36, 62, 0.5);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-header h3 {
+    font-size: 1.3rem;
+
+}
+
+.modal-body {
+    overflow-y: auto;
+    max-height: calc(70vh - 4rem);
 }
 
 @media (min-width: 48rem) {
