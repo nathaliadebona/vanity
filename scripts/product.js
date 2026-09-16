@@ -2,7 +2,7 @@ import { auth } from "./firebase-config.js";
 import { firestore } from "./firebase-config.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import { translations, currentLanguage } from "./i18n.js";
+import { translations, currentLanguage, translateProductField } from "./i18n.js";
 import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
@@ -49,9 +49,8 @@ async function loadProduct() {
     document.querySelector('.post-author span').textContent = `@${userData.username}`;
     document.querySelector('.key-information h3').textContent = productData.name;
     document.querySelector('.key-information .product-brand').textContent = productData.brand;
-    document.querySelector('.key-information .tags-row .category-tag').textContent = productData.category;
-    document.querySelector('.key-information .tags-row .status-tag').textContent = productData.status;
-
+    document.querySelector('.key-information .tags-row .category-tag').textContent = translateProductField(productData.category);
+    document.querySelector('.key-information .tags-row .status-tag').textContent = translateProductField(productData.status);
     let starsHTML = '';
         for (let i = 0; i < 5; i++) {
             if (i < productData.rating) {
@@ -143,7 +142,9 @@ prevButton.addEventListener('click', () => {
 });
 
 document.addEventListener('languageChanged', () => {
-    updateBuyAgainText()
+    updateBuyAgainText();
+    document.querySelector('.key-information .tags-row .category-tag').textContent = translateProductField(productData.category);
+    document.querySelector('.key-information .tags-row .status-tag').textContent = translateProductField(productData.status);
 });
 
 editBtn.addEventListener('click', () => {

@@ -117,6 +117,7 @@
 .action-buttons button {
     width: 2rem;
     height: 2rem;
+    gap: var(--spacing-xs);
     border-radius: 50%;
     background-color: var(--color-cards-bg);
     display: flex;
