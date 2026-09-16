@@ -13,6 +13,9 @@ import { translations, currentLanguage } from "./i18n.js";
 const tabButtons = document.querySelectorAll('.tab-button');
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
+const passwordRegister = document.getElementById('password-register');
+const passwordConfirmRegister = document.getElementById('password-confirm-register');
+const passwordMatchMessage = document.getElementById('password-match-message');
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -71,5 +74,24 @@ loginForm.addEventListener('submit', async (event) => {
         window.location.href = 'feed.html';
     } catch (error) {
         alert(error.message);
+    }
+});
+
+passwordConfirmRegister.addEventListener('input', () => {
+    if (passwordConfirmRegister.value === '') {
+        passwordMatchMessage.textContent = '';
+        passwordMatchMessage.classList.remove('match');
+        passwordMatchMessage.classList.remove('no-match');
+        return
+    }
+
+    if (passwordConfirmRegister.value === passwordRegister.value) {
+        passwordMatchMessage.innerHTML = `<i class="fa-solid fa-check"></i> ${translations["password-match"][currentLanguage]}`;
+        passwordMatchMessage.classList.add('match');
+        passwordMatchMessage.classList.remove('no-match');
+    } else {
+        passwordMatchMessage.innerHTML = `<i class="fa-solid fa-xmark"></i> ${translations["password-no-match"][currentLanguage]}`;
+        passwordMatchMessage.classList.remove('match');
+        passwordMatchMessage.classList.add('no-match');
     }
 });

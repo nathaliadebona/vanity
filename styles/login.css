@@ -57,6 +57,14 @@ label {
   font-weight: 500;
 }
 
+#password-match-message.match {
+    color: var(--color-success);
+}
+
+#password-match-message.no-match {
+    color: var(--color-danger);
+}
+
 #forgot-password {
   align-self: flex-end;
 }

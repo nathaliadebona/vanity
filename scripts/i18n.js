@@ -67,7 +67,10 @@ export const translations = {
     // ---- Sugestões para seguir ---- //
     "follow-suggestions": { pt: "Sugestões para seguir", en: "Suggestions to follow" },
     // ---- Mensagem de erro de username em uso ---- //
-    "username-taken": { pt: "Esse nome de usuário já está em uso", en: "This username is already in use." }
+    "username-taken": { pt: "Esse nome de usuário já está em uso", en: "This username is already in use." },
+    // ---- Mensagens de confirmação de senha ---- //
+    "password-match": { pt: "Senhas coincidem", en: "Passwords match" },
+    "password-no-match": { pt: "Senhas não coincidem", en: "Passwords do not match" }
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');
