@@ -222,6 +222,33 @@ followModalClose.addEventListener('click', () => {
     followModal.close();
 });
 
+followModalList.addEventListener('click', async (event) => {
+    const followBtn = event.target.closest('.follow-btn');
+
+    if (!followBtn) {
+        return;
+    }
+
+    const personId = followBtn.dataset.id;
+
+    const followId = `${auth.currentUser.uid}_${personId}`;
+    const followDocRef = doc(firestore, "follows", followId);
+    const followDoc = await getDoc(followDocRef);
+    const isFollowing = followDoc.exists();
+
+    if (isFollowing) {
+        await deleteDoc(followDocRef);
+        followBtn.textContent = translations["follow-btn"][currentLanguage];
+    } else {
+        await setDoc(followDocRef, {
+            followerId: auth.currentUser.uid,
+            followingId: personId
+        });
+
+        followBtn.textContent = translations["following-btn"][currentLanguage];
+    }
+});
+
 onAuthStateChanged(auth, async (user) => {
     profileUserId = viewedUserId ? viewedUserId : user.uid;
     const isOwnProfile = profileUserId === user.uid;
