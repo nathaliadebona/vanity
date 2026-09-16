@@ -5,6 +5,8 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fir
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { translations, currentLanguage, translateProductField } from "./i18n.js";
+import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const feedPostList = document.querySelector('.feed-post-list');
 
@@ -15,9 +17,15 @@ async function loadFeed() {
 
     querySnapshot.forEach(async (docSnapshot) => {
         const product = docSnapshot.data();
+
+        const favoriteId = `${auth.currentUser.uid}_${docSnapshot.id}`;
+        const favoriteDoc = await getDoc(doc(firestore, "favorites", favoriteId));
+        const isFavorited = favoriteDoc.exists();
+
         const userDoc = await getDoc(doc(firestore, "users", product.userId));
         const userData = userDoc.data();
         
+
         let starsHTML = '';
         for (let i = 0; i < 5; i++) {
             if (i < product.rating) {
@@ -39,7 +47,7 @@ async function loadFeed() {
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
-                        <i class="fa-regular fa-heart"></i>
+                        <i class="${isFavorited ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                     </button>
                 </div>
 
@@ -62,8 +70,27 @@ async function loadFeed() {
     });
 }
 
-feedPostList.addEventListener('click', (event) => {
-    if (event.target.closest('.favorite-btn')) {
+feedPostList.addEventListener('click', async (event) => {
+    const favoriteBtn = event.target.closest('.favorite-btn');
+
+    if (favoriteBtn) {
+        const card = event.target.closest('.product-card');
+        const favoriteId = `${auth.currentUser.uid}_${card.dataset.id}`;
+        const favoriteDocRef = doc(firestore, "favorites", favoriteId);
+        const favoriteDoc = await getDoc(favoriteDocRef);
+        const isFavorited = favoriteDoc.exists();
+        const icon = favoriteBtn.querySelector('i');
+
+        if (isFavorited) {
+            await deleteDoc(favoriteDocRef);
+            icon.classList.remove('fa-solid');
+            icon.classList.add('fa-regular');
+        } else {
+            await setDoc(favoriteDocRef, { userId: auth.currentUser.uid, productId: card.dataset.id });
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid');
+        }
+
         return;
     }
 
