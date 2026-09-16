@@ -1,4 +1,4 @@
-const favoriteBtn = document.querySelectorAll('.favorite-btn');
+const favoriteBtn = document.querySelectorAll('.favorite-btn:not(.action-buttons .favorite-btn)');
 
 favoriteBtn.forEach(button => {
     button.addEventListener('click', () => {

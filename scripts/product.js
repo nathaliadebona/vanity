@@ -4,6 +4,8 @@ import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { translations, currentLanguage } from "./i18n.js";
 import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const replyBtn = document.querySelectorAll('.reply-btn');
 const carouselImage = document.querySelectorAll('.carousel-image');
@@ -12,6 +14,7 @@ const prevButton = document.querySelector('.carousel-prev');
 const carouselDots = document.querySelector('.carousel-dots');
 const editBtn = document.querySelector('.edit-btn');
 const trashBtn = document.querySelector('.trash-btn');
+const favoriteBtn = document.querySelector('.action-buttons .favorite-btn');
 let productId;
 let currentIndex = 0;
 let productData;
@@ -23,6 +26,17 @@ async function loadProduct() {
     productData = productDoc.data();
     const userDoc = await getDoc(doc(firestore, "users", productData.userId));
     const userData = userDoc.data();
+    const favoriteId = `${auth.currentUser.uid}_${productId}`;
+    const favoriteDoc = await getDoc(doc(firestore, "favorites", favoriteId));
+    const isFavorited = favoriteDoc.exists();
+
+    if (isFavorited) {
+        document.querySelector('.action-buttons .favorite-btn i').classList.remove('fa-regular');
+        document.querySelector('.action-buttons .favorite-btn i').classList.add('fa-solid');
+    } else {
+        document.querySelector('.action-buttons .favorite-btn i').classList.remove('fa-solid');
+        document.querySelector('.action-buttons .favorite-btn i').classList.add('fa-regular');
+    }
 
     document.querySelector('.post-author a').href = `profile.html?id=${productData.userId}`;
     document.querySelector('.post-author span').textContent = `@${userData.username}`;
@@ -135,6 +149,24 @@ trashBtn.addEventListener('click', async () => {
     if (confirmed) {
         await deleteDoc(doc(firestore, "products", productId));
         window.location.href = 'profile.html';
+    }
+});
+
+favoriteBtn.addEventListener('click', async () => {
+    const favoriteId = `${auth.currentUser.uid}_${productId}`;
+    const favoriteDocRef = doc(firestore, "favorites", favoriteId);
+    const favoriteDoc = await getDoc(favoriteDocRef);
+    const isFavorited = favoriteDoc.exists();
+    const icon = favoriteBtn.querySelector('i');
+
+    if (isFavorited) {
+        await deleteDoc(favoriteDocRef);
+        icon.classList.add('fa-regular');
+        icon.classList.remove('fa-solid');
+    } else {
+        await setDoc(favoriteDocRef, { userId: auth.currentUser.uid, productId: productId });
+        icon.classList.remove('fa-regular');
+        icon.classList.add('fa-solid');
     }
 });
 
