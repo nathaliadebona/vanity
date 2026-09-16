@@ -6,6 +6,9 @@ import { translations, currentLanguage } from "./i18n.js";
 import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const replyBtn = document.querySelectorAll('.reply-btn');
 const carouselImage = document.querySelectorAll('.carousel-image');
@@ -29,6 +32,10 @@ async function loadProduct() {
     const favoriteId = `${auth.currentUser.uid}_${productId}`;
     const favoriteDoc = await getDoc(doc(firestore, "favorites", favoriteId));
     const isFavorited = favoriteDoc.exists();
+
+    const favoritesQuery = query(collection(firestore, "favorites"), where("productId", "==", productId));
+    const favoritesSnapshot = await getDocs(favoritesQuery);
+    document.getElementById('favorite-count').textContent = favoritesSnapshot.size;
 
     if (isFavorited) {
         document.querySelector('.action-buttons .favorite-btn i').classList.remove('fa-regular');
