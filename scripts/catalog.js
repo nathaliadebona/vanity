@@ -6,6 +6,9 @@ import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fires
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { translations, currentLanguage, translateProductField } from "./i18n.js";
+import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const filterBtn = document.getElementById('filter-btn');
 const searchInput = document.getElementById('search-input');
@@ -55,8 +58,12 @@ async function loadProducts() {
     const docsArray = querySnapshot.docs;
     docsArray.sort(() => Math.random() - 0.5);
 
-    docsArray.forEach((docSnapshot) => {
+    docsArray.forEach(async (docSnapshot) => {
         const product = docSnapshot.data();
+
+        const favoriteId = `${auth.currentUser.uid}_${docSnapshot.id}`;
+        const favoriteDoc = await getDoc(doc(firestore, "favorites", favoriteId));
+        const isFavorited = favoriteDoc.exists();
 
         let starsHTML = '';
         for (let i = 0; i < 5; i++) {
@@ -72,7 +79,7 @@ async function loadProducts() {
                 <div class="card-image">
                     <img src="" alt="">
                     <button type="button" class="favorite-btn">
-                        <i class="fa-regular fa-heart"></i>
+                        <i class="${isFavorited ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                     </button>
                 </div>
 
@@ -96,8 +103,27 @@ async function loadProducts() {
     });
 }
 
-catalogGrid.addEventListener('click', (event) => {
-    if (event.target.closest('.favorite-btn')) {
+catalogGrid.addEventListener('click', async (event) => {
+    const favoriteBtn = event.target.closest('.favorite-btn');
+
+    if (favoriteBtn) {
+        const card = event.target.closest('.product-card');
+        const favoriteId = `${auth.currentUser.uid}_${card.dataset.id}`;
+        const favoriteDocRef = doc(firestore, "favorites", favoriteId);
+        const favoriteDoc = await getDoc(favoriteDocRef);
+        const isFavorited = favoriteDoc.exists();
+        const icon = favoriteBtn.querySelector('i');
+
+        if (isFavorited) {
+            await deleteDoc(favoriteDocRef);
+            icon.classList.remove('fa-solid');
+            icon.classList.add('fa-regular');
+        } else {
+            await setDoc(favoriteDocRef, { userId: auth.currentUser.uid, productId: card.dataset.id });
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid');
+        }
+
         return;
     }
 
