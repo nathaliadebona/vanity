@@ -10,6 +10,12 @@ import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fire
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { translations, currentLanguage, translateProductField } from "./i18n.js";
 import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { ref } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+import { uploadBytes } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+import { getDownloadURL } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+import { updatePassword } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { storage } from "./firebase-config.js";
+import { updateDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const followModal = document.getElementById('follow-modal');
 const followModalTitle = document.getElementById('follow-modal-title');
@@ -20,6 +26,15 @@ const followingCountEl = document.getElementById('following-count');
 const logoutBtn = document.getElementById('logout-btn');
 const profileEditBtn = document.getElementById('profile-edit-btn');
 const followBtn = document.getElementById('follow-btn');
+const editProfileModal = document.getElementById('edit-profile-modal');
+const editProfileModalClose = document.getElementById('edit-profile-modal-close');
+const editProfileForm = document.querySelector('#edit-profile-modal form');
+const editNameInput = document.getElementById('edit-name');
+const editBioInput = document.getElementById('edit-bio');
+const editPhotoInput = document.getElementById('edit-photo');
+const avatarPreview = document.getElementById('avatar-preview');
+const editNewPassword = document.getElementById('edit-new-password');
+const editConfirmPassword = document.getElementById('edit-confirm-password');
 const tabButtons = document.querySelectorAll('.profile-tabs button');
 const productsTab = document.querySelector('.products-tab');
 const statsTab = document.querySelector('.stats-tab');
@@ -138,6 +153,16 @@ async function openFollowModal(type) {
     followModal.showModal();
 }
 
+async function loadUserInfo(profileUserId) { 
+    const userDoc = await getDoc(doc(firestore, "users", profileUserId));
+    const userData = userDoc.data();
+
+    document.querySelector('.profile-name').textContent = userData.name || '';
+    document.querySelector('.profile-username').textContent = '@' + userData.username;
+    document.querySelector('.profile-bio').textContent = userData.bio || '';
+    document.querySelector('.profile-top img').src = userData.photoURL || 'https://ui-avatars.com/api/?name=' + userData.username;
+}
+
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
         tabButtons.forEach(btn => {
@@ -185,6 +210,9 @@ catalogGrid.addEventListener('click', async (event) => {
     }
 
     const card = event.target.closest('.product-card');
+    if (!card) {
+        return;
+    }
     window.location.href = `product.html?id=${card.dataset.id}`;
 });
 
@@ -249,6 +277,58 @@ followModalList.addEventListener('click', async (event) => {
     }
 });
 
+profileEditBtn.addEventListener('click', async () => {
+    const userDoc = await getDoc(doc(firestore, "users", auth.currentUser.uid));
+    const userData = userDoc.data();
+
+    editNameInput.value = userData.name || '';
+    editBioInput.value = userData.bio || '';
+    avatarPreview.src = userData.photoURL || 'https://ui-avatars.com/api/?name=' + userData.username;
+    
+    editProfileModal.showModal();
+});
+
+editPhotoInput.addEventListener('change', () => {
+    const file = editPhotoInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+        avatarPreview.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+});
+
+editProfileForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const name = editNameInput.value;
+    const bio = editBioInput.value;
+
+    try {
+        const userDoc = await getDoc(doc(firestore, "users", auth.currentUser.uid));
+        const userData = userDoc.data();
+        let photoURL = userData.photoURL || '';
+    
+        if (editPhotoInput.files.length > 0) {
+            const file = editPhotoInput.files[0];
+            const storageRef = ref(storage, `profile-photos/${auth.currentUser.uid}`);
+            await uploadBytes(storageRef, file);
+            photoURL = await getDownloadURL(storageRef);
+        }
+
+        await updateDoc(doc(firestore, "users", auth.currentUser.uid), {
+            name: name,
+            bio: bio,
+            photoURL: photoURL
+        });
+    } catch (error) {
+        alert(error.message);
+    }
+
+    loadUserInfo(profileUserId)
+});
+
 onAuthStateChanged(auth, async (user) => {
     profileUserId = viewedUserId ? viewedUserId : user.uid;
     const isOwnProfile = profileUserId === user.uid;
@@ -275,4 +355,5 @@ onAuthStateChanged(auth, async (user) => {
 
     loadProfileProducts(profileUserId);
     loadFollowCounts(profileUserId);
+    loadUserInfo(profileUserId);
 });
