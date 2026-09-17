@@ -70,7 +70,15 @@ export const translations = {
     "username-taken": { pt: "Esse nome de usuário já está em uso", en: "This username is already in use." },
     // ---- Mensagens de confirmação de senha ---- //
     "password-match": { pt: "Senhas coincidem", en: "Passwords match" },
-    "password-no-match": { pt: "Senhas não coincidem", en: "Passwords do not match" }
+    "password-no-match": { pt: "Senhas não coincidem", en: "Passwords do not match" },
+    // ---- Edição de dados do perfil ----//
+    "edit-profile-title": { pt: "Editar perfil", en: "Edit profile" },
+    "edit-name-label": { pt: "Nome", en: "Name" },
+    "edit-bio-label": { pt: "Bio", en: "Bio" },
+    "edit-password-title": { pt: "Alterar senha", en: "Change password" },
+    "edit-new-password-label": { pt: "Nova senha", en: "New password" },
+    "edit-confirm-password-label": { pt: "Confirmar nova senha", en: "Confirm new password" },
+    "save-profile-btn": { pt: "Salvar", en: "Save" }
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');

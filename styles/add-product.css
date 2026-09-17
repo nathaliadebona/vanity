@@ -9,12 +9,6 @@ form {
   gap: var(--spacing-md);
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
 #add-product-image {
   display: none;
 }

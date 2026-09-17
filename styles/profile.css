@@ -139,20 +139,31 @@
   border-radius: 999px;
 }
 
-dialog#follow-modal {
+dialog.app-modal {
     width: 90%;
     max-width: 24rem;
     max-height: 70vh;
+    display: flex;
+    flex-direction: column;
     margin: auto;
     padding: var(--spacing-lg);
     border: none;
     border-radius: 1rem;
     background-color: var(--color-cards-bg);
     color: var(--color-text);
+    overflow: hidden;
 }
 
-dialog#follow-modal::backdrop {
+dialog.app-modal::backdrop {
     background-color: rgba(73, 36, 62, 0.5);
+}
+
+dialog.app-modal form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--spacing-md);
+    min-height: 0;
 }
 
 .modal-header {
@@ -168,8 +179,39 @@ dialog#follow-modal::backdrop {
 }
 
 .modal-body {
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
-    max-height: calc(70vh - 4rem);
+    padding-right: var(--spacing-md);
+}
+
+.avatar-upload {
+    position: relative;
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.avatar-upload img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-upload-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    color: var(--color-cards-bg);
 }
 
 @media (min-width: 48rem) {

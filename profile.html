@@ -137,12 +137,50 @@
         </div>
     </main>
 
-    <dialog id="follow-modal">
+    <dialog id="follow-modal" class="app-modal">
         <div class="modal-header">
             <h3 id="follow-modal-title"></h3>
             <button type="button" id="follow-modal-close"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="modal-body people-list" id="follow-modal-list"></div>
+    </dialog>
+
+    <dialog id="edit-profile-modal" class="app-modal">
+        <div class="modal-header">
+            <h3 data-i18n="edit-profile-title">Editar perfil</h3>
+            <button type="button" id="edit-profile-modal-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="modal-body">
+            <form action="">
+                <div class="avatar-upload">
+                    <label for="edit-photo">
+                        <img src="https://ui-avatars.com/api/?name=Nathalia" alt="" id="avatar-preview">
+                        <span class="avatar-upload-icon"><i class="fa-solid fa-camera"></i></span>
+                    </label>
+                    <input type="file" id="edit-photo" accept="image/*" hidden>
+                </div>
+                <div class="form-group">
+                    <label for="edit-name" data-i18n="edit-name-label">Nome</label>
+                    <input type="text" id="edit-name">
+                </div>
+                <div class="form-group">
+                    <label for="edit-bio" data-i18n="edit-bio-label">Bio</label>
+                    <textarea id="edit-bio"></textarea>
+                </div>
+                <hr>
+                <h4 data-i18n="edit-password-title">Alterar senha</h4>
+                <div class="form-group">
+                    <label for="edit-new-password" data-i18n="edit-new-password-label">Nova senha</label>
+                    <input type="password" id="edit-new-password">
+                </div>
+                <div class="form-group">
+                    <label for="edit-confirm-password" data-i18n="edit-confirm-password-label">Confirmar nova senha</label>
+                    <input type="password" id="edit-confirm-password">
+                </div>
+                <button type="submit" data-i18n="save-profile-btn">Salvar</button>
+            </form>
+        </div>
     </dialog>
 
     <script src="scripts/auth-guard.js" type="module"></script>

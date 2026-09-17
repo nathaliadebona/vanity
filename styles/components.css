@@ -317,6 +317,12 @@ header a img {
     transition: background-color 0.2s ease;
 }
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
 @media (min-width: 48rem) {
     html,
     body {
