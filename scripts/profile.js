@@ -304,11 +304,18 @@ editProfileForm.addEventListener('submit', async (event) => {
 
     const name = editNameInput.value;
     const bio = editBioInput.value;
+    const newPassword = editNewPassword.value;
+    const confirmPassword = editConfirmPassword.value;
 
     try {
         const userDoc = await getDoc(doc(firestore, "users", auth.currentUser.uid));
         const userData = userDoc.data();
         let photoURL = userData.photoURL || '';
+
+        if (newPassword !== '' && newPassword !== confirmPassword) {
+            alert(translations["password-mismatch"][currentLanguage]);
+            return;
+        }
     
         if (editPhotoInput.files.length > 0) {
             const file = editPhotoInput.files[0];
@@ -322,6 +329,10 @@ editProfileForm.addEventListener('submit', async (event) => {
             bio: bio,
             photoURL: photoURL
         });
+
+        if (newPassword !== '') {
+            await updatePassword(auth.currentUser, newPassword);
+        }
 
         loadUserInfo(profileUserId);
         editProfileModal.close();

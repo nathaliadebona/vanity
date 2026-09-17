@@ -78,7 +78,8 @@ export const translations = {
     "edit-password-title": { pt: "Alterar senha", en: "Change password" },
     "edit-new-password-label": { pt: "Nova senha", en: "New password" },
     "edit-confirm-password-label": { pt: "Confirmar nova senha", en: "Confirm new password" },
-    "save-profile-btn": { pt: "Salvar", en: "Save" }
+    "save-profile-btn": { pt: "Salvar", en: "Save" },
+    "password-mismatch": { pt: "As senhas não coincidem", en: "Passwords do not match" },
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');
