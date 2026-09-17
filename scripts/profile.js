@@ -322,11 +322,18 @@ editProfileForm.addEventListener('submit', async (event) => {
             bio: bio,
             photoURL: photoURL
         });
+
+        loadUserInfo(profileUserId);
+        editProfileModal.close();
     } catch (error) {
         alert(error.message);
     }
 
     loadUserInfo(profileUserId)
+});
+
+editProfileModalClose.addEventListener('click', () => {
+    editProfileModal.close();
 });
 
 onAuthStateChanged(auth, async (user) => {
