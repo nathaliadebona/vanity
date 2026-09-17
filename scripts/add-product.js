@@ -5,7 +5,11 @@ import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-
 import { addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { updateDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
+import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { ref } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+import { uploadBytes } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+import { getDownloadURL } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+import { storage } from "./firebase-config.js";
 
 const subcategories = {
     makeup: [
@@ -183,9 +187,39 @@ addProductForm.addEventListener('submit', async (event) => {
         }
 
         if (productId) {
+            let finalImageUrls;
+
+            if (selectedFiles.length > 0) {
+                const imageUrls = [];
+
+                for (const file of selectedFiles) {
+                    const imageRef = ref(storage, `product-images/${auth.currentUser.uid}/${productId}/${file.name}`);
+                    await uploadBytes(imageRef, file);
+                    const url = await getDownloadURL(imageRef);
+                    imageUrls.push(url);
+                }
+
+                finalImageUrls = imageUrls;
+            } else {
+                const existingDoc = await getDoc(doc(firestore, "products", productId));
+                finalImageUrls = existingDoc.data().images || [];
+            }
+
+            productData.images = finalImageUrls;
             await updateDoc(doc(firestore, "products", productId), productData);
         } else {
-            await addDoc(collection(firestore, "products"), productData);
+            const newProductRef = doc(collection(firestore, "products"));
+            const imageUrls = [];
+
+            for (const file of selectedFiles) {
+                const imageRef = ref(storage, `product-images/${auth.currentUser.uid}/${newProductRef.id}/${file.name}`);
+                await uploadBytes(imageRef, file);
+                const url = await getDownloadURL(imageRef);
+                imageUrls.push(url);
+            }
+
+            productData.images = imageUrls;
+            await setDoc(newProductRef, productData);
         }
 
         window.location.href = 'profile.html';
