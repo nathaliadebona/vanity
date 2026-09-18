@@ -35,6 +35,10 @@ const editPhotoInput = document.getElementById('edit-photo');
 const avatarPreview = document.getElementById('avatar-preview');
 const editNewPassword = document.getElementById('edit-new-password');
 const editConfirmPassword = document.getElementById('edit-confirm-password');
+const lightboxModal = document.getElementById('lightbox-modal');
+const lightboxImage = document.getElementById('lightbox-image');
+const lightboxClose = document.getElementById('lightbox-close');
+const profileAvatar = document.querySelector('.profile-top img');
 const tabButtons = document.querySelectorAll('.profile-tabs button');
 const productsTab = document.querySelector('.products-tab');
 const statsTab = document.querySelector('.stats-tab');
@@ -345,6 +349,15 @@ editProfileForm.addEventListener('submit', async (event) => {
 
 editProfileModalClose.addEventListener('click', () => {
     editProfileModal.close();
+});
+
+profileAvatar.addEventListener('click', () => {
+    lightboxImage.src = profileAvatar.src;
+    lightboxModal.showModal();
+});
+
+lightboxClose.addEventListener('click', () => {
+    lightboxModal.close();
 });
 
 onAuthStateChanged(auth, async (user) => {

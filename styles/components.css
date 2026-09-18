@@ -324,6 +324,39 @@ header a img {
   gap: var(--spacing-xs);
 }
 
+/* Expansão de imagens */
+dialog.app-modal.lightbox-modal[open] {
+    max-width: fit-content;
+    max-height: 90vh;
+    align-items: center;
+    padding: 0;
+    background-color: transparent;
+}
+
+dialog.lightbox-modal img {
+    max-width: 100%;
+    max-height: 90vh;
+    display: block;
+}
+
+#lightbox-close {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--color-cards-bg);
+}
+
+.profile-top img {
+    cursor: pointer;
+}
+
 @media (min-width: 48rem) {
     html,
     body {
