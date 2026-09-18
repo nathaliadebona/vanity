@@ -184,6 +184,11 @@
         font-size: 1.75rem;
     }
 
+    .profile-top img {
+        width: 8rem;
+        height: 8rem;
+    }
+
     #profile-edit-btn {
         display: block;
         width: auto;
