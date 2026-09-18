@@ -43,7 +43,7 @@ async function loadFeed() {
             <article class="product-card" data-id="${docSnapshot.id}">
                 <div class="post-author">
                     <a href="profile.html?id=${product.userId}">
-                        <img src="" alt="">
+                        <img src="${userData.photoURL || 'https://ui-avatars.com/api/?name=' + userData.username}" alt="">
                         <span>@${userData.username}</span>
                     </a>
                 </div>
