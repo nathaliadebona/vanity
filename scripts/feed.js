@@ -7,8 +7,12 @@ import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase
 import { translations, currentLanguage, translateProductField } from "./i18n.js";
 import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
 
 const feedPostList = document.querySelector('.feed-post-list');
+const suggestionsList = document.querySelector('.suggestions-list');
 
 async function loadFeed() {
     const querySnapshot = await getDocs(collection(firestore, "products"));
@@ -70,6 +74,41 @@ async function loadFeed() {
     });
 }
 
+async function loadFollowSuggestions() {
+    const usersSnapshot = await getDocs(collection(firestore, "users"));
+    const followingQuery = query(collection(firestore, "follows"), where("followerId", "==", auth.currentUser.uid));
+    const followingSnapshot = await getDocs(followingQuery);
+    const followingIds = followingSnapshot.docs.map(docSnapshot => docSnapshot.data().followingId);
+    const filteredUsers = usersSnapshot.docs.filter(docSnapshot => {
+        const isSelf = docSnapshot.id === auth.currentUser.uid;
+        const isFollowed = followingIds.includes(docSnapshot.id);
+        return !isSelf && !isFollowed;
+    });
+
+    filteredUsers.sort(() => Math.random() - 0.5);
+    const suggestedUsers = filteredUsers.slice(0, 3);
+
+    suggestionsList.innerHTML = '';
+
+    suggestedUsers.forEach(docSnapshot => {
+        const person = docSnapshot.data();
+
+        const cardHTML = `
+            <article class="person-card">
+                <a href="profile.html?id=${docSnapshot.id}" class="person-link">
+                    <img src="https://ui-avatars.com/api/?name=Camila" alt="">
+                    <div class="person-info">
+                        <p class="person-username">@${person.username}</p>
+                    </div>
+                </a>
+                <button type="button" class="follow-btn" data-id="${docSnapshot.id}">${translations["follow-btn"][currentLanguage]}</button>
+            </article>
+        `;
+
+        suggestionsList.innerHTML += cardHTML;
+    });
+}
+
 feedPostList.addEventListener('click', async (event) => {
     const favoriteBtn = event.target.closest('.favorite-btn');
 
@@ -102,6 +141,33 @@ document.addEventListener('languageChanged', () => {
     loadFeed();
 });
 
+suggestionsList.addEventListener('click', async (event) => {
+    const followBtn = event.target.closest('.follow-btn');
+
+    if (!followBtn) {
+        return;
+    }
+
+    const personId = followBtn.dataset.id;
+    const followId = `${auth.currentUser.uid}_${personId}`;
+    const followDocRef = doc(firestore, "follows", followId);
+    const followDoc = await getDoc(followDocRef);
+    const isFollowing = followDoc.exists();
+
+    if (isFollowing) {
+        await deleteDoc(followDocRef);
+        followBtn.textContent = translations["follow-btn"][currentLanguage];
+    } else {
+        await setDoc(followDocRef, {
+            followerId: auth.currentUser.uid,
+            followingId: personId
+        });
+
+        followBtn.textContent = translations["following-btn"][currentLanguage];
+    }
+});
+
 onAuthStateChanged(auth, (user) => {
     loadFeed();
+    loadFollowSuggestions();
 });

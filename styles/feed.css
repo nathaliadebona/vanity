@@ -33,4 +33,20 @@ aside {
     aside h3 {
         text-align: center;
     }
+
+    .suggestions-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .person-username {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .person-info {
+        min-width: 0;
+    }
 }
