@@ -167,6 +167,43 @@ async function loadUserInfo(profileUserId) {
     document.querySelector('.profile-top img').src = userData.photoURL || 'https://ui-avatars.com/api/?name=' + userData.username;
 }
 
+async function loadProfileStats(profileUserId) {
+    const q = query(collection(firestore, "products"), where("userId", "==", profileUserId));
+    const querySnapshot = await getDocs(q);
+
+    const total = querySnapshot.size;
+    let buyAgainCount = 0;
+    const categoryCounts = { makeup: 0, skincare: 0, perfume: 0, hair: 0 };
+    const statusCounts = { using: 0, finished: 0, wishlist: 0 };
+
+    querySnapshot.forEach(docSnapshot => {
+        const product = docSnapshot.data();
+
+        if (product.buyAgain === 'yes') {
+            buyAgainCount++;
+        }
+
+        categoryCounts[product.category]++;
+        statusCounts[product.status]++;
+    });
+
+    document.getElementById('stats-products-count').textContent = total;
+    document.getElementById('stats-buyagain-count').textContent = buyAgainCount;
+
+    document.getElementById('bar-makeup').style.width = (total > 0 ? categoryCounts.makeup / total * 100 : 0) + '%';
+    document.getElementById('bar-skincare').style.width = (total > 0 ? categoryCounts.skincare / total * 100 : 0) + '%';
+    document.getElementById('bar-perfume').style.width = (total > 0 ? categoryCounts.perfume / total * 100 : 0) + '%';
+    document.getElementById('bar-hair').style.width = (total > 0 ? categoryCounts.hair / total * 100 : 0) + '%';
+
+    document.getElementById('bar-using').style.width = (total > 0 ? statusCounts.using / total * 100 : 0) + '%';
+    document.getElementById('bar-finished').style.width = (total > 0 ? statusCounts.finished / total * 100 : 0) + '%';
+    document.getElementById('bar-wishlist').style.width = (total > 0 ? statusCounts.wishlist / total * 100 : 0) + '%';
+
+    const favoritesQuery = query(collection(firestore, "favorites"), where("userId", "==", profileUserId));
+    const favoritesSnapshot = await getDocs(favoritesQuery);
+    document.getElementById('stats-favorites-count').textContent = favoritesSnapshot.size;
+}
+
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
         tabButtons.forEach(btn => {
@@ -387,4 +424,5 @@ onAuthStateChanged(auth, async (user) => {
     loadProfileProducts(profileUserId);
     loadFollowCounts(profileUserId);
     loadUserInfo(profileUserId);
+    loadProfileStats(profileUserId);
 });
