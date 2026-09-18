@@ -10,6 +10,9 @@ import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fires
 import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
+const lightboxModal = document.getElementById('lightbox-modal');
+const lightboxImage = document.getElementById('lightbox-image');
+const lightboxClose = document.getElementById('lightbox-close');
 const replyBtn = document.querySelectorAll('.reply-btn');
 const nextButton = document.querySelector('.carousel-next');
 const prevButton = document.querySelector('.carousel-prev');
@@ -188,6 +191,17 @@ favoriteBtn.addEventListener('click', async () => {
         icon.classList.remove('fa-regular');
         icon.classList.add('fa-solid');
     }
+});
+
+carouselImagesContainer.addEventListener('click', (event) => {
+    if (event.target.classList.contains('carousel-image')) {
+        lightboxImage.src = event.target.src;
+        lightboxModal.showModal();
+    }
+});
+
+lightboxClose.addEventListener('click', () => {
+    lightboxModal.close();
 });
 
 onAuthStateChanged(auth, (user) => {

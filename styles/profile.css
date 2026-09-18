@@ -139,52 +139,6 @@
   border-radius: 999px;
 }
 
-dialog.app-modal[open] {
-    width: 90%;
-    max-width: 24rem;
-    max-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    padding: var(--spacing-lg);
-    border: none;
-    border-radius: 1rem;
-    background-color: var(--color-cards-bg);
-    color: var(--color-text);
-    overflow: hidden;
-}
-
-dialog.app-modal::backdrop {
-    background-color: rgba(73, 36, 62, 0.5);
-}
-
-dialog.app-modal form {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: var(--spacing-md);
-    min-height: 0;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--spacing-md);
-}
-
-.modal-header h3 {
-    font-size: 1.3rem;
-
-}
-
-.modal-body {
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-    padding-right: var(--spacing-md);
-}
-
 .avatar-upload {
     position: relative;
     width: 6rem;
