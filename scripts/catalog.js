@@ -77,7 +77,7 @@ async function loadProducts() {
         const cardHTML = `
             <article class="product-card" data-id="${docSnapshot.id}" data-category="${product.category}" data-status="${product.status}" data-buy-again="${product.buyAgain}">
                 <div class="card-image">
-                    <img src="" alt="">
+                    <img src="${product.images && product.images.length > 0 ? product.images[0] : ''}" alt="">
                     <button type="button" class="favorite-btn">
                         <i class="${isFavorited ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                     </button>

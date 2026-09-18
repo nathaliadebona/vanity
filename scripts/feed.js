@@ -45,7 +45,7 @@ async function loadFeed() {
                 </div>
 
                 <div class="card-image">
-                    <img src="" alt="">
+                    <img src="${product.images && product.images.length > 0 ? product.images[0] : ''}" alt="">
                     <button type="button" class="favorite-btn">
                         <i class="${isFavorited ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                     </button>

@@ -70,7 +70,7 @@ async function loadProfileProducts(profileUserId) {
         const cardHTML = `
             <article class="product-card" data-id="${docSnapshot.id}">
                 <div class="card-image">
-                    <img src="" alt="">
+                    <img src="${product.images && product.images.length > 0 ? product.images[0] : ''}" alt="">
                     <button type="button" class="favorite-btn">
                         <i class="${isFavorited ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                     </button>
