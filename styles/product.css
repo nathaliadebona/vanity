@@ -18,6 +18,8 @@
 
 .carousel-image {
     display: none;
+    aspect-ratio: 16/9;
+    object-fit: cover;
 }
 
 .carousel-image.active {

@@ -11,13 +11,14 @@ import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fires
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const replyBtn = document.querySelectorAll('.reply-btn');
-const carouselImage = document.querySelectorAll('.carousel-image');
 const nextButton = document.querySelector('.carousel-next');
 const prevButton = document.querySelector('.carousel-prev');
 const carouselDots = document.querySelector('.carousel-dots');
 const editBtn = document.querySelector('.edit-btn');
 const trashBtn = document.querySelector('.trash-btn');
 const favoriteBtn = document.querySelector('.action-buttons .favorite-btn');
+const carouselImagesContainer = document.querySelector('.carousel-images');
+let carouselImage = document.querySelectorAll('.carousel-image');
 let productId;
 let currentIndex = 0;
 let productData;
@@ -51,6 +52,7 @@ async function loadProduct() {
     document.querySelector('.key-information .product-brand').textContent = productData.brand;
     document.querySelector('.key-information .tags-row .category-tag').textContent = translateProductField(productData.category);
     document.querySelector('.key-information .tags-row .status-tag').textContent = translateProductField(productData.status);
+    
     let starsHTML = '';
         for (let i = 0; i < 5; i++) {
             if (i < productData.rating) {
@@ -62,6 +64,27 @@ async function loadProduct() {
 
     document.querySelector('.key-information .rating').innerHTML = starsHTML;
     document.querySelector('.review p').textContent = productData.review;
+
+    let imagesHTML = '';
+        for (let i = 0; i < productData.images.length; i++) {
+            const activeClass = i === 0 ? 'active' : '';
+            imagesHTML += `<img src="${productData.images[i]}" alt="" class="carousel-image ${activeClass}">`;
+        }
+
+        carouselImagesContainer.innerHTML = imagesHTML;
+        carouselImage = document.querySelectorAll('.carousel-image');
+
+        carouselDots.innerHTML = '';
+        carouselImage.forEach((image, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot';
+            carouselDots.append(dot);
+
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
 
     updateBuyAgainText();
 }
@@ -90,17 +113,6 @@ function updateCarousel() {
     const activeDot = allDots[currentIndex];
     activeDot.classList.add('active');
 }
-
-carouselImage.forEach((image, index) => {
-    const dot = document.createElement('button');
-    dot.className = 'carousel-dot';
-    carouselDots.append(dot);
-
-    dot.addEventListener('click', () => {
-        currentIndex = index;
-        updateCarousel();
-    });
-});
 
 replyBtn.forEach(button => {
     button.addEventListener('click', () => {
