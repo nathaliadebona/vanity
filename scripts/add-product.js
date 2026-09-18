@@ -54,6 +54,7 @@ const photoPreviews = document.querySelector('.photo-previews');
 const params = new URLSearchParams(window.location.search);
 const productId = params.get('id');
 let selectedFiles = [];
+let existingImages = [];
 
 if (productId) {
     loadProductForEdit();
@@ -62,6 +63,9 @@ if (productId) {
 async function loadProductForEdit() {
     const productDoc = await getDoc(doc(firestore, "products", productId));
     const productData = productDoc.data();
+
+    existingImages = productData.images || [];
+    renderPreviews();
 
     document.getElementById('product-name').value = productData.name;
     document.getElementById('product-brand').value = productData.brand;
@@ -108,6 +112,29 @@ function showImagePreviews(files) {
 
 function renderPreviews() {
     photoPreviews.innerHTML = '';
+
+    existingImages.forEach((url, index) => {
+        const photoPreviewItem = document.createElement('div');
+        photoPreviewItem.className = 'photo-preview-item';
+
+        const img = document.createElement('img');
+        img.src = url;
+
+        const removePhotoBtn = document.createElement('button');
+        removePhotoBtn.className = 'remove-photo-btn';
+        removePhotoBtn.addEventListener('click', () => {
+            existingImages.splice(index, 1);
+            renderPreviews();
+        });
+
+        const removeIcon = document.createElement('i');
+        removeIcon.className = 'fa-solid fa-trash-can';
+        removePhotoBtn.append(removeIcon);
+
+        photoPreviewItem.append(img);
+        photoPreviewItem.append(removePhotoBtn);
+        photoPreviews.append(photoPreviewItem);
+    });
 
     selectedFiles.forEach((file, index) => {
         const reader = new FileReader();
@@ -186,40 +213,29 @@ addProductForm.addEventListener('submit', async (event) => {
             userId: auth.currentUser.uid
         }
 
+        let docRef;
+
         if (productId) {
-            let finalImageUrls;
-
-            if (selectedFiles.length > 0) {
-                const imageUrls = [];
-
-                for (const file of selectedFiles) {
-                    const imageRef = ref(storage, `product-images/${auth.currentUser.uid}/${productId}/${file.name}`);
-                    await uploadBytes(imageRef, file);
-                    const url = await getDownloadURL(imageRef);
-                    imageUrls.push(url);
-                }
-
-                finalImageUrls = imageUrls;
-            } else {
-                const existingDoc = await getDoc(doc(firestore, "products", productId));
-                finalImageUrls = existingDoc.data().images || [];
-            }
-
-            productData.images = finalImageUrls;
-            await updateDoc(doc(firestore, "products", productId), productData);
+            docRef = doc(firestore, "products", productId);
         } else {
-            const newProductRef = doc(collection(firestore, "products"));
-            const imageUrls = [];
+            docRef = doc(collection(firestore, "products"));
+        }
 
-            for (const file of selectedFiles) {
-                const imageRef = ref(storage, `product-images/${auth.currentUser.uid}/${newProductRef.id}/${file.name}`);
-                await uploadBytes(imageRef, file);
-                const url = await getDownloadURL(imageRef);
-                imageUrls.push(url);
-            }
+        const newImageUrls = [];
 
-            productData.images = imageUrls;
-            await setDoc(newProductRef, productData);
+        for (const file of selectedFiles) {
+            const imageRef = ref(storage, `product-images/${auth.currentUser.uid}/${docRef.id}/${file.name}`);
+            await uploadBytes(imageRef, file);
+            const url = await getDownloadURL(imageRef);
+            newImageUrls.push(url);
+        }
+
+        productData.images = [...existingImages, ...newImageUrls];
+
+        if (productId) {
+            await updateDoc(docRef, productData);
+        } else {
+            await setDoc(docRef, productData);
         }
 
         window.location.href = 'profile.html';
