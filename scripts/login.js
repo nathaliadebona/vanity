@@ -9,6 +9,7 @@ import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fires
 import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { translations, currentLanguage } from "./i18n.js";
+import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 const tabButtons = document.querySelectorAll('.tab-button');
 const loginForm = document.getElementById('login-form');
@@ -16,6 +17,7 @@ const registerForm = document.getElementById('register-form');
 const passwordRegister = document.getElementById('password-register');
 const passwordConfirmRegister = document.getElementById('password-confirm-register');
 const passwordMatchMessage = document.getElementById('password-match-message');
+const forgotPasswordLink = document.getElementById('forgot-password');
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -93,5 +95,22 @@ passwordConfirmRegister.addEventListener('input', () => {
         passwordMatchMessage.innerHTML = `<i class="fa-solid fa-xmark"></i> ${translations["password-no-match"][currentLanguage]}`;
         passwordMatchMessage.classList.remove('match');
         passwordMatchMessage.classList.add('no-match');
+    }
+});
+
+forgotPasswordLink.addEventListener('click', async (event) =>{
+    event.preventDefault();
+    const email = document.getElementById('email-login').value;
+
+    if (email === '') {
+        alert(translations["forgot-password-empty"][currentLanguage]);
+        return
+    } 
+
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert(translations["forgot-password-sent"][currentLanguage]);
+    } catch (error) {
+        alert(error.message);
     }
 });

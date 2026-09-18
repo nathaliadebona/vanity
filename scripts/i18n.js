@@ -17,6 +17,8 @@ export const translations = {
     "add-product": { pt: "Adicionar", en: "Add" },
     "explore": { pt: "Explorar", en: "Explore" },
     "profile": { pt: "Perfil", en: "Profile" },
+    "forgot-password-empty": { pt: "Digite seu e-mail no campo acima primeiro", en: "Enter your email in the field above first" },
+    "forgot-password-sent": { pt: "E-mail de redefinição enviado! Confira sua caixa de entrada", en: "Password reset email sent! Check your inbox" },
     // ---- Perfil ---- //
     "profile-edit": { pt: "Editar perfil", en: "Edit profile" },
     "tab-products": { pt: "Produtos", en: "Products" },
