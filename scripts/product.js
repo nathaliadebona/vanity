@@ -25,6 +25,7 @@ const editBtn = document.querySelector('.edit-btn');
 const trashBtn = document.querySelector('.trash-btn');
 const favoriteBtn = document.querySelector('.action-buttons .favorite-btn');
 const carouselImagesContainer = document.querySelector('.carousel-images');
+const commentsListEl = document.querySelector('.comments-list');
 let carouselImage = document.querySelectorAll('.carousel-image');
 let productId;
 let currentIndex = 0;
@@ -140,6 +141,7 @@ async function loadComments() {
 
         const comment = document.createElement('article');
         comment.classList.add('comment');
+        comment.dataset.id = commentDoc.id;
 
         const commentHeader = document.createElement('div');
         commentHeader.classList.add('comment-header');
@@ -151,17 +153,26 @@ async function loadComments() {
         commentUsername.textContent = '@' + authorData.username;
 
         const commentTime = document.createElement('time');
-        commentTime.textContent = commentDate.toLocaleDateString('pt-BR');;
+        commentTime.textContent = commentDate.toLocaleDateString('pt-BR');
 
         const commentBody = document.createElement('p');
         commentBody.classList.add('comment-body');
         commentBody.textContent = commentDoc.data().text;
+
+        const trashBtn = document.createElement('button');
+        trashBtn.classList.add('trash-btn');
+        trashBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
 
         commentHeader.appendChild(commentAvatar);
         commentHeader.appendChild(commentUsername);
         commentHeader.appendChild(commentTime);
         comment.appendChild(commentHeader);
         comment.appendChild(commentBody);
+
+        if (authorId === auth.currentUser.uid) {
+            comment.appendChild(trashBtn)
+        }
+
         commentsList.appendChild(comment);
     }
 }
@@ -276,6 +287,18 @@ commentForm.addEventListener('submit', async (event) => {
     loadComments();
 
     newCommentInput.value = '';
+});
+
+commentsListEl.addEventListener('click', async (event) => {
+    const trashBtn = event.target.closest('.trash-btn');
+    if (!trashBtn) {
+        return
+    }
+
+    const comment = trashBtn.closest('.comment');
+    await deleteDoc(doc(firestore, "comments", comment.dataset.id));
+
+    loadComments();
 });
 
 onAuthStateChanged(auth, (user) => {
