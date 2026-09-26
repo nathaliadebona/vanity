@@ -146,7 +146,7 @@ async function loadComments() {
         console.log(replies);
 
         const userSnap = await getDoc(doc(firestore, "users", authorId));
-        const authorData = userSnap.data();
+        const authorData = userSnap.data() || { username: 'usuário removido' };
         const commentDate = commentDoc.data().createdAt.toDate();
         const likedBy = commentDoc.data().likedBy;
 
@@ -194,33 +194,41 @@ async function loadComments() {
         const repliesList = document.createElement('div');
         repliesList.classList.add('replies');
         
-        for (const replyDoc of replies) {
-            const replyAuthorId = replyDoc.data().userId;
-            const replyUserSnap = await getDoc(doc(firestore, "users", replyAuthorId));
-            const replyAuthorData = replyUserSnap.data() || { username: 'usuário removido'};
+    for (const replyDoc of replies) {
+        const replyAuthorId = replyDoc.data().userId;
+        const replyUserSnap = await getDoc(doc(firestore, "users", replyAuthorId));
+        const replyAuthorData = replyUserSnap.data() || { username: 'usuário removido' };
+        const replyDate = replyDoc.data().createdAt.toDate();
 
-            const replyText = document.createElement('p');
-            replyText.textContent = replyDoc.data().text;
+        const reply = document.createElement('div');
+        reply.classList.add('reply');
 
-            const replyAvatar = document.createElement('img');
-            replyAvatar.classList.add('reply-avatar');
-            replyAvatar.src = replyAuthorData.photoURL || 'https://ui-avatars.com/api/?name=' + replyAuthorData.username;
+        const replyHeader = document.createElement('div');
+        replyHeader.classList.add('reply-header');
 
-            const replyUsername = document.createElement('span');
-            replyUsername.classList.add('reply-username');
-            replyUsername.textContent = '@' + replyAuthorData.username;
-        
-            const replyDate = replyDoc.data().createdAt.toDate();
+        const replyAvatar = document.createElement('img');
+        replyAvatar.classList.add('reply-avatar');
+        replyAvatar.src = replyAuthorData.photoURL || 'https://ui-avatars.com/api/?name=' + replyAuthorData.username;
 
-            const replyTime = document.createElement('time');
-            replyTime.classList.add('comment-date');
-            replyTime.textContent = replyDate.toLocaleDateString('pt-BR');
+        const replyUsername = document.createElement('span');
+        replyUsername.classList.add('reply-username');
+        replyUsername.textContent = '@' + replyAuthorData.username;
 
-            repliesList.appendChild(replyAvatar);
-            repliesList.appendChild(replyUsername);
-            repliesList.appendChild(replyTime);
-            repliesList.appendChild(replyText);
-        }
+        const replyTime = document.createElement('time');
+        replyTime.classList.add('reply-time');
+        replyTime.textContent = replyDate.toLocaleDateString('pt-BR');
+
+        const replyText = document.createElement('p');
+        replyText.classList.add('reply-text');
+        replyText.textContent = replyDoc.data().text;
+
+        replyHeader.appendChild(replyAvatar);
+        replyHeader.appendChild(replyUsername);
+        replyHeader.appendChild(replyTime);
+        reply.appendChild(replyHeader);
+        reply.appendChild(replyText);
+        repliesList.appendChild(reply);
+    }
 
         commentHeader.appendChild(commentAvatar);
         commentHeader.appendChild(commentUsername);
