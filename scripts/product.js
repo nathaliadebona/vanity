@@ -135,7 +135,16 @@ async function loadComments() {
     const querySnapshot = await getDocs(q);
 
     for (const commentDoc of querySnapshot.docs) {
+         if (commentDoc.data().parentId !== null) {
+            continue;
+        }
         const authorId = commentDoc.data().userId;
+
+        const replies = querySnapshot.docs.filter((item) => {
+            return item.data().parentId === commentDoc.id;
+        });
+        console.log(replies);
+
         const userSnap = await getDoc(doc(firestore, "users", authorId));
         const authorData = userSnap.data();
         const commentDate = commentDoc.data().createdAt.toDate();
@@ -182,6 +191,15 @@ async function loadComments() {
         replyBtn.textContent = 'Responder';
         replyBtn.dataset.i18n = 'reply-btn';
 
+        const repliesList = document.createElement('div');
+        repliesList.classList.add('replies');
+        
+        for (const replyDoc of replies) {
+            const replyText = document.createElement('p');
+            replyText.textContent = replyDoc.data().text;
+            repliesList.appendChild(replyText);
+        }
+
         commentHeader.appendChild(commentAvatar);
         commentHeader.appendChild(commentUsername);
         commentHeader.appendChild(commentTime);
@@ -193,6 +211,7 @@ async function loadComments() {
         if (authorId === auth.currentUser.uid) {
             comment.appendChild(trashBtn)
         }
+        comment.appendChild(repliesList);
         commentsList.appendChild(comment);
     }
 }
