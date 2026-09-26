@@ -9,10 +9,14 @@ import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fire
 import { query } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const lightboxModal = document.getElementById('lightbox-modal');
 const lightboxImage = document.getElementById('lightbox-image');
 const lightboxClose = document.getElementById('lightbox-close');
+const commentForm = document.getElementById('comment-form');
+const newCommentInput = document.getElementById('new-comment-input');
 const replyBtn = document.querySelectorAll('.reply-btn');
 const nextButton = document.querySelector('.carousel-next');
 const prevButton = document.querySelector('.carousel-prev');
@@ -202,6 +206,27 @@ carouselImagesContainer.addEventListener('click', (event) => {
 
 lightboxClose.addEventListener('click', () => {
     lightboxModal.close();
+});
+
+commentForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const commentText = newCommentInput.value.trim();
+
+    if (!commentText) {
+        return;
+    }
+
+    const newComment = {
+        productId: productId,
+        userId: auth.currentUser.uid,
+        text: commentText,
+        likedBy: [],
+        parentId: null,
+        createdAt: serverTimestamp()
+    }
+
+    await addDoc(collection(firestore, "comments"), newComment);
 });
 
 onAuthStateChanged(auth, (user) => {
