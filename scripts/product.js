@@ -210,8 +210,15 @@ async function loadComments() {
             replyUsername.classList.add('reply-username');
             replyUsername.textContent = '@' + replyAuthorData.username;
         
+            const replyDate = replyDoc.data().createdAt.toDate();
+
+            const replyTime = document.createElement('time');
+            replyTime.classList.add('comment-date');
+            replyTime.textContent = replyDate.toLocaleDateString('pt-BR');
+
             repliesList.appendChild(replyAvatar);
             repliesList.appendChild(replyUsername);
+            repliesList.appendChild(replyTime);
             repliesList.appendChild(replyText);
         }
 
