@@ -132,17 +132,38 @@ async function loadComments() {
     )
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => {
+    for (const commentDoc of querySnapshot.docs) {
+        const authorId = commentDoc.data().userId;
+        const userSnap = await getDoc(doc(firestore, "users", authorId));
+        const authorData = userSnap.data();
+        const commentDate = commentDoc.data().createdAt.toDate();
+
         const comment = document.createElement('article');
         comment.classList.add('comment');
 
+        const commentHeader = document.createElement('div');
+        commentHeader.classList.add('comment-header');
+
+        const commentAvatar = document.createElement( 'img');
+        commentAvatar.src = authorData.photoURL || 'https://ui-avatars.com/api/?name=' + authorData.username;
+
+        const commentUsername = document.createElement('span');
+        commentUsername.textContent = '@' + authorData.username;
+
+        const commentTime = document.createElement('time');
+        commentTime.textContent = commentDate.toLocaleDateString('pt-BR');;
+
         const commentBody = document.createElement('p');
         commentBody.classList.add('comment-body');
-        commentBody.textContent = doc.data().text;
+        commentBody.textContent = commentDoc.data().text;
 
-        commentsList.appendChild(comment);
+        commentHeader.appendChild(commentAvatar);
+        commentHeader.appendChild(commentUsername);
+        commentHeader.appendChild(commentTime);
+        comment.appendChild(commentHeader);
         comment.appendChild(commentBody);
-    });
+        commentsList.appendChild(comment);
+    }
 }
 
 replyBtn.forEach(button => {
@@ -251,6 +272,8 @@ commentForm.addEventListener('submit', async (event) => {
     }
 
     await addDoc(collection(firestore, "comments"), newComment);
+
+    loadComments();
 
     newCommentInput.value = '';
 });
