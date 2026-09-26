@@ -139,6 +139,7 @@ async function loadComments() {
         const userSnap = await getDoc(doc(firestore, "users", authorId));
         const authorData = userSnap.data();
         const commentDate = commentDoc.data().createdAt.toDate();
+        const likedBy = commentDoc.data().likedBy;
 
         const comment = document.createElement('article');
         comment.classList.add('comment');
@@ -164,6 +165,10 @@ async function loadComments() {
         favoriteBtn.classList.add('like-btn');
         favoriteBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
 
+        if (likedBy.includes(auth.currentUser.uid)) {
+            favoriteBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        }
+
         const favoriteCounter = document.createElement('span');
         favoriteCounter.classList.add('like-count');
         favoriteCounter.textContent = commentDoc.data().likedBy.length;
@@ -182,7 +187,6 @@ async function loadComments() {
         if (authorId === auth.currentUser.uid) {
             comment.appendChild(trashBtn)
         }
-
         commentsList.appendChild(comment);
     }
 }
