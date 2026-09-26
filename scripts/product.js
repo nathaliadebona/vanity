@@ -121,6 +121,14 @@ function updateCarousel() {
     activeDot.classList.add('active');
 }
 
+async function loadComments() {
+    const q = query(
+        collection(firestore, "comments"),
+        where("productId", "==", productId),
+
+    )
+}
+
 replyBtn.forEach(button => {
     button.addEventListener('click', () => {
         const commentActions = button.closest('.comments-actions');
@@ -227,6 +235,8 @@ commentForm.addEventListener('submit', async (event) => {
     }
 
     await addDoc(collection(firestore, "comments"), newComment);
+
+    newCommentInput.value = '';
 });
 
 onAuthStateChanged(auth, (user) => {
