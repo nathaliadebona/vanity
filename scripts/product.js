@@ -11,6 +11,7 @@ import { where } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fires
 import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const lightboxModal = document.getElementById('lightbox-modal');
 const lightboxImage = document.getElementById('lightbox-image');
@@ -159,6 +160,14 @@ async function loadComments() {
         commentBody.classList.add('comment-body');
         commentBody.textContent = commentDoc.data().text;
 
+        const favoriteBtn = document.createElement('button');
+        favoriteBtn.classList.add('like-btn');
+        favoriteBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+
+        const favoriteCounter = document.createElement('span');
+        favoriteCounter.classList.add('like-count');
+        favoriteCounter.textContent = commentDoc.data().likedBy.length;
+
         const trashBtn = document.createElement('button');
         trashBtn.classList.add('trash-btn');
         trashBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
@@ -168,7 +177,8 @@ async function loadComments() {
         commentHeader.appendChild(commentTime);
         comment.appendChild(commentHeader);
         comment.appendChild(commentBody);
-
+        comment.appendChild(favoriteBtn);
+        comment.appendChild(favoriteCounter);
         if (authorId === auth.currentUser.uid) {
             comment.appendChild(trashBtn)
         }
@@ -297,6 +307,31 @@ commentsListEl.addEventListener('click', async (event) => {
 
     const comment = trashBtn.closest('.comment');
     await deleteDoc(doc(firestore, "comments", comment.dataset.id));
+
+    loadComments();
+});
+
+commentsListEl.addEventListener('click', async (event) => {
+    const likeBtn = event.target.closest('.like-btn');
+    if (!likeBtn) {
+        return;
+    }
+
+    const comment = likeBtn.closest('.comment');
+    const commentRef = doc(firestore, "comments", comment.dataset.id);
+
+    const commentSnap = await getDoc(commentRef);
+    const likedBy = commentSnap.data().likedBy;
+
+    if (!likedBy.includes(auth.currentUser.uid)) {
+        await updateDoc(commentRef, {
+            likedBy: arrayUnion(auth.currentUser.uid)
+        });
+    } else {
+        await updateDoc(commentRef, {
+            likedBy: arrayRemove(auth.currentUser.uid)
+        });
+    }
 
     loadComments();
 });
