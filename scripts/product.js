@@ -195,8 +195,23 @@ async function loadComments() {
         repliesList.classList.add('replies');
         
         for (const replyDoc of replies) {
+            const replyAuthorId = replyDoc.data().userId;
+            const replyUserSnap = await getDoc(doc(firestore, "users", replyAuthorId));
+            const replyAuthorData = replyUserSnap.data() || { username: 'usuário removido'};
+
             const replyText = document.createElement('p');
             replyText.textContent = replyDoc.data().text;
+
+            const replyAvatar = document.createElement('img');
+            replyAvatar.classList.add('reply-avatar');
+            replyAvatar.src = replyAuthorData.photoURL || 'https://ui-avatars.com/api/?name=' + replyAuthorData.username;
+
+            const replyUsername = document.createElement('span');
+            replyUsername.classList.add('reply-username');
+            replyUsername.textContent = '@' + replyAuthorData.username;
+        
+            repliesList.appendChild(replyAvatar);
+            repliesList.appendChild(replyUsername);
             repliesList.appendChild(replyText);
         }
 
