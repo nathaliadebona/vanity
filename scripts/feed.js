@@ -134,6 +134,9 @@ feedPostList.addEventListener('click', async (event) => {
     }
 
     const card = event.target.closest('.product-card');
+    if(!card) {
+        return;
+    }
     window.location.href = `product.html?id=${card.dataset.id}`;
 });
 
