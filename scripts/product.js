@@ -177,6 +177,11 @@ async function loadComments() {
         trashBtn.classList.add('trash-btn');
         trashBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
 
+        const replyBtn = document.createElement('button');
+        replyBtn.classList.add('reply-btn');
+        replyBtn.textContent = 'Responder';
+        replyBtn.dataset.i18n = 'reply-btn';
+
         commentHeader.appendChild(commentAvatar);
         commentHeader.appendChild(commentUsername);
         commentHeader.appendChild(commentTime);
@@ -184,6 +189,7 @@ async function loadComments() {
         comment.appendChild(commentBody);
         comment.appendChild(favoriteBtn);
         comment.appendChild(favoriteCounter);
+        comment.appendChild(replyBtn);
         if (authorId === auth.currentUser.uid) {
             comment.appendChild(trashBtn)
         }
@@ -338,6 +344,58 @@ commentsListEl.addEventListener('click', async (event) => {
     }
 
     loadComments();
+});
+
+commentsListEl.addEventListener('click', (event) => {
+    const replyBtn = event.target.closest('.reply-btn');
+    if (!replyBtn) {
+        return
+    }
+
+    const comment = replyBtn.closest('.comment');
+    const commentId = comment.dataset.id;
+
+    const existingForm = comment.querySelector('.reply-form');
+        if (existingForm) {
+        return;
+    }
+
+    const replyForm = document.createElement('form');
+    replyForm.classList.add('reply-form');
+
+    replyForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const replyText = replyInput.value.trim();
+        if (!replyText) {
+            return;
+        }
+
+        const newReply = {
+            productId: productId,
+            userId: auth.currentUser.uid,
+            text: replyText,
+            likedBy: [],
+            parentId: commentId,
+            createdAt: serverTimestamp()
+        }
+
+        await addDoc(collection(firestore, "comments"), newReply);
+        loadComments();
+    });
+
+    const replyInput = document.createElement('input');
+    replyInput.classList.add('reply-input');
+    replyInput.type = 'text';
+
+    const replySendBtn = document.createElement('button');
+    replySendBtn.classList.add('reply-send-btn');
+    replySendBtn.type = 'submit';
+    replySendBtn.textContent = 'Enviar'
+
+    replyForm.appendChild(replyInput);
+    replyForm.appendChild(replySendBtn);
+    comment.appendChild(replyForm);
 });
 
 onAuthStateChanged(auth, (user) => {
