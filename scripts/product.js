@@ -33,6 +33,7 @@ let productData;
 async function loadProduct() {
     const params = new URLSearchParams(window.location.search);
     productId = params.get('id');
+    loadComments();
     const productDoc = await getDoc(doc(firestore, "products", productId));
     productData = productDoc.data();
     const userDoc = await getDoc(doc(firestore, "users", productData.userId));
@@ -122,11 +123,26 @@ function updateCarousel() {
 }
 
 async function loadComments() {
+    const commentsList = document.querySelector('.comments-list');
+    commentsList.innerHTML = '';
+
     const q = query(
         collection(firestore, "comments"),
-        where("productId", "==", productId),
-
+        where("productId", "==", productId)
     )
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+        const comment = document.createElement('article');
+        comment.classList.add('comment');
+
+        const commentBody = document.createElement('p');
+        commentBody.classList.add('comment-body');
+        commentBody.textContent = doc.data().text;
+
+        commentsList.appendChild(comment);
+        comment.appendChild(commentBody);
+    });
 }
 
 replyBtn.forEach(button => {
