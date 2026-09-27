@@ -499,11 +499,16 @@ commentsListEl.addEventListener('click', (event) => {
 shareBtn.addEventListener('click', () => {
     const productName = document.querySelector('.key-information h3').textContent;
 
-    navigator.share({
-        title: productName,
-        text: 'Olha esse produto que encontrei no Vanity!',
-        url: window.location.href
-    });
+    if (navigator.share) {
+        navigator.share({
+            title: productName,
+            text: 'Olha esse produto que encontrei no Vanity!',
+            url: window.location.href
+        });
+    } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copiado!');
+    }
 });
 
 onAuthStateChanged(auth, (user) => {
