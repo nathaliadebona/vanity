@@ -204,6 +204,7 @@ async function loadComments() {
 
         const reply = document.createElement('div');
         reply.classList.add('reply');
+        reply.dataset.id = replyDoc.id;
 
         const replyHeader = document.createElement('div');
         replyHeader.classList.add('reply-header');
@@ -224,12 +225,20 @@ async function loadComments() {
         replyText.classList.add('reply-text');
         replyText.textContent = replyDoc.data().text;
 
+        const replyTrashBtn = document.createElement('button');
+        replyTrashBtn.classList.add('trash-btn');
+        replyTrashBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
+
         replyHeader.appendChild(replyAvatar);
         replyHeader.appendChild(replyUsername);
         replyHeader.appendChild(replyTime);
         reply.appendChild(replyHeader);
         reply.appendChild(replyText);
         repliesList.appendChild(reply);
+        if (replyAuthorId === auth.currentUser.uid) {
+            reply.appendChild(replyTrashBtn);
+        };
     }
 
         commentHeader.appendChild(commentAvatar);
@@ -370,8 +379,14 @@ commentsListEl.addEventListener('click', async (event) => {
         return
     }
 
-    const comment = trashBtn.closest('.comment');
-    await deleteDoc(doc(firestore, "comments", comment.dataset.id));
+    const reply = trashBtn.closest('.reply');
+
+    if (reply) {
+        await deleteDoc(doc(firestore, "comments", reply.dataset.id));
+    } else {
+        const comment = trashBtn.closest('.comment');
+        await deleteDoc(doc(firestore, "comments", comment.dataset.id));
+    }
 
     loadComments();
 });
