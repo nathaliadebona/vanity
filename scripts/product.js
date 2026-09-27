@@ -33,6 +33,12 @@ let productId;
 let currentIndex = 0;
 let productData;
 
+async function updateFavoriteCount() {
+    const favoritesQuery = query(collection(firestore, "favorites"), where("productId", "==", productId));
+    const favoritesSnapshot = await getDocs(favoritesQuery);
+    document.getElementById('favorite-count').textContent = favoritesSnapshot.size;
+}
+
 async function loadProduct() {
     const params = new URLSearchParams(window.location.search);
     productId = params.get('id');
@@ -45,9 +51,7 @@ async function loadProduct() {
     const favoriteDoc = await getDoc(doc(firestore, "favorites", favoriteId));
     const isFavorited = favoriteDoc.exists();
 
-    const favoritesQuery = query(collection(firestore, "favorites"), where("productId", "==", productId));
-    const favoritesSnapshot = await getDocs(favoritesQuery);
-    document.getElementById('favorite-count').textContent = favoritesSnapshot.size;
+    await updateFavoriteCount();
 
     if (isFavorited) {
         document.querySelector('.social-actions .favorite-btn i').classList.remove('fa-regular');
@@ -353,6 +357,8 @@ favoriteBtn.addEventListener('click', async () => {
         icon.classList.remove('fa-regular');
         icon.classList.add('fa-solid');
     }
+
+    updateFavoriteCount();
 });
 
 carouselImagesContainer.addEventListener('click', (event) => {

@@ -140,6 +140,16 @@
     color: var(--color-danger);
 }
 
+.social-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.social-actions button {
+    color: var(--color-accent);
+}
+
 .action-buttons .favorite-btn {
     color: var(--color-accent);
 }
