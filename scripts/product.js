@@ -145,7 +145,7 @@ async function loadComments() {
         });
 
         const userSnap = await getDoc(doc(firestore, "users", authorId));
-        const authorData = userSnap.data() || { username: 'usuário removido' };
+        const authorData = userSnap.data() || { username: translations['removed-user'][currentLanguage] };
         const commentDate = commentDoc.data().createdAt.toDate();
         const likedBy = commentDoc.data().likedBy;
 
@@ -199,7 +199,7 @@ async function loadComments() {
     for (const replyDoc of replies) {
         const replyAuthorId = replyDoc.data().userId;
         const replyUserSnap = await getDoc(doc(firestore, "users", replyAuthorId));
-        const replyAuthorData = replyUserSnap.data() || { username: 'usuário removido' };
+        const replyAuthorData = replyUserSnap.data() || { username: translations['removed-user'][currentLanguage] };
         const replyDate = replyDoc.data().createdAt.toDate();
 
         const reply = document.createElement('div');
