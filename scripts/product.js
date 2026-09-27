@@ -225,10 +225,21 @@ async function loadComments() {
         replyText.classList.add('reply-text');
         replyText.textContent = replyDoc.data().text;
 
+        const replyLikeBtn = document.createElement('button');
+        replyLikeBtn.classList.add('like-btn');
+        replyLikeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+
+        if (replyDoc.data().likedBy.includes(auth.currentUser.uid)) {
+            replyLikeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        }       
+    
+        const replyLikeCounter = document.createElement('span');
+        replyLikeCounter.classList.add('like-count');
+        replyLikeCounter.textContent = replyDoc.data().likedBy.length;
+
         const replyTrashBtn = document.createElement('button');
         replyTrashBtn.classList.add('trash-btn');
         replyTrashBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-
 
         replyHeader.appendChild(replyAvatar);
         replyHeader.appendChild(replyUsername);
@@ -236,6 +247,8 @@ async function loadComments() {
         reply.appendChild(replyHeader);
         reply.appendChild(replyText);
         repliesList.appendChild(reply);
+        reply.appendChild(replyLikeBtn);
+        reply.appendChild(replyLikeCounter);
         if (replyAuthorId === auth.currentUser.uid) {
             reply.appendChild(replyTrashBtn);
         };
@@ -397,8 +410,15 @@ commentsListEl.addEventListener('click', async (event) => {
         return;
     }
 
-    const comment = likeBtn.closest('.comment');
-    const commentRef = doc(firestore, "comments", comment.dataset.id);
+    const reply = likeBtn.closest('.reply');
+    let commentRef;
+
+    if (reply) {
+        commentRef = doc(firestore, "comments", reply.dataset.id);
+    } else {
+        const comment = likeBtn.closest('.comment');
+        commentRef = doc(firestore, "comments", comment.dataset.id);
+    }
 
     const commentSnap = await getDoc(commentRef);
     const likedBy = commentSnap.data().likedBy;
