@@ -27,6 +27,7 @@ const trashBtn = document.querySelector('.trash-btn');
 const favoriteBtn = document.querySelector('.social-actions .favorite-btn');
 const carouselImagesContainer = document.querySelector('.carousel-images');
 const commentsListEl = document.querySelector('.comments-list');
+const shareBtn = document.querySelector('.share-btn');
 let carouselImage = document.querySelectorAll('.carousel-image');
 let productId;
 let currentIndex = 0;
@@ -493,6 +494,16 @@ commentsListEl.addEventListener('click', (event) => {
     comment.appendChild(replyForm);
 
     translatePage();
+});
+
+shareBtn.addEventListener('click', () => {
+    const productName = document.querySelector('.key-information h3').textContent;
+
+    navigator.share({
+        title: productName,
+        text: 'Olha esse produto que encontrei no Vanity!',
+        url: window.location.href
+    });
 });
 
 onAuthStateChanged(auth, (user) => {
