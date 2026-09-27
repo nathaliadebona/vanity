@@ -17,9 +17,12 @@
 }
 
 .carousel-image {
+    width: 100%;
+    height: auto;
     display: none;
     aspect-ratio: 16/9;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: var(--color-accent-light);
 }
 
 .carousel-image.active {
