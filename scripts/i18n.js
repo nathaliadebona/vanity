@@ -90,7 +90,12 @@ const langToggleBtn = document.getElementById('lang-toggle');
 const savedLanguage = localStorage.getItem('language');
 export let currentLanguage = savedLanguage ? savedLanguage : 'pt';
 
-export function applyTranslations () {
+export function translateProductField(value) {
+    const key = `filter-${value}`;
+    return translations[key][currentLanguage];
+}
+
+export function translatePage() {
     const elementsToTranslate = document.querySelectorAll('[data-i18n]');
     const elementsToTranslatePlaceholder = document.querySelectorAll('[data-i18n-placeholder]');
     
@@ -105,14 +110,12 @@ export function applyTranslations () {
         const translation = translations[key];
         el.placeholder = translation[currentLanguage];
     });
-
-    langToggleBtn.textContent = (currentLanguage === 'pt' ? 'en' : 'pt').toUpperCase();
-    document.dispatchEvent(new CustomEvent('languageChanged'));
 }
 
-export function translateProductField(value) {
-    const key = `filter-${value}`;
-    return translations[key][currentLanguage];
+export function applyTranslations () {
+    translatePage();
+    langToggleBtn.textContent = (currentLanguage === 'pt' ? 'en' : 'pt').toUpperCase();
+    document.dispatchEvent(new CustomEvent('languageChanged'));
 }
 
 langToggleBtn.addEventListener('click', () => {

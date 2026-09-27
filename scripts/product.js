@@ -2,7 +2,7 @@ import { auth } from "./firebase-config.js";
 import { firestore } from "./firebase-config.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import { translations, currentLanguage, translateProductField, applyTranslations } from "./i18n.js";
+import { translations, currentLanguage, translateProductField, applyTranslations, translatePage } from "./i18n.js";
 import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
@@ -248,7 +248,7 @@ async function loadComments() {
         commentsList.appendChild(comment);
     }
 
-    applyTranslations()
+    translatePage();
 }
 
 replyBtn.forEach(button => {
@@ -294,6 +294,7 @@ document.addEventListener('languageChanged', () => {
     updateBuyAgainText();
     document.querySelector('.key-information .tags-row .category-tag').textContent = translateProductField(productData.category);
     document.querySelector('.key-information .tags-row .status-tag').textContent = translateProductField(productData.status);
+    loadComments();
 });
 
 editBtn.addEventListener('click', () => {
@@ -452,7 +453,7 @@ commentsListEl.addEventListener('click', (event) => {
     replyForm.appendChild(replySendBtn);
     comment.appendChild(replyForm);
 
-    applyTranslations();
+    translatePage();
 });
 
 onAuthStateChanged(auth, (user) => {
