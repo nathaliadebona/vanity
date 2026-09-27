@@ -143,7 +143,6 @@ async function loadComments() {
         const replies = querySnapshot.docs.filter((item) => {
             return item.data().parentId === commentDoc.id;
         });
-        console.log(replies);
 
         const userSnap = await getDoc(doc(firestore, "users", authorId));
         const authorData = userSnap.data() || { username: 'usuário removido' };
@@ -169,6 +168,9 @@ async function loadComments() {
         const commentBody = document.createElement('p');
         commentBody.classList.add('comment-body');
         commentBody.textContent = commentDoc.data().text;
+
+        const commentActions = document.createElement('div');
+        commentActions.classList.add('comments-actions');
 
         const favoriteBtn = document.createElement('button');
         favoriteBtn.classList.add('like-btn');
@@ -235,12 +237,13 @@ async function loadComments() {
         commentHeader.appendChild(commentTime);
         comment.appendChild(commentHeader);
         comment.appendChild(commentBody);
-        comment.appendChild(favoriteBtn);
-        comment.appendChild(favoriteCounter);
-        comment.appendChild(replyBtn);
+        commentActions.appendChild(favoriteBtn);
+        commentActions.appendChild(favoriteCounter);
+        commentActions.appendChild(replyBtn);
         if (authorId === auth.currentUser.uid) {
-            comment.appendChild(trashBtn)
+            commentActions.appendChild(trashBtn);
         }
+        comment.appendChild(commentActions);
         comment.appendChild(repliesList);
         commentsList.appendChild(comment);
     }
