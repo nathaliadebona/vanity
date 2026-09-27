@@ -236,11 +236,18 @@
     margin-top: var(--spacing-md);
 }
 
+.new-comment form {
+    display: flex;
+    flex: 1;
+    gap: var(--spacing-sm);
+}
+
 .new-comment input {
     flex: 1;
 }
 
-.new-comment button {
+.new-comment button,
+.reply-form .reply-send-btn {
     padding: var(--spacing-xs) var(--spacing-md);
     border-radius: 999px;
     background-color: var(--color-accent);
@@ -282,6 +289,17 @@
     color: var(--color-text-secondary);
     font-size: 0.8rem;
 }
+
+.reply-form {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+}
+
+.reply-input {
+    flex: 1;
+}
+
 
 @media (min-width: 48rem) {
     .product-page {
