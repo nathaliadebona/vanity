@@ -225,6 +225,9 @@ async function loadComments() {
         replyText.classList.add('reply-text');
         replyText.textContent = replyDoc.data().text;
 
+        const replyCommentActions = document.createElement('div');
+        replyCommentActions.classList.add('comments-actions');
+
         const replyLikeBtn = document.createElement('button');
         replyLikeBtn.classList.add('like-btn');
         replyLikeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
@@ -247,10 +250,11 @@ async function loadComments() {
         reply.appendChild(replyHeader);
         reply.appendChild(replyText);
         repliesList.appendChild(reply);
-        reply.appendChild(replyLikeBtn);
-        reply.appendChild(replyLikeCounter);
+        reply.appendChild(replyCommentActions);
+        replyCommentActions.appendChild(replyLikeBtn);
+        replyCommentActions.appendChild(replyLikeCounter);
         if (replyAuthorId === auth.currentUser.uid) {
-            reply.appendChild(replyTrashBtn);
+            replyCommentActions.appendChild(replyTrashBtn);
         };
     }
 
