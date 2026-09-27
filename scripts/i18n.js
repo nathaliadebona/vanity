@@ -85,12 +85,13 @@ export const translations = {
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');
-const elementsToTranslate = document.querySelectorAll('[data-i18n]');
-const elementsToTranslatePlaceholder = document.querySelectorAll('[data-i18n-placeholder]');
 const savedLanguage = localStorage.getItem('language');
 export let currentLanguage = savedLanguage ? savedLanguage : 'pt';
 
-function applyTranslations () {
+export function applyTranslations () {
+    const elementsToTranslate = document.querySelectorAll('[data-i18n]');
+    const elementsToTranslatePlaceholder = document.querySelectorAll('[data-i18n-placeholder]');
+    
     elementsToTranslate.forEach(element => {
         const key = element.dataset.i18n;
         const translation = translations[key];

@@ -2,7 +2,7 @@ import { auth } from "./firebase-config.js";
 import { firestore } from "./firebase-config.js";
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import { translations, currentLanguage, translateProductField } from "./i18n.js";
+import { translations, currentLanguage, translateProductField, applyTranslations } from "./i18n.js";
 import { deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { collection } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
@@ -247,6 +247,8 @@ async function loadComments() {
         comment.appendChild(repliesList);
         commentsList.appendChild(comment);
     }
+
+    applyTranslations()
 }
 
 replyBtn.forEach(button => {
@@ -443,11 +445,14 @@ commentsListEl.addEventListener('click', (event) => {
     const replySendBtn = document.createElement('button');
     replySendBtn.classList.add('reply-send-btn');
     replySendBtn.type = 'submit';
-    replySendBtn.textContent = 'Enviar'
+    replySendBtn.textContent = 'Enviar';
+    replySendBtn.dataset.i18n = 'send-btn';
 
     replyForm.appendChild(replyInput);
     replyForm.appendChild(replySendBtn);
     comment.appendChild(replyForm);
+
+    applyTranslations();
 });
 
 onAuthStateChanged(auth, (user) => {
