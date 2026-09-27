@@ -24,7 +24,7 @@ const prevButton = document.querySelector('.carousel-prev');
 const carouselDots = document.querySelector('.carousel-dots');
 const editBtn = document.querySelector('.edit-btn');
 const trashBtn = document.querySelector('.trash-btn');
-const favoriteBtn = document.querySelector('.action-buttons .favorite-btn');
+const favoriteBtn = document.querySelector('.social-actions .favorite-btn');
 const carouselImagesContainer = document.querySelector('.carousel-images');
 const commentsListEl = document.querySelector('.comments-list');
 let carouselImage = document.querySelectorAll('.carousel-image');
@@ -49,11 +49,11 @@ async function loadProduct() {
     document.getElementById('favorite-count').textContent = favoritesSnapshot.size;
 
     if (isFavorited) {
-        document.querySelector('.action-buttons .favorite-btn i').classList.remove('fa-regular');
-        document.querySelector('.action-buttons .favorite-btn i').classList.add('fa-solid');
+        document.querySelector('.social-actions .favorite-btn i').classList.remove('fa-regular');
+        document.querySelector('.social-actions .favorite-btn i').classList.add('fa-solid');
     } else {
-        document.querySelector('.action-buttons .favorite-btn i').classList.remove('fa-solid');
-        document.querySelector('.action-buttons .favorite-btn i').classList.add('fa-regular');
+        document.querySelector('.social-actions .favorite-btn i').classList.remove('fa-solid');
+        document.querySelector('.social-actions .favorite-btn i').classList.add('fa-regular');
     }
 
     document.querySelector('.post-author a').href = `profile.html?id=${productData.userId}`;
