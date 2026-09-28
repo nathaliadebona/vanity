@@ -83,7 +83,9 @@ export const translations = {
     "save-profile-btn": { pt: "Salvar", en: "Save" },
     "password-mismatch": { pt: "As senhas não coincidem", en: "Passwords do not match" },
     // ---- Usuário removido ---- //
-    "removed-user": { pt: "usuário removido", en: "removed user"}
+    "removed-user": { pt: "usuário removido", en: "removed user"},
+    // ---- Notificações ---- //
+    "notifications-title": { pt: "Notificações", en: "Notifications" },
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');
