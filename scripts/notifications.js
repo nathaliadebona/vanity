@@ -24,8 +24,14 @@ async function loadNotifications() {
         
         const notification = document.createElement('div');
         notification.classList.add('notification');
+
+        if (!notificationDoc.data().read) {
+            notification.classList.add('unread');
+        }
+
         notification.dataset.id = notificationDoc.data().productId;
         notification.dataset.notificationId = notificationDoc.id;
+        
 
         const notificationActor = document.createElement('span');
         notificationActor.textContent = `@${actorData.username}`;
