@@ -8,6 +8,7 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-fir
 import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { orderBy } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { translations, currentLanguage, translateProductField, applyTranslations, translatePage } from "./i18n.js";
+import { updateDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 async function loadNotifications() {
     const notificationsQuery = query(collection(firestore, "notifications"), where("userId", "==", auth.currentUser.uid), orderBy("createdAt", "desc"));
@@ -23,7 +24,8 @@ async function loadNotifications() {
         
         const notification = document.createElement('div');
         notification.classList.add('notification');
-       notification.dataset.id = notificationDoc.data().productId;
+        notification.dataset.id = notificationDoc.data().productId;
+        notification.dataset.notificationId = notificationDoc.id;
 
         const notificationActor = document.createElement('span');
         notificationActor.textContent = `@${actorData.username}`;
@@ -46,12 +48,16 @@ document.addEventListener('languageChanged', () => {
 
 const notificationsListEl = document.querySelector('.notifications-list');
 
-notificationsListEl.addEventListener('click', (event) => {
+notificationsListEl.addEventListener('click', async (event) => {
     const card = event.target.closest('.notification');
     
     if (!card) {
         return;
     }   
+
+    await updateDoc(doc(firestore, "notifications", card.dataset.notificationId), {
+        read: true
+    });
 
     window.location.href = `product.html?id=${card.dataset.id}`;
 });
