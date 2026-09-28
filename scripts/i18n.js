@@ -86,6 +86,7 @@ export const translations = {
     "removed-user": { pt: "usuário removido", en: "removed user"},
     // ---- Notificações ---- //
     "notifications-title": { pt: "Notificações", en: "Notifications" },
+    "notification-comment": { pt: " comentou no seu produto", en: " commented on your product" },
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');
