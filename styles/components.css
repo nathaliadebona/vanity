@@ -73,8 +73,24 @@ header a img {
     object-fit: cover;
 }
 
+.header-profile {
+    display: none;
+}
+
 #lang-toggle {
     transition: background-color 0.2s ease;
+}
+
+.notifications-link {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 0.0625rem solid var(--color-accent);
+    font-size: 1.2rem;
+    color: var(--color-accent);
 }
 
 /* -- MENU -- */
@@ -453,6 +469,15 @@ dialog.lightbox-modal img {
         order: 2;
     }
 
+    .header-profile {
+        display: block;
+    }
+
+    .notifications-link {
+        border-color:  var(--color-cards-bg);
+        color: var(--color-cards-bg);
+    }
+
     main {
         height: 100vh;
         overflow-y: auto;
@@ -546,4 +571,5 @@ dialog.lightbox-modal img {
     .follow-btn:hover {
         background-color: var(--color-accent-light);
     }
+
 }
