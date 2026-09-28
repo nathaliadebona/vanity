@@ -164,7 +164,8 @@ async function loadComments() {
         const commentAvatar = document.createElement( 'img');
         commentAvatar.src = authorData.photoURL || 'https://ui-avatars.com/api/?name=' + authorData.username;
 
-        const commentUsername = document.createElement('span');
+        const commentUsername = document.createElement('a');
+        commentUsername.href = `profile.html?id=${authorId}`
         commentUsername.textContent = '@' + authorData.username;
 
         const commentTime = document.createElement('time');
@@ -218,8 +219,9 @@ async function loadComments() {
         replyAvatar.classList.add('reply-avatar');
         replyAvatar.src = replyAuthorData.photoURL || 'https://ui-avatars.com/api/?name=' + replyAuthorData.username;
 
-        const replyUsername = document.createElement('span');
+        const replyUsername = document.createElement('a');
         replyUsername.classList.add('reply-username');
+        replyUsername.href = `profile.html?id=${replyAuthorId}`;
         replyUsername.textContent = '@' + replyAuthorData.username;
 
         const replyTime = document.createElement('time');
