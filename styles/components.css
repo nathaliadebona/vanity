@@ -541,7 +541,8 @@ dialog.lightbox-modal img {
 
     .catalog-header h2,
     .explore-page h2,
-    .add-product-page h2 {
+    .add-product-page h2,
+    .notifications-page h2 {
         font-size: 2.5rem;
     }
 
