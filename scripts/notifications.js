@@ -23,7 +23,8 @@ async function loadNotifications() {
         
         const notification = document.createElement('div');
         notification.classList.add('notification');
-       
+       notification.dataset.id = notificationDoc.data().productId;
+
         const notificationActor = document.createElement('span');
         notificationActor.textContent = `@${actorData.username}`;
 
@@ -41,6 +42,18 @@ async function loadNotifications() {
 
 document.addEventListener('languageChanged', () => {
     loadNotifications();
+});
+
+const notificationsListEl = document.querySelector('.notifications-list');
+
+notificationsListEl.addEventListener('click', (event) => {
+    const card = event.target.closest('.notification');
+    
+    if (!card) {
+        return;
+    }   
+
+    window.location.href = `product.html?id=${card.dataset.id}`;
 });
 
 onAuthStateChanged(auth, (user) => {
