@@ -35,6 +35,8 @@ async function loadNotifications() {
         notification.appendChild(notificationActor);
         notification.appendChild(notificationText);
     }
+
+    translatePage();
 }
 
 onAuthStateChanged(auth, (user) => {
