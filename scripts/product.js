@@ -295,9 +295,13 @@ async function createMentionedText(text) {
                 const textNode = document.createTextNode(part);
                 fragment.appendChild(textNode);
             } else {
+                const mentionedUserDoc = mentionSnapshot.docs[0]; 
+                console.log(mentionedUserDoc.id);
+
                 const mentionLink = document.createElement('a');
                 mentionLink.classList.add('mention');
                 mentionLink.textContent = part;
+                mentionLink.href = `profile.html?id=${mentionedUserDoc.id}`;
                 fragment.appendChild(mentionLink);
             }
         } else {
