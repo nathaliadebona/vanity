@@ -172,7 +172,7 @@ async function loadComments() {
 
         const commentBody = document.createElement('p');
         commentBody.classList.add('comment-body');
-        commentBody.textContent = commentDoc.data().text;
+        commentBody.appendChild(createMentionedText(commentDoc.data().text));
 
         const commentActions = document.createElement('div');
         commentActions.classList.add('comments-actions');
@@ -228,7 +228,7 @@ async function loadComments() {
 
         const replyText = document.createElement('p');
         replyText.classList.add('reply-text');
-        replyText.textContent = replyDoc.data().text;
+        replyText.appendChild(createMentionedText(replyDoc.data().text));
 
         const replyCommentActions = document.createElement('div');
         replyCommentActions.classList.add('comments-actions');
@@ -280,6 +280,25 @@ async function loadComments() {
     }
 
     translatePage();
+}
+
+function createMentionedText(text) {
+    const parts = text.split(/(@\w+)/);
+    const fragment = document.createDocumentFragment();
+
+    for (const part of parts) {
+        if (part.startsWith('@')) {
+            const mentionLink = document.createElement('a');
+            mentionLink.classList.add('mention');
+            mentionLink.textContent = part;
+            fragment.appendChild(mentionLink);
+        } else {
+            const textNode = document.createTextNode(part);
+            fragment.appendChild(textNode);
+        }
+    }
+
+    return fragment;
 }
 
 replyBtn.forEach(button => {
