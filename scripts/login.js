@@ -86,18 +86,6 @@ registerForm.addEventListener('submit', async (event) => {
     }
 });
 
-loginPasswordToggle.addEventListener('click', () => {
-    if (loginPasswordInput.type === 'password') {
-        loginPasswordInput.type = 'text';
-        loginPasswordToggle.querySelector('i').classList.remove('fa-eye');
-        loginPasswordToggle.querySelector('i').classList.add('fa-eye-slash');
-    } else {
-        loginPasswordInput.type = 'password';
-        loginPasswordToggle.querySelector('i').classList.remove('fa-eye-slash');
-        loginPasswordToggle.querySelector('i').classList.add('fa-eye');
-    }
-});
-
 loginForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
