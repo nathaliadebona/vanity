@@ -82,6 +82,7 @@ header a img {
 }
 
 .notifications-link {
+    position: relative;
     width: 2.5rem;
     height: 2.5rem;
     display: flex;
@@ -91,6 +92,22 @@ header a img {
     border: 0.0625rem solid var(--color-accent);
     font-size: 1.2rem;
     color: var(--color-accent);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    min-width: 1.1rem;
+    height: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background-color: var(--color-danger);
+    color: var(--color-cards-bg);
 }
 
 /* -- MENU -- */
