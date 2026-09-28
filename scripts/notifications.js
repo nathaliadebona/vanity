@@ -39,6 +39,10 @@ async function loadNotifications() {
     translatePage();
 }
 
+document.addEventListener('languageChanged', () => {
+    loadNotifications();
+});
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
         loadNotifications();
