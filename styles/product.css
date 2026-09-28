@@ -336,10 +336,13 @@
         flex: 1;
     }
 
-    .product-full-image img {
+    .carousel-image {
         height: 100%;
-        object-fit: cover;
         border-radius: 0.75rem;
+    }
+
+    .carousel-images {
+        height: 100%;
     }
 
     .key-information {
