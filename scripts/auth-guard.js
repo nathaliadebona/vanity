@@ -29,9 +29,11 @@ onAuthStateChanged(auth, async (user) => {
 
     const bellLink = document.querySelector('.notifications-link');
 
-    const notificationBadge = document.createElement('span');
-    notificationBadge.classList.add('notification-badge');
-    notificationBadge.textContent = unreadSnapshot.size;
+    if (unreadSnapshot.size > 0) {
+        const notificationBadge = document.createElement('span');
+        notificationBadge.classList.add('notification-badge');
+        notificationBadge.textContent = unreadSnapshot.size;
 
-    bellLink.appendChild(notificationBadge);
+        bellLink.appendChild(notificationBadge);
+    }
 });
