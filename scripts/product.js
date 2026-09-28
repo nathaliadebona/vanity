@@ -423,6 +423,20 @@ commentForm.addEventListener('submit', async (event) => {
 
     await addDoc(collection(firestore, "comments"), newComment);
 
+    if (productData.userId !== auth.currentUser.uid) {
+        const newNotification = {
+            userId: productData.userId,
+            actorId: auth.currentUser.uid,
+            productId: productId,
+            type: 'comment',
+            read: false,
+            createdAt: serverTimestamp()
+        };
+
+        await addDoc(collection(firestore, "notifications"), newNotification);
+
+    }
+
     loadComments();
 
     newCommentInput.value = '';
