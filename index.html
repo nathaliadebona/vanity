@@ -31,7 +31,12 @@
                 <input type="email" id="email-login" name="email-login" required>
 
                 <label for="password-login" data-i18n="password-login">Senha</label>
-                <input type="password" id="password-login" name="password-login" required>
+                <div class="password-field">
+                    <input type="password" id="password-login" name="password-login" required>
+                    <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
 
                 <a href="#" id="forgot-password" data-i18n="forgot-password">Esqueci a senha</a>
                 

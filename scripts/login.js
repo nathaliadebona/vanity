@@ -18,6 +18,8 @@ const passwordRegister = document.getElementById('password-register');
 const passwordConfirmRegister = document.getElementById('password-confirm-register');
 const passwordMatchMessage = document.getElementById('password-match-message');
 const forgotPasswordLink = document.getElementById('forgot-password');
+const loginPasswordInput = document.getElementById('password-login');
+const loginPasswordToggle = document.querySelector('#password-login + .toggle-password');
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -62,6 +64,18 @@ registerForm.addEventListener('submit', async (event) => {
         window.location.href = 'feed.html';
     } catch (error) {
         alert(error.message);
+    }
+});
+
+loginPasswordToggle.addEventListener('click', () => {
+    if (loginPasswordInput.type === 'password') {
+        loginPasswordInput.type = 'text';
+        loginPasswordToggle.querySelector('i').classList.remove('fa-eye');
+        loginPasswordToggle.querySelector('i').classList.add('fa-eye-slash');
+    } else {
+        loginPasswordInput.type = 'password';
+        loginPasswordToggle.querySelector('i').classList.remove('fa-eye-slash');
+        loginPasswordToggle.querySelector('i').classList.add('fa-eye');
     }
 });
 

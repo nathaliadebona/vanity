@@ -69,6 +69,23 @@ label {
   align-self: flex-end;
 }
 
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    width: 100%;
+    padding-right: 2.5rem;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: var(--spacing-sm);
+    transform: translateY(-50%);
+    color: var(--color-text-secondary);
+}
+
 @media (hover: hover) {
     a#forgot-password:hover {
         text-decoration: underline;
