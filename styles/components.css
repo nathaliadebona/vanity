@@ -590,4 +590,8 @@ dialog.lightbox-modal img {
         background-color: var(--color-accent-light);
     }
 
+    button[type="submit"]:hover {
+        filter: brightness(0.9);
+    }
+
 }
