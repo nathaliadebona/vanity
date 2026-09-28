@@ -53,10 +53,20 @@
                 <input type="email" id="email-register" name="email-register" required>
 
                 <label for="password-register" data-i18n="password-register">Senha</label>
-                <input type="password" name="password-register" id="password-register" required>
+                <div class="password-field">
+                    <input type="password" name="password-register" id="password-register" required>
+                    <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
 
                 <label for="password-confirm-register" data-i18n="password-confirm-register">Confirmar senha</label>
-                <input type="password" id="password-confirm-register" name="password-confirm-register" required>
+                <div class="password-field">
+                    <input type="password" id="password-confirm-register" name="password-confirm-register" required>
+                    <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
 
                 <span id="password-match-message"></span>
 

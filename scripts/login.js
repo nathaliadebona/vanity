@@ -18,8 +18,27 @@ const passwordRegister = document.getElementById('password-register');
 const passwordConfirmRegister = document.getElementById('password-confirm-register');
 const passwordMatchMessage = document.getElementById('password-match-message');
 const forgotPasswordLink = document.getElementById('forgot-password');
-const loginPasswordInput = document.getElementById('password-login');
-const loginPasswordToggle = document.querySelector('#password-login + .toggle-password');
+
+function setupPasswordToggle(inputId) {
+    const input = document.getElementById(inputId);
+    const toggle = document.querySelector(`#${inputId} + .toggle-password`);
+
+    toggle.addEventListener('click', () => {
+        if (input.type === 'password') {
+            input.type = 'text';
+            toggle.querySelector('i').classList.remove('fa-eye');
+            toggle.querySelector('i').classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            toggle.querySelector('i').classList.remove('fa-eye-slash');
+            toggle.querySelector('i').classList.add('fa-eye');
+        }
+    });
+}
+
+setupPasswordToggle('password-login');
+setupPasswordToggle('password-register');
+setupPasswordToggle('password-confirm-register');
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
