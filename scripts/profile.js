@@ -204,6 +204,26 @@ async function loadProfileStats(profileUserId) {
     document.getElementById('stats-favorites-count').textContent = favoritesSnapshot.size;
 }
 
+function setupPasswordToggle(inputId) {
+    const input = document.getElementById(inputId);
+    const toggle = document.querySelector(`#${inputId} + .toggle-password`);
+
+    toggle.addEventListener('click', () => {
+        if (input.type === 'password') {
+            input.type = 'text';
+            toggle.querySelector('i').classList.remove('fa-eye');
+            toggle.querySelector('i').classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            toggle.querySelector('i').classList.remove('fa-eye-slash');
+            toggle.querySelector('i').classList.add('fa-eye');
+        }
+    });
+}
+
+setupPasswordToggle('edit-new-password');
+setupPasswordToggle('edit-confirm-password');
+
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
         tabButtons.forEach(btn => {

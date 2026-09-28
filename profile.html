@@ -172,15 +172,29 @@
                     <label for="edit-bio" data-i18n="edit-bio-label">Bio</label>
                     <textarea id="edit-bio"></textarea>
                 </div>
+
                 <hr>
+
                 <h4 data-i18n="edit-password-title">Alterar senha</h4>
+                
                 <div class="form-group">
                     <label for="edit-new-password" data-i18n="edit-new-password-label">Nova senha</label>
-                    <input type="password" id="edit-new-password">
+                    <div class="password-field">
+                        <input type="password" id="edit-new-password">
+                        <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <label for="edit-confirm-password" data-i18n="edit-confirm-password-label">Confirmar nova senha</label>
-                    <input type="password" id="edit-confirm-password">
+                    <div class="password-field">
+                        <input type="password" id="edit-confirm-password">
+                        <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
                 <button type="submit" data-i18n="save-profile-btn">Salvar</button>
             </form>
