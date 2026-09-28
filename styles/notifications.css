@@ -16,3 +16,8 @@
     gap: var(--spacing-sm);
 }
 
+.notification.unread {
+    border-left: 0.25rem solid var(--color-accent);
+    background-color: var(--color-accent-light);
+}
+
