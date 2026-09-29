@@ -63,32 +63,46 @@
                 <p class="profile-username">@username</p>
                 <p class="profile-bio">Biografia</p>
             </div>
-            <button type="button" id="profile-edit-btn" data-i18n="profile-edit">
-                Editar perfil
-            </button>
-            <button type="button" id="follow-btn" class="follow-btn" data-i18n="follow-btn">Seguir</button>
+
+            <div class="profile-actions"> 
+                <button type="button" id="profile-edit-btn" data-i18n="profile-edit">
+                    Editar perfil
+                </button>
+
+                <button type="button" id="follow-btn" class="follow-btn" data-i18n="follow-btn">Seguir</button>
+            
+                <button type="button" class="share-btn" aria-label="Compartilhar perfil">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
+            </div>
+
             <div class="profile-tabs">
                 <button type="button" data-tab="products" data-i18n="tab-products" class="active">Produtos</button>
                 <button type="button" data-tab="stats" data-i18n="tab-stats">Estatísticas</button>
             </div>
+
             <section class="products-tab">
                 <div class="catalog-grid"></div>
             </section>
+
             <section class="stats-tab" style="display: none;">
                 <div class="stats-summary">
                     <div>
                         <span id="stats-products-count"></span>
                         <p>Produtos</p>
                     </div>
+
                     <div>
                         <span id="stats-favorites-count"></span>
                         <p>Favoritos</p>
                     </div>
+
                     <div>
                         <span id="stats-buyagain-count"></span>
                         <p>Recompraria</p>
                     </div>
                 </div>
+
                 <div class="stats-chart">
                     <h4 data-i18n="chart-category">Por categoria</h4>
                     <div>

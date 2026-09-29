@@ -56,8 +56,14 @@
     transition: background-color 0.3s ease;
 }
 
+.profile-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
 #profile-edit-btn {
-    width: 100%;
+    flex: 1;
     text-align: center;
     padding: var(--spacing-xs) var(--spacing-sm);
     border: 0.0625rem solid var(--color-accent);
@@ -208,6 +214,7 @@
 
     #profile-edit-btn {
         display: block;
+        flex: none;
         width: auto;
     }
 }

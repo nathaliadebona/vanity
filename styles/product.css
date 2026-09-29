@@ -210,6 +210,12 @@
     font-size: 0.9rem;
 }
 
+.comment-header span,
+.comment-header a,
+.reply-header a {
+    color: inherit;
+}
+
 .comment-header time {
     color: var(--color-text-secondary);
     font-size: 0.8rem;
