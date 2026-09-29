@@ -43,6 +43,7 @@ const tabButtons = document.querySelectorAll('.profile-tabs button');
 const productsTab = document.querySelector('.products-tab');
 const statsTab = document.querySelector('.stats-tab');
 const catalogGrid = document.querySelector('.catalog-grid');
+const shareBtn = document.querySelector('.share-btn');
 const params = new URLSearchParams(window.location.search);
 const viewedUserId = params.get('id');
 let profileUserId;
@@ -415,6 +416,19 @@ profileAvatar.addEventListener('click', () => {
 
 lightboxClose.addEventListener('click', () => {
     lightboxModal.close();
+});
+
+shareBtn.addEventListener('click', () => {
+    if (navigator.share) {
+        navigator.share({
+            title: document.querySelector('.profile-name').textContent,
+            text: 'Dá uma olhada esse perfil no Vanity!',
+            url: window.location.href
+        });
+    } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copiado!');
+    }
 });
 
 onAuthStateChanged(auth, async (user) => {
